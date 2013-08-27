@@ -1,0 +1,31 @@
+***************************************************
+*              Package LayAureo                   *
+***************************************************
+
+Copyright 2003 Gruppo Utilizzatori Italiani di TeX
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+ Author: Fabiano Busdraghi
+         at fabusdr@yahoo.it
+
+Abstract
+
+ This package produces a wide page layout for 
+ documents that use A4 paper size. Moreover, 
+ LayAureo provides both a simple hook for leaving 
+ an empty space which is required if pages are 
+ bundled by a press binding (use option 
+ binding=length), and an option called big which 
+ it forces typearea to become maximum. There is no 
+ full English documentation yet.
+
+Installation
+
+ Run LaTeX on layaureo.ins and move layaureo.sty 
+ into a directory searched by LaTeX. Refresh the 
+ database to finish installation.
+ To produce the documentation run layaureo.dtx
+ through (pdf)LaTeX.

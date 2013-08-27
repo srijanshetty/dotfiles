@@ -1,0 +1,58 @@
+[
+    { "keys": ["ctrl+shift+k"], "command": "swap_line_up" },
+    { "keys": ["ctrl+shift+j"], "command": "swap_line_down" },
+    { "keys": ["alt+shift+k"], "command": "select_lines", "args": {"forward": false} },
+    { "keys": ["alt+shift+j"], "command": "select_lines", "args": {"forward": true} },
+    { "keys": ["ctrl+t"], "command": "new_file"},
+    { "keys": ["ctrl+n"], "command": "advanced_new_file"},
+    { "keys": ["ctrl+w"], "command": "close_file" },
+    { "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
+    { "keys": ["alt+shift+down"], "command": "select_lines", "args": {"forward": true} },
+    { "keys": ["ctrl+j"], "command": "join_lines" },
+    { "keys": ["ctrl+shift+s"], "command": "toggle_side_bar" },
+    { "keys": ["ctrl+alt+0"], "command": "focus_side_bar" },
+    { "keys": ["ctrl+alt+1"], "command": "focus_group", "args": { "group": 0 } },
+    { "keys": ["ctrl+alt+2"], "command": "focus_group", "args": { "group": 1 } },
+    { "keys": ["ctrl+shift+1"], "command": "move_to_group", "args": { "group": 0 } },
+    { "keys": ["ctrl+shift+2"], "command": "move_to_group", "args": { "group": 1 } },
+    {
+        "keys": ["ctrl+1"],
+        "command": "set_layout",
+        "args":
+            {
+                "cols": [0.0, 1.0],
+                "rows": [0.0, 1.0],
+                "cells": [[0, 0, 1, 1]]
+            }
+    },
+    {
+        "keys": ["ctrl+2"],
+        "command": "set_layout",
+        "args":
+        {
+            "cols": [0.0, 0.5, 1.0],
+            "rows": [0.0, 1.0],
+            "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+        }
+    },
+    {
+        "keys": ["ctrl+right"],
+        "command": "set_layout",
+        "args":
+            {
+            "cols": [0.0, 0.66, 1.0],
+            "rows": [0.0, 1.0],
+            "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+            }
+    },
+    {
+        "keys": ["ctrl+left"],
+        "command": "set_layout",
+        "args":
+            {
+            "cols": [0.0, 0.33, 1.0],
+            "rows": [0.0, 1.0],
+            "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+            }
+    }
+]
