@@ -18,12 +18,14 @@ function install_system {
 	echo "************************ System ************************************"
 	echo "********************************************************************"
 	echo ""
-	sudo apt-get install -y dstat htop # preload
+	sudo apt-get install -y dstat htop
 }
 
 function install_essentials {
 	# Install the no-brainers
 	sudo apt-get install git openssh-server ia32-libs
+	sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
+    sudo apt-get install -y synapse
 }
 
 function install_battery {
@@ -47,22 +49,17 @@ function install_miscellaneous {
 	sudo apt-get install -y flashplugin-installer vlc pavucontrol
 }
 
-function install_ui {
+function install_indicators {
 	echo ""
 	echo "********************************************************************"
 	echo "************************ UI Components *****************************"
 	echo "********************************************************************"
 	echo ""
 	# Repositories 
-	sudo add-apt-repository ppa:noobslab/indicators 
-	sudo add-apt-repository ppa:noobslab/apps 
-	sudo apt-get update
+	sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
 	
 	# Indicators
 	sudo apt-get install -y lm-sensors hddtemp fluxgui indicator-sensors
-	
-	# Synapse
-	sudo apt-get install -y synapse
 }
 
 function install_vim { 
@@ -91,6 +88,16 @@ function install_xmonad {
 }
 
 # Configuration Functions
+function config_synapse {
+    cd ~/.config
+    if [[ -e synapse ]]; then
+        echo "Synapse configuration exists"
+    else
+        ln -s "${CONFDIR}/config/synapse" .
+    fi
+    cd $CONFDIR
+}
+
 function config_git {
     # Git configuration
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"""
@@ -182,7 +189,7 @@ while [ -n "$1" ]; do
             install_zsh
             install_xmonad
             install_essentials
-            install_ui
+            install_indicators
             install_battery
             install_system
             config;;
@@ -207,7 +214,7 @@ while [ -n "$1" ]; do
 
         -m | --miscellaneous) install_miscellaneous ;;
 
-        -u | --ui) install_ui;;
+        -i | --indicators) install_indicators;;
 
         -r | --remap) remap;;
 
