@@ -1,6 +1,13 @@
 #!/bin/zsh
 
 # Installation functions
+function tester {
+    if which autojump &>/dev/null; then
+        echo "Autojump exists"
+    else
+    fi
+}
+
 function install_zsh {
 	echo ""
 	echo "********************************************************************"
@@ -8,8 +15,13 @@ function install_zsh {
 	echo "********************************************************************"
 	echo ""
 	echo "Installing zsh"
-	sudo apt-get install -y zsh autojump
+	sudo apt-get install -y zsh 
     chsh -s /bin/zsh
+    
+    # Install autojump
+    cd shells/autojump
+    ./install.sh
+    cd ${CONFDIR}
 }
 
 function install_system {
@@ -101,19 +113,23 @@ function config_synapse {
 function config_git {
     # Git configuration
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"""
-    git config user.name "Srijan R Shetty"
-    git config user.email "srijan.shetty@gmail.com"
+    git config --global user.name "Srijan R Shetty"
+    git config --global user.email "srijan.shetty@gmail.com"
 }
 
 function config_zsh {
     cd
-    ln -s "${CONFDIR}/shells/zsh/zprezto" .zprezto
+    if [[ -d .zprezto ]]; then
+        echo "Prezto already exists"
+    else
+        ln -s "${CONFDIR}/shells/zsh/zprezto" .zprezto
 
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
-    cd ${CONFDIR}
+        setopt EXTENDED_GLOB
+        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+            ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+        done
+        cd ${CONFDIR}
+    fi
 }
 
 function solarize {
@@ -132,7 +148,7 @@ function solarize {
     shells/solarize/solarize
 }
 
-function remap {
+function config_xmodmap {
     # Map caps lock to escape
     cd
     if [ -e .Xmodmap ]; then 
@@ -141,7 +157,9 @@ function remap {
         ln -s ${CONFDIR}/files/Xmodmap .Xmoadmap
     fi
     cd ${CONFDIR}
-    
+}
+
+function config_xinitrc {
     #This is for xinitrc
     cd 
     if [ -e .xinitrc ]; then
@@ -177,8 +195,19 @@ function config {
     config_git
     config_xmonad
     config_vim
-    remap
+    config_zsh
+    config_xinitrc
+    config_xmodmap
+    config_synapse
     solarize
+}
+
+function config_bare {
+    config_zsh
+    config_vim
+    solarize
+    config_xmodmap
+    config_git
 }
 
 CONFDIR=${PWD}
@@ -223,6 +252,10 @@ while [ -n "$1" ]; do
         -s | --system) install_system;;
 
         -b | --battery) install_battery;;
+
+        --barebones) config_bare;;
+    
+        --test) tester;;
 
         *)
             echo "********************************************************************

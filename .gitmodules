@@ -10,3 +10,6 @@
 [submodule "config/vim"]
 	path = config/vim
 	url = https://github.com/srijanshetty/vim.git
+[submodule "shells/autojump"]
+	path = shells/autojump
+	url = https://github.com/joelthelion/autojump.git
