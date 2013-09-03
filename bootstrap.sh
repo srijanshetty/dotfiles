@@ -19,9 +19,13 @@ function install_zsh {
     chsh -s /bin/zsh
     
     # Install autojump
-    cd shells/autojump
-    ./install.sh
-    cd ${CONFDIR}
+    if which autojump &>/dev/null; then
+        echo "Autojump already exists, you will have to manually source autojump.zsh"
+    else
+        cd shells/autojump
+        ./install.sh
+        cd ${CONFDIR}
+    fi
 }
 
 function install_system {
