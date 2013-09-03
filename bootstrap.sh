@@ -1,10 +1,14 @@
 #!/bin/zsh
 
 # Installation functions
-function tester {
+function install_autojump {
+    # Install autojump
     if which autojump &>/dev/null; then
-        echo "Autojump exists"
+        echo "Autojump already exists, you will have to manually source autojump.zsh"
     else
+        cd shells/autojump
+        ./install.sh
+        cd ${CONFDIR}
     fi
 }
 
@@ -253,6 +257,8 @@ while [ -n "$1" ]; do
 
         -c | --config) config;;
         
+        --autojump) autojump;;
+
         -s | --system) install_system;;
 
         -b | --battery) install_battery;;
