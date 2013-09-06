@@ -21,15 +21,6 @@ function install_zsh {
 	echo "Installing zsh"
 	sudo apt-get install -y zsh 
     chsh -s /bin/zsh
-    
-    # Install autojump
-    if which autojump &>/dev/null; then
-        echo "Autojump already exists, you will have to manually source autojump.zsh"
-    else
-        cd shells/autojump
-        ./install.sh
-        cd ${CONFDIR}
-    fi
 }
 
 function install_system {
@@ -218,6 +209,10 @@ function config_bare {
     config_git
 }
 
+function bare {
+    #write something here
+}
+
 CONFDIR=${PWD}
 while [ -n "$1" ]; do
     case "$1" in 
@@ -263,8 +258,10 @@ while [ -n "$1" ]; do
 
         -b | --battery) install_battery;;
 
-        --barebones) config_bare;;
+        --config-bare) config_bare;;
     
+        --bare) bare;;
+
         --test) tester;;
 
         *)
