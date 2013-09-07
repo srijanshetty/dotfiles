@@ -1,17 +1,6 @@
 #!/bin/zsh
-
 function install_node {
-
-}
-
-function install_ack {
-    if [[ -d ${HOME}/local/bin ]]; then
-        echo "The home directory already exists"
-    else
-        mkdir -p ${HOME}/local/bin
-    fi
-    wget -O "${HOME}/local/bin/ack" http://beyondgrep.com/ack-2.08-single-file 
-    #change the permission of the ack file
+   # 
 }
 
 function install_lamp {
@@ -53,8 +42,6 @@ while [ -n "$1" ]; do
             install_chrome;;
         -n | --node)
             install_node;;
-        -a | --ack)
-            install_ack;;
         *) echo "tools,lamp";;
     esac
     shift
