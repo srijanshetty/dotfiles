@@ -135,6 +135,7 @@ function config_bare {
     config_zsh
     config_vim
     solarize
+    install_autojump
 }
 
 CONFDIR=${PWD}

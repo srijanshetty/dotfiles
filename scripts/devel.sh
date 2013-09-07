@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+function install_node {
+
+}
+
 function install_ack {
     if [[ -d ${HOME}/local/bin ]]; then
         echo "The home directory already exists"
@@ -25,12 +29,6 @@ function install_chrome {
     fi
 }
 
-function install_node {
-    sudo add-apt-repository ppa:chris-lea/node.js && sudo apt-get update
-    sudo apt-get -y install nodejs
-    sudo ./npm.sh
-}
-
 function install_sublime {
     wget http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3047_amd64.deb -O temp.deb && sudo dpkg -i temp.deb
     if [ -e temp.deb ]; then
@@ -40,10 +38,11 @@ function install_sublime {
 }
 
 function install_yeoman {
+    # check for node
     # check for the existence of npm
     npm install -g yo
 }
-# Add for sublime
+
 while [ -n "$1" ]; do
     case "$1" in 
         -t | --tools) 

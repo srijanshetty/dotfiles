@@ -1,22 +1,11 @@
 #!/bin/zsh
 
 function install_zsh {
-	echo ""
-	echo "********************************************************************"
-	echo "************************ ZSH ***************************************"
-	echo "********************************************************************"
-	echo ""
-	echo "Installing zsh"
 	sudo apt-get install -y zsh 
     chsh -s /bin/zsh
 }
 
 function install_system {
-	echo ""
-	echo "********************************************************************"
-	echo "************************ System ************************************"
-	echo "********************************************************************"
-	echo ""
 	sudo apt-get install -y dstat htop
 }
 
@@ -28,11 +17,6 @@ function install_essentials {
 }
 
 function install_battery {
-	echo ""
-	echo "********************************************************************"
-	echo "************************ Battery ***********************************"
-	echo "********************************************************************"
-	echo ""
 	sudo apt-get install -y acpi ibam
 	# sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
 	# sudo apt-get install -y bumblebee virtualgl linux-headers-generic
@@ -40,20 +24,10 @@ function install_battery {
 }
 
 function install_miscellaneous {
-	echo ""
-	echo "********************************************************************"
-	echo "************************ Miscellaneous *****************************"
-	echo "********************************************************************"
-	echo ""
 	sudo apt-get install -y flashplugin-installer vlc pavucontrol
 }
 
 function install_indicators {
-	echo ""
-	echo "********************************************************************"
-	echo "************************ UI Components *****************************"
-	echo "********************************************************************"
-	echo ""
 	# Repositories 
 	sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
 	
@@ -63,21 +37,12 @@ function install_indicators {
 
 function install_vim { 
 	# Install vim, then copy config files
-	echo ""
-	echo "********************************************************************"
-	echo "************************ Vim ***************************************"
-	echo "********************************************************************"
-	echo ""
+    sudo apt-get install vim
 }
 
 function install_xmonad {
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
-	sudo apt-get -y install gnome-panel
-	echo ""
-	echo "********************************************************************"
-	echo "************************ Xmonad ************************************"
-	echo "********************************************************************"
-	echo ""
+	sudo apt-get -y install gnome-panel xmonad
 }
 
 CONFDIR=${PWD}
