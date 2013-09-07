@@ -2,6 +2,5 @@ cloud
 apache late start and mysql late start
 start without x
 Return status
-Add an installer for autojump
 colorize the output
 change ./install to something better
