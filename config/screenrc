@@ -1,0 +1,13 @@
+# look and feel
+caption always 
+caption string "%{= bb}%{k}[%H:%n] %{w}%h %t %=%m/%d %C%a %{y}[%l] "
+
+# scrollback
+defscrollback 10000
+
+# Skip the startup message
+startup_message off
+
+# Default shell
+shell "/usr/bin/zsh"
+

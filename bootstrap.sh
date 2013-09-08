@@ -90,7 +90,7 @@ function config_xmodmap {
     if [ -e .Xmodmap ]; then 
         echo "A remap file already exists. Please delete it and run --remap"
     else
-        ln -s ${CONFDIR}/files/Xmodmap .Xmoadmap
+        ln -s ${CONFDIR}/config/Xmodmap .Xmoadmap
     fi
     cd ${CONFDIR}
 }
@@ -101,7 +101,7 @@ function config_xinitrc {
     if [ -e .xinitrc ]; then
         echo "A xinitrc already exists. Delete and retry"
     else
-        ln -s "${CONFDIR}/files/xinitrc" .xinitrc
+        ln -s "${CONFDIR}/config/xinitrc" .xinitrc
     fi
 }
 
