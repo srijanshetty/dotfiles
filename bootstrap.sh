@@ -84,6 +84,7 @@ function config_synapse {
     fi
 }
 
+#I haven't used it recently but still
 function config_xmodmap {
     # Map caps lock to escape
     cd
@@ -119,6 +120,17 @@ function config_xmonad {
     fi
 }
 
+#Configuration file for screen
+function config_screen {
+    cd 
+    if [ -e .screenrc ]; then
+        echo "There is already a screenrc. Delete and retry"
+    else
+        ln -s "${CONFDIR}/config/screenrc" .screenrc
+        cd ${CONFDIR}
+    fi
+}
+
 #Autoinstallers
 #Install everything
 function config {
@@ -138,7 +150,10 @@ function config_bare {
     install_autojump
 }
 
+#Store the configuration directory for use by the functions
 CONFDIR=${PWD}
+
+# Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
     case "$1" in 
         -x | --xmonad-config) config_xmonad;;
@@ -148,6 +163,8 @@ while [ -n "$1" ]; do
         -g | --git-config) config_git;;
 
         -z |--zsh-config) config_zsh;;
+
+        -s |--screen-config) config_screen;;
         
         -c | --config) config;;
         
