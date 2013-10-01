@@ -93,7 +93,7 @@ function config_xmodmap {
     if [ -e .Xmodmap ]; then 
         echo "[${RED} FAIL ${NORMAL}] Remap failed. Delete ~/.xmodmap and retry"
     else
-        ln -s ${CONFDIR}/config/Xmodmap .Xmoadmap
+        ln -s ${CONFDIR}/config/Xmodmap .Xmodmap
         echo "[${GREEN} OKAY ${NORMAL}] Remap configured"
     fi
     cd ${CONFDIR}
