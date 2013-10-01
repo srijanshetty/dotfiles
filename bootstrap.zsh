@@ -1,5 +1,28 @@
 #!/bin/zsh
 
+#Help text
+function help_text() {
+cat <<- _EOF_
+
+USAGE: bootstrap.sh <arguments>
+VERSION: 1.0.0
+
+Available commands:
+
+    -x | --xmonad-config        config_xmonad
+    -v | --vim-config           config_vim
+    -g | --git-config           config_git
+    -z | --zsh-config           config_zsh
+    -s | --screen-config        config_screen
+    -a | --autojump             install_autojump
+    -c | --config               config
+    --config-bare               config_bare
+    --solarize                  solarize
+    --test                      tester
+            
+_EOF_
+}
+
 # Installation functions
 function install_autojump {
     # Install autojump
@@ -171,21 +194,21 @@ while [ -n "$1" ]; do
 
         -g | --git-config) config_git;;
 
-        -z |--zsh-config) config_zsh;;
+        -z | --zsh-config) config_zsh;;
 
-        -s |--screen-config) config_screen;;
+        -s | --screen-config) config_screen;;
         
         -c | --config) config;;
         
         -a | --autojump) install_autojump;;
+
+        -h | --help ) help_text;;
 
         --config-bare) config_bare;;
     
         --solarize) solarize;;
 
         --test) tester;;
-
-        *) echo "Help function will be up soon";;
     esac
     shift
 done
