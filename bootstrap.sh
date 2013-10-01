@@ -4,11 +4,12 @@
 function install_autojump {
     # Install autojump
     if which autojump &>/dev/null; then
-        echo "Autojump already exists, you will have to manually configure autojump.zsh"
+        echo "[${GREEN} OKAY ${NORMAL}] Autojump already installed"
     else
         cd shells/autojump
         ./install.sh
         cd ${CONFDIR}
+        echo "[${GREEN} OKAY ${NORMAL}] Autojump installed"
     fi
 }
 
@@ -18,12 +19,14 @@ function config_vim {
     if which vim &>/dev/null; then
         cd
         if [ -d .vim ]; then
-            echo "A vim configuration already exists, delete and run --vim-config"
+            echo "[${RED} FAIL ${NORMAL}] Vim configuration failed. Delete ~/.vim and retry"
         else
             ln -s "${CONFDIR}/config/vim/vim" .vim
             ln -s "${CONFDIR}/config/vim/vimrc" .vimrc
         fi
         cd $CONFDIR
+    else
+        echo "[${RED} FAIL ${NORMAL}] Vim configuration failed. Install vim first"
     fi
 }
 
@@ -33,6 +36,9 @@ function config_git {
         git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"""
         git config --global user.name "Srijan R Shetty"
         git config --global user.email "srijan.shetty@gmail.com"
+        echo "[${GREEN} OKAY ${NORMAL}] Git configured."
+    else
+        echo "[${RED} FAIL ${NORMAL}] Git failed. Install git first"
     fi
 }
 
@@ -41,7 +47,7 @@ function config_zsh {
     if which zsh &> /dev/null; then
         cd
         if [[ -d .zprezto ]]; then
-            echo "Prezto already exists"
+            echo "[${RED} FAIL ${NORMAL}] Prezto failed. Delete ~/.zprezto and retry"
         else
             ln -s "${CONFDIR}/shells/zsh/zprezto" .zprezto
 
@@ -50,25 +56,21 @@ function config_zsh {
                 ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
             done
             cd ${CONFDIR}
+            echo "[${GREEN} OKAY ${NORMAL}] Prezto configured."
         fi
     fi
 }
 
 #Solarize the terminal
 function solarize {
-	echo ""
-	echo "********************************************************************"
-	echo "************************ SOLARIZE **********************************"
-	echo "********************************************************************"
-	echo ""
-    
     if [ -e ~/.dircolors ]; then
-        echo "A color configuration already Exists. Exiting."
+        echo "[${RED} FAIL ${NORMAL}] Solarize failed. Delete ~/.dircolors and retry"
     else
         cp shells/dircolors.ansi-light ~/.dircolors
     fi
     eval `dircolors ~/.dircolors`
     shells/solarize/solarize
+    echo "[${GREEN} OKAY ${NORMAL}] Solarize configured"
 }
 
 #Synapse configuration
@@ -76,9 +78,9 @@ function config_synapse {
     if which synapse &> /dev/null; then
         cd ~/.config
         if [[ -e synapse ]]; then
-            echo "Synapse configuration exists"
+            echo "[${RED} FAIL ${NORMAL}] Synapse failed. Delete ~/.config/synapse and retry"
         else
-            ln -s "${CONFDIR}/config/synapse" .
+            echo "[${GREEN} OKAY ${NORMAL}] Synapse configured"
         fi
         cd $CONFDIR
     fi
@@ -89,9 +91,10 @@ function config_xmodmap {
     # Map caps lock to escape
     cd
     if [ -e .Xmodmap ]; then 
-        echo "A remap file already exists. Please delete it and run --remap"
+        echo "[${RED} FAIL ${NORMAL}] Remap failed. Delete ~/.xmodmap and retry"
     else
         ln -s ${CONFDIR}/config/Xmodmap .Xmoadmap
+        echo "[${GREEN} OKAY ${NORMAL}] Remap configured"
     fi
     cd ${CONFDIR}
 }
@@ -100,9 +103,10 @@ function config_xmodmap {
 function config_xinitrc {
     cd 
     if [ -e .xinitrc ]; then
-        echo "A xinitrc already exists. Delete and retry"
+        echo "[${RED} FAIL ${NORMAL}] Xinitrc Failed. Delete ~/.xinitrc and retry"
     else
         ln -s "${CONFDIR}/config/xinitrc" .xinitrc
+        echo "[${GREEN} OKAY ${NORMAL}] Xinitrc configured"
     fi
 }
 
@@ -111,11 +115,12 @@ function config_xmonad {
     if which xmonad &> /dev/null; then
         cd
         if [ -d .xmonad ]; then
-            echo "A xmonad configuration already exists, delete and run --xmonad-config"
+            echo "[${RED} FAIL ${NORMAL}] Xmonad failed. Delete ~/.xmonad and retry"
         else
             ln -s "${CONFDIR}/config/xmonad" .xmonad
             cd ${CONFDIR}
             xmonad --recompile
+            echo "[${GREEN} OKAY ${NORMAL}] Xmonad configured"
         fi
     fi
 }
@@ -124,10 +129,11 @@ function config_xmonad {
 function config_screen {
     cd 
     if [ -e .screenrc ]; then
-        echo "There is already a screenrc. Delete and retry"
+        echo "[${RED} FAIL ${NORMAL}] Screen failed. Delete ~/.screenrc and retry"
     else
         ln -s "${CONFDIR}/config/screenrc" .screenrc
         cd ${CONFDIR}
+        echo "[${GREEN} OKAY ${NORMAL}] Screen configured"
     fi
 }
 
@@ -153,6 +159,9 @@ function config_bare {
 #Store the configuration directory for use by the functions
 CONFDIR=${PWD}
 
+#Source the required helper functions
+source ./helper.sh
+
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
     case "$1" in 
@@ -168,7 +177,7 @@ while [ -n "$1" ]; do
         
         -c | --config) config;;
         
-        -a | --autojump) autojump;;
+        -a | --autojump) install_autojump;;
 
         --config-bare) config_bare;;
     
