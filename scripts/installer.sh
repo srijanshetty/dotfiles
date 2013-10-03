@@ -1,5 +1,4 @@
 #!/bin/zsh
-
 function install_zsh {
 	sudo apt-get install -y zsh 
     chsh -s /bin/zsh

@@ -9,25 +9,28 @@ VERSION: 1.0.0
 
 Available commands:
 
-    -x | --xmonad-config        config_xmonad
-    -v | --vim-config           config_vim
-    -g | --git-config           config_git
-    -z | --zsh-config           config_zsh
-    -s | --screen-config        config_screen
-    -a | --autojump             install_autojump
-    -c | --config               config
-    --config-bare               config_bare
-    --solarize                  solarize
-    --test                      tester
+-x | --xmonad-config        configure only xmonad 
+-v | --vim-config           configure only vim
+-g | --git-config           configure git
+-z | --zsh-config           configure zsh using Prezto
+-s | --screen-config        configure screen
+-i | --xinitrc-config       configure xinitrc 
+-y | --synapse-config       configure synapse
+-r | --remap-config         configure xmodmap 
+-a | --autojump             Install autojump
+-c | --config               apply all configuration options
+--config-bare               bare bones configuration 
+--solarize                  solarize the terminal
+--test                      tester program
             
 _EOF_
 }
 
 # Installation functions
-function install_autojump {
+function install_autojump() {
     # Install autojump
     if which autojump &>/dev/null; then
-        echo "[${GREEN} OKAY ${NORMAL}] Autojump already installed"
+        echo "[${RED} FAIL ${NORMAL}] Autojump already installed"
     else
         cd shells/autojump
         ./install.sh
@@ -38,7 +41,7 @@ function install_autojump {
 
 # Configuration Functions
 #Vim configuration
-function config_vim {
+function config_vim() {
     if which vim &>/dev/null; then
         cd
         if [ -d .vim ]; then
@@ -54,7 +57,7 @@ function config_vim {
 }
 
 # Git configuration
-function config_git {
+function config_git() {
     if which git &> /dev/null; then
         git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"""
         git config --global user.name "Srijan R Shetty"
@@ -66,7 +69,7 @@ function config_git {
 }
 
 #ZSH configuration
-function config_zsh {
+function config_zsh() {
     if which zsh &> /dev/null; then
         cd
         if [[ -d .zprezto ]]; then
@@ -85,15 +88,15 @@ function config_zsh {
 }
 
 #Solarize the terminal
-function solarize {
+function config_solarize() {
     if [ -e ~/.dircolors ]; then
         echo "[${RED} FAIL ${NORMAL}] Solarize failed. Delete ~/.dircolors and retry"
     else
         cp shells/dircolors.ansi-light ~/.dircolors
+        eval `dircolors ~/.dircolors`
+        shells/solarize/solarize
+        echo "[${GREEN} OKAY ${NORMAL}] Solarize configured"
     fi
-    eval `dircolors ~/.dircolors`
-    shells/solarize/solarize
-    echo "[${GREEN} OKAY ${NORMAL}] Solarize configured"
 }
 
 #Synapse configuration
@@ -175,15 +178,18 @@ function config_bare {
     config_git
     config_zsh
     config_vim
-    solarize
+    config_solarize
     install_autojump
 }
 
 #Store the configuration directory for use by the functions
 CONFDIR=${PWD}
 
-#Source the required helper functions
-source ./helper.sh
+#colored outputs
+NORMAL=$(tput sgr0)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+RED=$(tput setaf 1)
 
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
@@ -202,11 +208,17 @@ while [ -n "$1" ]; do
         
         -a | --autojump) install_autojump;;
 
+        -i | --xinitrc-config) config_xinitrc;;
+
+        -y | --synapse-config) config_synapse;;
+
+        -r | --remap-config) config_xmodmap;;
+        
         -h | --help ) help_text;;
 
         --config-bare) config_bare;;
     
-        --solarize) solarize;;
+        --solarize) config_solarize;;
 
         --test) tester;;
     esac
