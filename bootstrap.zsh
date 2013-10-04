@@ -187,9 +187,9 @@ CONFDIR=${PWD}
 
 #colored outputs
 NORMAL=$(tput sgr0)
+RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 YELLOW=$(tput setaf 3)
-RED=$(tput setaf 1)
 
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do

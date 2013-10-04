@@ -1,7 +1,4 @@
 #!/bin/zsh
-function install_node {
-   # 
-}
 
 function install_lamp {
 	sudo apt-get install -y apache2 mysql-server mysql-client phpmyadmin
@@ -46,4 +43,3 @@ while [ -n "$1" ]; do
     esac
     shift
 done
-

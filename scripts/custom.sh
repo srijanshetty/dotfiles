@@ -1,7 +1,22 @@
 #!/bin/bash
 
+#help text
+function help_text(){
+cat << _EOF_
+USAGE: custom.sh <arguments>
+VERSION: 0.0.2
+
+Available Commands:
+
+-a | --ack              Install Ack
+
+_EOF_
+
+}
+
+#Ack installer
 function install_ack {
-    if [[ -d ${HOME}/Documents/local/bin ]]; then
+    if [ -d ${HOME}/Documents/local/bin ]; then
         echo "The home directory already exists"
     else
         mkdir -p ${HOME}/local/bin
@@ -10,12 +25,16 @@ function install_ack {
     chmod u+x "${HOME}/Documents/local/bin/ack"
 }
 
-while [[ -n "$1" ]]; do
+#colors
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+
+#Loop through all the passed arguments
+while [ -n "$1" ]; do
     case "$1" in 
         -a | --ack )
             install_ack;;
-        -j | --autojump)
-            install_autojump;;
     esac
     shift
 done
