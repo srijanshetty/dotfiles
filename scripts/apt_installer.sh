@@ -10,17 +10,18 @@ Available options:
 -f | --full                        Full Installations
 -a | --ack                         Install ack 
 -x | --xmonad                      Install xmonad
--e | --essentials                  Install the essentails
--m | --miscellaneous               Miscellaneous utilities
--i | --indicators                  Indicators
--s | --system                      System binaries
--b | --battery                     Battery related utilities
+-e | --essentials                  zsh, ack, git, vim and screen
+-m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
+-i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor 
+-s | --system                      dstat, htop
+-b | --battery                     ibam, bumblebee, acpi
+--build                            g++, make, python-setuptools
 
 _EOF_
 }
 
 # Install ack
-function install_ack {
+function install_ack() {
     if [ -d ${HOME}/Documents/local/bin ]; then
     else
         mkdir -p ${HOME}/local/bin
@@ -43,6 +44,11 @@ function install_essentials {
 function install_xmonad {
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
 	sudo apt-get -y install gnome-panel xmonad
+}
+
+# Build tools
+function install_build_tools {
+    sudo apt-get install -y python-setuptools make g++
 }
 
 # System monitoring utilies
@@ -119,6 +125,9 @@ while [ -n "$1" ]; do
 
         -b | --battery)
             install_battery;;
+
+        --build)
+            install_build_tools;;
 
         -h | --help)
             help_text;;
