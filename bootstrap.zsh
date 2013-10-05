@@ -22,7 +22,6 @@ Available commands:
 --config-bare               bare bones configuration 
 --solarize                  solarize the terminal
 --test                      tester program
-            
 _EOF_
 }
 
@@ -100,7 +99,7 @@ function config_solarize() {
 }
 
 #Synapse configuration
-function config_synapse {
+function config_synapse() {
     if which synapse &> /dev/null; then
         cd ~/.config
         if [[ -e synapse ]]; then
@@ -113,7 +112,7 @@ function config_synapse {
 }
 
 #I haven't used it recently but still
-function config_xmodmap {
+function config_xmodmap() {
     # Map caps lock to escape
     cd
     if [ -e .Xmodmap ]; then 
@@ -126,7 +125,7 @@ function config_xmodmap {
 }
 
 #This is for xinitrc
-function config_xinitrc {
+function config_xinitrc() {
     cd 
     if [ -e .xinitrc ]; then
         echo "[${RED} FAIL ${NORMAL}] Xinitrc Failed. Delete ~/.xinitrc and retry"
@@ -137,7 +136,7 @@ function config_xinitrc {
 }
 
 #Configure xmonad
-function config_xmonad {
+function config_xmonad() {
     if which xmonad &> /dev/null; then
         cd
         if [ -d .xmonad ]; then
@@ -152,7 +151,7 @@ function config_xmonad {
 }
 
 #Configuration file for screen
-function config_screen {
+function config_screen() {
     cd 
     if [ -e .screenrc ]; then
         echo "[${RED} FAIL ${NORMAL}] Screen failed. Delete ~/.screenrc and retry"
@@ -165,7 +164,7 @@ function config_screen {
 
 #Autoinstallers
 #Install everything
-function config {
+function config() {
     config_bare
     config_xmonad
     config_xinitrc
@@ -174,12 +173,13 @@ function config {
 }
 
 #Install only essential stuff
-function config_bare {
+function config_bare() {
     config_git
     config_zsh
     config_vim
-    config_solarize
+    config_screen
     install_autojump
+    config_solarize
 }
 
 #Store the configuration directory for use by the functions
