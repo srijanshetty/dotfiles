@@ -3,4 +3,9 @@ config/sublime-text-3/Cache/*
 config/sublime-text-3/Local/*
 config/sublime-text-3/Packages/User/Package Control.cache/
 config/sublime-text-3/Packages/User/Package Control.last-run
+config/xmonad/history
+config/xmonad/xmonad.errors
+config/xmonad/xmonad.hi
+config/xmonad/xmonad.o
+config/xmonad/xmonad-x86_64-linux
 
