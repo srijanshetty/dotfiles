@@ -7,15 +7,15 @@ USAGE: apt_installer <arguments>
 
 Available options:
 
--f | --full                        Full Installations
--a | --ack                         Install ack 
--x | --xmonad                      Install xmonad
--e | --essentials                  zsh, ack, git, vim and screen
--m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
--i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor 
--s | --system                      dstat, htop
--b | --battery                     ibam, bumblebee, acpi
---build                            g++, make, python-setuptools
+    -f | --full                        Full Installations
+    -a | --ack                         Install ack 
+    -x | --xmonad                      Install xmonad
+    -e | --essentials                  zsh, ack, git, vim and screen
+    -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
+    -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor 
+    -s | --system                      dstat, htop
+    -b | --battery                     ibam, bumblebee, acpi, jupiter
+    --build                            g++, make, python-setuptools
 
 _EOF_
 }
@@ -48,7 +48,9 @@ function install_xmonad {
 
 # Build tools
 function install_build_tools {
-    sudo apt-get install -y python-setuptools make g++
+    #python-setuptools is for easy_install
+    #g++ is for c++ compilation
+    sudo apt-get install -y python-setuptools g++
 }
 
 # System monitoring utilies
@@ -65,6 +67,9 @@ function install_battery {
 	sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
 	sudo apt-get install -y bumblebee virtualgl linux-headers-generic
 
+    # Install jupiter for performance control
+    sudo add-apt-repository ppa:webupd8team/jupiter && sudo apt-get update
+    sudo apt-get install jupiter
 }
 
 # have to keep a check on the temparature of the laptop

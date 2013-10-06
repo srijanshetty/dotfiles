@@ -5,23 +5,23 @@ function help_text() {
 cat <<- _EOF_
 
 USAGE: bootstrap.sh <arguments>
-VERSION: 1.0.0
 
 Available commands:
 
--x | --xmonad-config        configure only xmonad 
--v | --vim-config           configure only vim
--g | --git-config           configure git
--z | --zsh-config           configure zsh using Prezto
--s | --screen-config        configure screen
--i | --xinitrc-config       configure xinitrc 
--y | --synapse-config       configure synapse
--r | --remap-config         configure xmodmap 
--a | --autojump             Install autojump
--c | --config               apply all configuration options
---config-bare               bare bones configuration 
---solarize                  solarize the terminal
---test                      tester program
+    -x | --xmonad-config        configure only xmonad 
+    -v | --vim-config           configure only vim
+    -g | --git-config           configure git
+    -z | --zsh-config           configure zsh using Prezto
+    -s | --screen-config        configure screen
+    -i | --xinitrc-config       configure xinitrc 
+    -y | --synapse-config       configure synapse
+    -r | --remap-config         configure xmodmap 
+    -a | --autojump             Install autojump
+    -c | --config               apply all configuration options
+    --config-bare               bare bones configuration 
+    --solarize                  solarize the terminal
+    --test                      tester program
+
 _EOF_
 }
 
@@ -29,7 +29,7 @@ _EOF_
 function install_autojump() {
     # Install autojump
     if which autojump &>/dev/null; then
-        echo "[${RED} FAIL ${NORMAL}] Autojump already installed"
+        echo "[${RED} FAIL ${NORMAL}] Autojump is already installed"
     else
         cd shells/autojump
         ./install.sh
@@ -45,6 +45,7 @@ function config_vim() {
         cd
         if [ -d .vim ]; then
             echo "[${RED} FAIL ${NORMAL}] Vim configuration failed. Delete ~/.vim and retry"
+            ERR=1
         else
             ln -s "${CONFDIR}/config/vim/vim" .vim
             ln -s "${CONFDIR}/config/vim/vimrc" .vimrc
@@ -52,6 +53,7 @@ function config_vim() {
         cd $CONFDIR
     else
         echo "[${RED} FAIL ${NORMAL}] Vim configuration failed. Install vim first"
+        ERR=2
     fi
 }
 
@@ -63,7 +65,8 @@ function config_git() {
         git config --global user.email "srijan.shetty@gmail.com"
         echo "[${GREEN} OKAY ${NORMAL}] Git configured."
     else
-        echo "[${RED} FAIL ${NORMAL}] Git failed. Install git first"
+        echo "[${RED} FAIL ${NORMAL}] Git configuration failed. Install git first"
+        ERR=2
     fi
 }
 
@@ -72,7 +75,8 @@ function config_zsh() {
     if which zsh &> /dev/null; then
         cd
         if [[ -d .zprezto ]]; then
-            echo "[${RED} FAIL ${NORMAL}] Prezto failed. Delete ~/.zprezto and retry"
+            echo "[${RED} FAIL ${NORMAL}] Prezto configuration failed. Delete ~/.zprezto and retry"
+            ERR=1
         else
             ln -s "${CONFDIR}/shells/zsh/zprezto" .zprezto
 
@@ -83,13 +87,17 @@ function config_zsh() {
             cd ${CONFDIR}
             echo "[${GREEN} OKAY ${NORMAL}] Prezto configured."
         fi
+    else
+        echo "[${RED} FAIL ${NORMAL}] Zsh configuration failed. Install zsh first"
+        ERR=2
     fi
 }
 
 #Solarize the terminal
 function config_solarize() {
     if [ -e ~/.dircolors ]; then
-        echo "[${RED} FAIL ${NORMAL}] Solarize failed. Delete ~/.dircolors and retry"
+        echo "[${RED} FAIL ${NORMAL}] Solarize configuration failed. Delete ~/.dircolors and retry"
+        ERR=1
     else
         cp shells/dircolors.ansi-light ~/.dircolors
         eval `dircolors ~/.dircolors`
@@ -101,13 +109,18 @@ function config_solarize() {
 #Synapse configuration
 function config_synapse() {
     if which synapse &> /dev/null; then
-        cd ~/.config
-        if [[ -e synapse ]]; then
-            echo "[${RED} FAIL ${NORMAL}] Synapse failed. Delete ~/.config/synapse and retry"
+        if [ -e ~/.config/synapse/config.json ]; then
+            echo "[${RED} FAIL ${NORMAL}] Synapse configuration failed. Delete ~/.config/synapse and retry"
+            ERR=1
         else
+            cd ~/.config/synapse
+            ln -s "${CONFDIR}/config/synapse/config.json" config.json
             echo "[${GREEN} OKAY ${NORMAL}] Synapse configured"
+            cd $CONFDIR
         fi
-        cd $CONFDIR
+    else
+        echo "[${RED} FAIL ${NORMAL}] Synapse configuration failed. Install synapse first"
+        ERR=2
     fi
 }
 
@@ -116,7 +129,8 @@ function config_xmodmap() {
     # Map caps lock to escape
     cd
     if [ -e .Xmodmap ]; then 
-        echo "[${RED} FAIL ${NORMAL}] Remap failed. Delete ~/.xmodmap and retry"
+        echo "[${RED} FAIL ${NORMAL}] Remap configuration failed. Delete ~/.xmodmap and retry"
+        ERR=1
     else
         ln -s ${CONFDIR}/config/Xmodmap .Xmodmap
         echo "[${GREEN} OKAY ${NORMAL}] Remap configured"
@@ -128,7 +142,8 @@ function config_xmodmap() {
 function config_xinitrc() {
     cd 
     if [ -e .xinitrc ]; then
-        echo "[${RED} FAIL ${NORMAL}] Xinitrc Failed. Delete ~/.xinitrc and retry"
+        echo "[${RED} FAIL ${NORMAL}] Xinitrc configuration Failed. Delete ~/.xinitrc and retry"
+        ERR=1
     else
         ln -s "${CONFDIR}/config/xinitrc" .xinitrc
         echo "[${GREEN} OKAY ${NORMAL}] Xinitrc configured"
@@ -140,25 +155,35 @@ function config_xmonad() {
     if which xmonad &> /dev/null; then
         cd
         if [ -d .xmonad ]; then
-            echo "[${RED} FAIL ${NORMAL}] Xmonad failed. Delete ~/.xmonad and retry"
+            echo "[${RED} FAIL ${NORMAL}] Xmonad configuration failed. Delete ~/.xmonad and retry"
+            ERR=1
         else
             ln -s "${CONFDIR}/config/xmonad" .xmonad
             cd ${CONFDIR}
             xmonad --recompile
             echo "[${GREEN} OKAY ${NORMAL}] Xmonad configured"
         fi
+    else
+        echo "[${RED} FAIL ${NORMAL}] xmonad configuration failed. Install xmonad first"
+        ERR=2
     fi
 }
 
 #Configuration file for screen
 function config_screen() {
-    cd 
-    if [ -e .screenrc ]; then
-        echo "[${RED} FAIL ${NORMAL}] Screen failed. Delete ~/.screenrc and retry"
+    if which screen &> /dev/null; then
+        cd 
+        if [ -e .screenrc ]; then
+            echo "[${RED} FAIL ${NORMAL}] Screen configuration failed. Delete ~/.screenrc and retry"
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/screenrc" .screenrc
+            cd ${CONFDIR}
+            echo "[${GREEN} OKAY ${NORMAL}] Screen configured"
+        fi
     else
-        ln -s "${CONFDIR}/config/screenrc" .screenrc
-        cd ${CONFDIR}
-        echo "[${GREEN} OKAY ${NORMAL}] Screen configured"
+        echo "[${RED} FAIL ${NORMAL}] screen configuration failed. Install screen first"
+        ERR=2
     fi
 }
 
@@ -185,11 +210,14 @@ function config_bare() {
 #Store the configuration directory for use by the functions
 CONFDIR=${PWD}
 
-#colored outputs
+# Debug messages 
 NORMAL=$(tput sgr0)
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 YELLOW=$(tput setaf 3)
+
+# flag for errors
+ERR=0
 
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
@@ -224,3 +252,6 @@ while [ -n "$1" ]; do
     esac
     shift
 done
+
+# return the exit status
+exit $ERR
