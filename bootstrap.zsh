@@ -95,12 +95,13 @@ function config_zsh() {
 
 #Solarize the terminal
 function config_solarize() {
-    if [ -e ~/.dircolors ]; then
+    if [ -e ~/.dircolors-day ]; then
         echo "[${RED} FAIL ${NORMAL}] Solarize configuration failed. Delete ~/.dircolors and retry"
         ERR=1
     else
-        cp shells/dircolors.ansi-light ~/.dircolors
-        eval `dircolors ~/.dircolors`
+        cp shells/dircolors.ansi-light ~/.dircolors-light
+        cp shells/dircolors.ansi-dark ~/.dircolors-dark
+        eval `dircolors ~/.dircolors-light`
         shells/solarize/solarize
         echo "[${GREEN} OKAY ${NORMAL}] Solarize configured"
     fi
