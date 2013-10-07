@@ -29,12 +29,12 @@ _EOF_
 function install_autojump() {
     # Install autojump
     if which autojump &>/dev/null; then
-        echo "[${RED} FAIL ${NORMAL}] Autojump is already installed"
+        fail "Autojump is already installed"
     else
         cd shells/autojump
         ./install.sh
         cd ${CONFDIR}
-        echo "[${GREEN} OKAY ${NORMAL}] Autojump installed"
+        success "Autojump installed"
     fi
 }
 
@@ -44,7 +44,7 @@ function config_vim() {
     if which vim &>/dev/null; then
         cd
         if [ -d .vim ]; then
-            echo "[${RED} FAIL ${NORMAL}] Vim configuration failed. Delete ~/.vim and retry"
+            fail "Vim configuration failed. Delete ~/.vim and retry"
             ERR=1
         else
             ln -s "${CONFDIR}/config/vim/vim" .vim
@@ -52,7 +52,7 @@ function config_vim() {
         fi
         cd $CONFDIR
     else
-        echo "[${RED} FAIL ${NORMAL}] Vim configuration failed. Install vim first"
+        fail "Vim configuration failed. Install vim first"
         ERR=2
     fi
 }
@@ -63,9 +63,9 @@ function config_git() {
         git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"""
         git config --global user.name "Srijan R Shetty"
         git config --global user.email "srijan.shetty@gmail.com"
-        echo "[${GREEN} OKAY ${NORMAL}] Git configured."
+        success "Git configured."
     else
-        echo "[${RED} FAIL ${NORMAL}] Git configuration failed. Install git first"
+        fail "Git configuration failed. Install git first"
         ERR=2
     fi
 }
@@ -75,7 +75,7 @@ function config_zsh() {
     if which zsh &> /dev/null; then
         cd
         if [[ -d .zprezto ]]; then
-            echo "[${RED} FAIL ${NORMAL}] Prezto configuration failed. Delete ~/.zprezto and retry"
+            fail "Prezto configuration failed. Delete ~/.zprezto and retry"
             ERR=1
         else
             ln -s "${CONFDIR}/shells/zsh/zprezto" .zprezto
@@ -85,25 +85,25 @@ function config_zsh() {
                 ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
             done
             cd ${CONFDIR}
-            echo "[${GREEN} OKAY ${NORMAL}] Prezto configured."
+            success "Prezto configured."
         fi
     else
-        echo "[${RED} FAIL ${NORMAL}] Zsh configuration failed. Install zsh first"
+        fail "Zsh configuration failed. Install zsh first"
         ERR=2
     fi
 }
 
 #Solarize the terminal
 function config_solarize() {
-    if [ -e ~/.dircolors-day ]; then
-        echo "[${RED} FAIL ${NORMAL}] Solarize configuration failed. Delete ~/.dircolors and retry"
+    if [ -e ~/.dircolors-light ]; then
+        fail "Solarize configuration failed. Delete ~/.dircolors and retry"
         ERR=1
     else
         cp shells/dircolors.ansi-light ~/.dircolors-light
         cp shells/dircolors.ansi-dark ~/.dircolors-dark
         eval `dircolors ~/.dircolors-light`
         shells/solarize/solarize
-        echo "[${GREEN} OKAY ${NORMAL}] Solarize configured"
+        success "Solarize configured"
     fi
 }
 
@@ -111,16 +111,16 @@ function config_solarize() {
 function config_synapse() {
     if which synapse &> /dev/null; then
         if [ -e ~/.config/synapse/config.json ]; then
-            echo "[${RED} FAIL ${NORMAL}] Synapse configuration failed. Delete ~/.config/synapse and retry"
+            fail "Synapse configuration failed. Delete ~/.config/synapse and retry"
             ERR=1
         else
             cd ~/.config/synapse
             ln -s "${CONFDIR}/config/synapse/config.json" config.json
-            echo "[${GREEN} OKAY ${NORMAL}] Synapse configured"
+            success "Synapse configured"
             cd $CONFDIR
         fi
     else
-        echo "[${RED} FAIL ${NORMAL}] Synapse configuration failed. Install synapse first"
+        fail "Synapse configuration failed. Install synapse first"
         ERR=2
     fi
 }
@@ -130,11 +130,11 @@ function config_xmodmap() {
     # Map caps lock to escape
     cd
     if [ -e .Xmodmap ]; then 
-        echo "[${RED} FAIL ${NORMAL}] Remap configuration failed. Delete ~/.xmodmap and retry"
+        fail "Remap configuration failed. Delete ~/.xmodmap and retry"
         ERR=1
     else
         ln -s ${CONFDIR}/config/Xmodmap .Xmodmap
-        echo "[${GREEN} OKAY ${NORMAL}] Remap configured"
+        success "Remap configured"
     fi
     cd ${CONFDIR}
 }
@@ -143,11 +143,11 @@ function config_xmodmap() {
 function config_xinitrc() {
     cd 
     if [ -e .xinitrc ]; then
-        echo "[${RED} FAIL ${NORMAL}] Xinitrc configuration Failed. Delete ~/.xinitrc and retry"
+        fail "Xinitrc configuration Failed. Delete ~/.xinitrc and retry"
         ERR=1
     else
         ln -s "${CONFDIR}/config/xinitrc" .xinitrc
-        echo "[${GREEN} OKAY ${NORMAL}] Xinitrc configured"
+        success "Xinitrc configured"
     fi
 }
 
@@ -156,16 +156,16 @@ function config_xmonad() {
     if which xmonad &> /dev/null; then
         cd
         if [ -d .xmonad ]; then
-            echo "[${RED} FAIL ${NORMAL}] Xmonad configuration failed. Delete ~/.xmonad and retry"
+            fail "Xmonad configuration failed. Delete ~/.xmonad and retry"
             ERR=1
         else
             ln -s "${CONFDIR}/config/xmonad" .xmonad
             cd ${CONFDIR}
             xmonad --recompile
-            echo "[${GREEN} OKAY ${NORMAL}] Xmonad configured"
+            success "Xmonad configured"
         fi
     else
-        echo "[${RED} FAIL ${NORMAL}] xmonad configuration failed. Install xmonad first"
+        fail "xmonad configuration failed. Install xmonad first"
         ERR=2
     fi
 }
@@ -175,15 +175,15 @@ function config_screen() {
     if which screen &> /dev/null; then
         cd 
         if [ -e .screenrc ]; then
-            echo "[${RED} FAIL ${NORMAL}] Screen configuration failed. Delete ~/.screenrc and retry"
+            fail "Screen configuration failed. Delete ~/.screenrc and retry"
             ERR=1
         else
             ln -s "${CONFDIR}/config/screenrc" .screenrc
             cd ${CONFDIR}
-            echo "[${GREEN} OKAY ${NORMAL}] Screen configured"
+            success "Screen configured"
         fi
     else
-        echo "[${RED} FAIL ${NORMAL}] screen configuration failed. Install screen first"
+        fail "screen configuration failed. Install screen first"
         ERR=2
     fi
 }
@@ -217,6 +217,18 @@ RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 YELLOW=$(tput setaf 3)
 
+# function to output messages on the console
+function fail() {
+        echo "[${RED} FAIL ${NORMAL}] $*"
+}
+
+function warn() {
+        echo "[${RED} WARN ${NORMAL}] $*"
+}
+
+function success() {
+        echo "[${GREEN} OKAY ${NORMAL}] $*"
+}
 # flag for errors
 ERR=0
 
