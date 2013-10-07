@@ -2,3 +2,4 @@ cloud
 node
 xclip setting
 pygments installer
+add a sublime text option in bootstrapper and apt_installer

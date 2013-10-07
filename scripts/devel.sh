@@ -23,11 +23,17 @@ function install_sublime {
     # link sublime files
 }
 
+#Install node
 function install_yeoman {
-    # check for node
-    # check for the existence of npm
-    npm install -g yo
+    if hash node &> /dev/null; then 
+        npm install -g yo 
+    else
+        fail "Node is not installed. Install node and retry"
+    fi
 }
+
+#source the installation files
+source helper.sh
 
 while [ -n "$1" ]; do
     case "$1" in 

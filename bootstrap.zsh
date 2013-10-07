@@ -188,6 +188,24 @@ function config_screen() {
     fi
 }
 
+#Configure sublime text
+function config_sublime() {
+    if which subl &> /dev/null; then
+        cd ~/.config
+        if [ -d sublime-text3 ]; then
+            fail "Sublime text configuration failed. Remove ~/.config/sublime-text3 and retry."
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/sublime-text3" sublime-text3 
+            cd ${CONFDIR}
+            success "Sublime Text configured"
+        fi
+    else
+        fail "Sublime text configuration failed. Install sublime text and then retry"
+        ERR=2
+    fi
+}
+
 #Autoinstallers
 #Install everything
 function config() {
@@ -211,24 +229,9 @@ function config_bare() {
 #Store the configuration directory for use by the functions
 CONFDIR=${PWD}
 
-# Debug messages 
-NORMAL=$(tput sgr0)
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-YELLOW=$(tput setaf 3)
+#for helper function
+source helper.sh
 
-# function to output messages on the console
-function fail() {
-        echo "[${RED} FAIL ${NORMAL}] $*"
-}
-
-function warn() {
-        echo "[${RED} WARN ${NORMAL}] $*"
-}
-
-function success() {
-        echo "[${GREEN} OKAY ${NORMAL}] $*"
-}
 # flag for errors
 ERR=0
 
