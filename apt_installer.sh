@@ -15,7 +15,7 @@ Available options:
     -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor 
     -s | --system                      dstat, htop
     -b | --battery                     ibam, bumblebee, acpi, jupiter
-    --build                            g++, make, python-setuptools
+    --build                            g++, make, python-setuptools, rubygems
 
 _EOF_
 }
@@ -50,7 +50,7 @@ function install_xmonad {
 function install_build_tools {
     #python-setuptools is for easy_install
     #g++ is for c++ compilation
-    sudo apt-get install -y python-setuptools g++
+    sudo apt-get install -y python-setuptools g++ rubygems
 }
 
 # System monitoring utilies
