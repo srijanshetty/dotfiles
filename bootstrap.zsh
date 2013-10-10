@@ -18,6 +18,7 @@ Available commands:
     -r | --remap-config         configure xmodmap 
     -a | --autojump             Install autojump
     -c | --config               apply all configuration options
+    --config-sublime            configure sumblime text
     --config-bare               bare bones configuration 
     --solarize                  solarize the terminal
     --test                      tester program
@@ -214,6 +215,7 @@ function config() {
     config_xinitrc
     config_xmodmap
     config_synapse
+    config_sublime
 }
 
 #Install only essential stuff
@@ -230,7 +232,7 @@ function config_bare() {
 CONFDIR=${PWD}
 
 #for helper function
-source helper.sh
+source scripts/helper.sh
 
 # flag for errors
 ERR=0
@@ -238,33 +240,50 @@ ERR=0
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
     case "$1" in 
-        -x | --xmonad-config) config_xmonad;;
+        -x | --xmonad-config)
+            config_xmonad;;
 
-        -v | --vim-config) config_vim;;
+        -v | --vim-config)
+            config_vim;;
 
-        -g | --git-config) config_git;;
+        -g | --git-config)
+            config_git;;
 
-        -z | --zsh-config) config_zsh;;
+        -z | --zsh-config)
+            config_zsh;;
 
-        -s | --screen-config) config_screen;;
+        -s | --screen-config)
+            config_screen;;
         
-        -c | --config) config;;
+        -c | --config)
+            config;;
         
-        -a | --autojump) install_autojump;;
+        -a | --autojump)
+            install_autojump;;
 
-        -i | --xinitrc-config) config_xinitrc;;
+        -i | --xinitrc-config)
+            config_xinitrc;;
 
-        -y | --synapse-config) config_synapse;;
+        -y | --synapse-config)
+            config_synapse;;
 
-        -r | --remap-config) config_xmodmap;;
+        -r | --remap-config)
+            config_xmodmap;;
         
-        -h | --help ) help_text;;
+        -h | --help )
+            help_text;;
 
-        --config-bare) config_bare;;
+        --config-sublime) 
+            config_sublime;;
+
+        --config-bare)
+            config_bare;;
     
-        --solarize) config_solarize;;
+        --solarize)
+            config_solarize;;
 
-        --test) tester;;
+        --test)
+            tester;;
     esac
     shift
 done
