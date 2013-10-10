@@ -30,7 +30,7 @@ _EOF_
 function install_autojump() {
     # Install autojump
     if which autojump &>/dev/null; then
-        fail "Autojump is already installed"
+        warn "Autojump is already installed"
     else
         cd shells/autojump
         ./install.sh

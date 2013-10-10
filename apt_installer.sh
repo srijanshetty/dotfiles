@@ -20,48 +20,78 @@ Available options:
 _EOF_
 }
 
+# a function to install something 
+function apt_install() {
+    if hash $1; then
+        warn "$1 is already installed"
+    else
+        (sudo apt-get install -y $1 &>/dev/null && success "$1 installed") || fail "$1 installation"
+    fi
+}
+
 # Install ack
 function install_ack() {
-    if [ -d ${HOME}/Documents/local/bin ]; then
+    if hash ack; then
+        warn "ack already installed"
     else
-        mkdir -p ${HOME}/local/bin
+        if [ -d ${HOME}/Documents/local/bin ]; then
+        else
+            mkdir -p ${HOME}/local/bin
+        fi
+        (wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.08-single-file &>/dev/null \
+            && success "ack installed" ) || fail "ack installation"
+        chmod u+x "${HOME}/Documents/local/bin/ack"
     fi
-    wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.08-single-file 
-    chmod u+x "${HOME}/Documents/local/bin/ack"
 }
 
 # zsh, ack, vim ,git and screen
 function install_essentials {
-	sudo apt-get install -y zsh git vim screen
+    highlight "\nInstalling ZSH, VIM, GIT, SCREEN"
+
+    apt_install zsh
+    apt_install git
+    apt_install vim
+    apt_install screen
     install_ack
 
     # change default shell to zsh
     chsh -s /bin/zsh
-    
 }
 
 # Xmonad, the tiling manager
 function install_xmonad {
+    highlight "\nInstalling xmonad"
+
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
-	sudo apt-get -y install gnome-panel xmonad
+    apt_install gnome-panel
+    apt_install xmonad
 }
 
 # Build tools
-function install_build_tools {
+function install_build_tools() {
+    highlight "\nInstalling build tools"
+
     #python-setuptools is for easy_install
     #g++ is for c++ compilation
-    sudo apt-get install -y python-setuptools g++ rubygems
+    # apt_install python-setuptools
+    apt_install g++
+    # apt_install rubygems
 }
 
 # System monitoring utilies
-function install_system {
-	sudo apt-get install -y dstat htop
+function install_system() {
+    highlight "\nInstalling System Utilities"
+    apt_install dstat
+    apt_install htop
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
 function install_battery {
+    highlight "\nInstalling battery monitoring utilies"
+
     # Monitoring tools
-	sudo apt-get install -y acpi ibam
+    apt_install acpi
+    apt_install ibam
 
     # Bumblee the saviour of poor nVidia card laptops running linux
 	sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
@@ -74,30 +104,35 @@ function install_battery {
 
 # have to keep a check on the temparature of the laptop
 function install_indicators {
-	# Repositories 
+    # the sensors which are required
+    apt_install lm-sensors
+    apt_install hddtemp
+    apt_install fluxgui
+
+    # the indicator for sensors
 	sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
-	
-	# Indicators
-	sudo apt-get install -y lm-sensors hddtemp fluxgui indicator-sensors
+    apt_install indicator-sensors
 }
 
 function install_miscellaneous {
     # media utilies like flash
-	sudo apt-get install -y flashplugin-installer vlc pavucontrol
+	apt_install flashplugin-installer
+    apt_install vlc 
+    apt_install pavucontrol
 
     # simple utilies like SSH, compatibility tools
-	sudo apt-get install openssh-server ia32-libs
+    apt_install openssh-server
+    apt_install ia32-libs
+
+    # Synapse for immediate execution
 	sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
-    sudo apt-get install -y synapse
+    apt_install synapse
 }
 
-#colors
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-YELLOW=$(tput setaf 3)
+# source the helper functions
+source scripts/helper.sh
 
 #Store the root directory
-cd ..
 CONFDIR=${PWD}
 
 #Loop through arguments
