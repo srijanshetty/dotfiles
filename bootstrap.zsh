@@ -29,7 +29,7 @@ _EOF_
 # Installation functions
 function install_autojump() {
     # Install autojump
-    if which autojump &>/dev/null; then
+    if hash autojump; then
         warn "Autojump is already installed"
     else
         cd shells/autojump
@@ -42,7 +42,7 @@ function install_autojump() {
 # Configuration Functions
 #Vim configuration
 function config_vim() {
-    if which vim &>/dev/null; then
+    if hash vim; then
         cd
         if [ -d .vim ]; then
             fail "Vim configuration failed. Delete ~/.vim and retry"
@@ -60,7 +60,7 @@ function config_vim() {
 
 # Git configuration
 function config_git() {
-    if which git &> /dev/null; then
+    if hash git; then
         git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"""
         git config --global user.name "Srijan R Shetty"
         git config --global user.email "srijan.shetty@gmail.com"
@@ -73,7 +73,7 @@ function config_git() {
 
 #ZSH configuration
 function config_zsh() {
-    if which zsh &> /dev/null; then
+    if hash zsh; then
         cd
         if [[ -d .zprezto ]]; then
             fail "Prezto configuration failed. Delete ~/.zprezto and retry"
@@ -110,7 +110,7 @@ function config_solarize() {
 
 #Synapse configuration
 function config_synapse() {
-    if which synapse &> /dev/null; then
+    if hash synapse; then
         if [ -e ~/.config/synapse/config.json ]; then
             fail "Synapse configuration failed. Delete ~/.config/synapse and retry"
             ERR=1
@@ -154,7 +154,7 @@ function config_xinitrc() {
 
 #Configure xmonad
 function config_xmonad() {
-    if which xmonad &> /dev/null; then
+    if hash xmonad; then
         cd
         if [ -d .xmonad ]; then
             fail "Xmonad configuration failed. Delete ~/.xmonad and retry"
@@ -173,7 +173,7 @@ function config_xmonad() {
 
 #Configuration file for screen
 function config_screen() {
-    if which screen &> /dev/null; then
+    if hash screen; then
         cd 
         if [ -e .screenrc ]; then
             fail "Screen configuration failed. Delete ~/.screenrc and retry"
@@ -191,7 +191,7 @@ function config_screen() {
 
 #Configure sublime text
 function config_sublime() {
-    if which subl &> /dev/null; then
+    if hash subl; then
         cd ~/.config
         if [ -d sublime-text3 ]; then
             fail "Sublime text configuration failed. Remove ~/.config/sublime-text3 and retry."
