@@ -45,7 +45,7 @@ function install_ack() {
 }
 
 # zsh, ack, vim ,git and screen
-function install_essentials {
+function install_essentials() {
     highlight "\nInstalling ZSH, VIM, GIT, SCREEN"
 
     apt_install zsh
@@ -53,13 +53,10 @@ function install_essentials {
     apt_install vim
     apt_install screen
     install_ack
-
-    # change default shell to zsh
-    chsh -s /bin/zsh
 }
 
 # Xmonad, the tiling manager
-function install_xmonad {
+function install_xmonad() {
     highlight "\nInstalling xmonad"
 
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
@@ -67,8 +64,15 @@ function install_xmonad {
     apt_install xmonad
 }
 
+# System monitoring utilies
+function install_system() {
+    highlight "\nInstalling System Utilities"
+    apt_install dstat
+    apt_install htop
+}
+
 # Build tools
-function install_build_tools() {
+function install_build_tools {
     highlight "\nInstalling build tools"
 
     #python-setuptools is for easy_install
@@ -76,13 +80,6 @@ function install_build_tools() {
     # apt_install python-setuptools
     apt_install g++
     # apt_install rubygems
-}
-
-# System monitoring utilies
-function install_system() {
-    highlight "\nInstalling System Utilities"
-    apt_install dstat
-    apt_install htop
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
@@ -94,12 +91,12 @@ function install_battery {
     apt_install ibam
 
     # Bumblee the saviour of poor nVidia card laptops running linux
-	sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
-	sudo apt-get install -y bumblebee virtualgl linux-headers-generic
+	#sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
+	#sudo apt-get install -y bumblebee virtualgl linux-headers-generic
 
     # Install jupiter for performance control
-    sudo add-apt-repository ppa:webupd8team/jupiter && sudo apt-get update
-    sudo apt-get install jupiter
+    #sudo add-apt-repository ppa:webupd8team/jupiter && sudo apt-get update
+    #sudo apt-get install jupiter
 }
 
 # have to keep a check on the temparature of the laptop
@@ -110,8 +107,8 @@ function install_indicators {
     apt_install fluxgui
 
     # the indicator for sensors
-	sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
-    apt_install indicator-sensors
+	#sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
+    #apt_install indicator-sensors
 }
 
 function install_miscellaneous {
@@ -125,8 +122,8 @@ function install_miscellaneous {
     apt_install ia32-libs
 
     # Synapse for immediate execution
-	sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
-    apt_install synapse
+	#sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
+    #apt_install synapse
 }
 
 # source the helper functions

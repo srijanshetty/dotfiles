@@ -28,6 +28,7 @@ _EOF_
 
 # Installation functions
 function install_autojump() {
+    highlight "\nInstalling autojump"
     # Install autojump
     if hash autojump; then
         warn "Autojump is already installed"
@@ -42,6 +43,7 @@ function install_autojump() {
 # Configuration Functions
 #Vim configuration
 function config_vim() {
+    highlight "\nConfiguring Vim"
     if hash vim; then
         cd
         if [ -d .vim ]; then
@@ -60,6 +62,7 @@ function config_vim() {
 
 # Git configuration
 function config_git() {
+    highlight "\nConfiguring git"
     if hash git; then
         git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"""
         git config --global user.name "Srijan R Shetty"
@@ -73,14 +76,21 @@ function config_git() {
 
 #ZSH configuration
 function config_zsh() {
+    highlight "\nConfiguring zsh"
     if hash zsh; then
         cd
         if [[ -d .zprezto ]]; then
             fail "Prezto configuration failed. Delete ~/.zprezto and retry"
             ERR=1
         else
-            ln -s "${CONFDIR}/shells/zsh/zprezto" .zprezto
+            # change default shell to zsh
+            if [ -n $ZSH_NAME ]; then
+                warn "The current shell is zsh"
+            else
+                chsh -s /bin/zsh
+            fi
 
+            ln -s "${CONFDIR}/shells/zsh/zprezto" .zprezto
             setopt EXTENDED_GLOB
             for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
                 ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
@@ -96,6 +106,7 @@ function config_zsh() {
 
 #Solarize the terminal
 function config_solarize() {
+    highlight "\nConfiguring the color scheme"
     if [ -e ~/.dircolors-light ]; then
         fail "Solarize configuration failed. Delete ~/.dircolors and retry"
         ERR=1
@@ -110,6 +121,7 @@ function config_solarize() {
 
 #Synapse configuration
 function config_synapse() {
+    highlight "\nConfiguring synapse"
     if hash synapse; then
         if [ -e ~/.config/synapse/config.json ]; then
             fail "Synapse configuration failed. Delete ~/.config/synapse and retry"
@@ -128,6 +140,7 @@ function config_synapse() {
 
 #I haven't used it recently but still
 function config_xmodmap() {
+    highlight "\nConfiguring xmodmap"
     # Map caps lock to escape
     cd
     if [ -e .Xmodmap ]; then 
@@ -142,6 +155,7 @@ function config_xmodmap() {
 
 #This is for xinitrc
 function config_xinitrc() {
+    highlight "\nConfiguring xinitrc"
     cd 
     if [ -e .xinitrc ]; then
         fail "Xinitrc configuration Failed. Delete ~/.xinitrc and retry"
@@ -154,6 +168,7 @@ function config_xinitrc() {
 
 #Configure xmonad
 function config_xmonad() {
+    highlight "\nConfiguring xmonad"
     if hash xmonad; then
         cd
         if [ -d .xmonad ]; then
@@ -173,6 +188,7 @@ function config_xmonad() {
 
 #Configuration file for screen
 function config_screen() {
+    highlight "\nConfiguring screen"
     if hash screen; then
         cd 
         if [ -e .screenrc ]; then
@@ -191,6 +207,7 @@ function config_screen() {
 
 #Configure sublime text
 function config_sublime() {
+    highlight "\nConfiguring sublime text"
     if hash subl; then
         cd ~/.config
         if [ -d sublime-text3 ]; then
