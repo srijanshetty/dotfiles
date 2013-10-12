@@ -25,7 +25,12 @@ function apt_install() {
     if hash $1; then
         warn "$1 is already installed"
     else
-        (sudo apt-get install -y $1 &>/dev/null && success "$1 installed") || fail "$1 installation"
+        if sudo apt-get install -y $1 &>/dev/null; then
+            success "$1 installed"
+        else
+            fail "$1 installation"
+            ERR=1
+        fi
     fi
 }
 
@@ -35,12 +40,19 @@ function install_ack() {
         warn "ack already installed"
     else
         if [ -d ${HOME}/Documents/local/bin ]; then
+
         else
             mkdir -p ${HOME}/local/bin
         fi
-        (wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.08-single-file &>/dev/null \
-            && success "ack installed" ) || fail "ack installation"
-        chmod u+x "${HOME}/Documents/local/bin/ack"
+
+        # Dowlonad the ack script
+        if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.08-single-file &>/dev/null; then
+            chmod u+x "${HOME}/Documents/local/bin/ack"
+            success "ack installed" 
+        else
+            fail "ack installation"
+            ERR=1
+        fi
     fi
 }
 
@@ -96,7 +108,7 @@ function install_battery {
 
     # Install jupiter for performance control
     #sudo add-apt-repository ppa:webupd8team/jupiter && sudo apt-get update
-    #sudo apt-get install jupiter
+    apt_install jupiter
 }
 
 # have to keep a check on the temparature of the laptop
@@ -108,7 +120,7 @@ function install_indicators {
 
     # the indicator for sensors
 	#sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
-    #apt_install indicator-sensors
+    apt_install indicator-sensors
 }
 
 function install_miscellaneous {
@@ -123,7 +135,7 @@ function install_miscellaneous {
 
     # Synapse for immediate execution
 	#sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
-    #apt_install synapse
+    apt_install synapse
 }
 
 # source the helper functions
@@ -131,6 +143,9 @@ source scripts/helper.sh
 
 #Store the root directory
 CONFDIR=${PWD}
+
+#For the error code
+ERR=0
 
 #Loop through arguments
 while [ -n "$1" ]; do
@@ -171,3 +186,6 @@ while [ -n "$1" ]; do
     esac
     shift
 done
+
+#Return the error
+exit $ERR

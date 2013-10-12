@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # Debug messages 
 NORMAL=$(tput sgr0)
 RED=$(tput setaf 1)
@@ -21,4 +23,10 @@ function success() {
 
 function highlight() {
         echo "${UNDERLINE_ON}$*${UNDERLINE_OFF}" 
+}
+
+function inRepo {
+    for file in /etc/apt/sources.list.d/*.list; do
+        grep "$1" $file
+    done
 }
