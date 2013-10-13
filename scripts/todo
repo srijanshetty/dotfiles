@@ -3,3 +3,4 @@ node
 xclip setting
 pygments installer
 add a sublime text option apt_installer
+add a ProxyCommand directive in ssh config
