@@ -22,7 +22,7 @@ _EOF_
 
 # a function to install something 
 function apt_install() {
-    if hash $1; then
+    if hash $1 &> /dev/null; then
         warn "$1 is already installed"
     else
         if sudo apt-get install -y $1 &>/dev/null; then
@@ -36,7 +36,7 @@ function apt_install() {
 
 # Install ack
 function install_ack() {
-    if hash ack; then
+    if hash ack &> /dev/null; then
         warn "ack already installed"
     else
         if [ -d ${HOME}/Documents/local/bin ]; then
