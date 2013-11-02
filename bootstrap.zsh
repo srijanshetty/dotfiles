@@ -30,7 +30,7 @@ _EOF_
 function install_autojump() {
     highlight "\nInstalling autojump"
     # Install autojump
-    if hash autojump; then
+    if hash autojump &> /dev/null; then
         warn "Autojump is already installed"
     else
         cd shells/autojump
@@ -44,7 +44,7 @@ function install_autojump() {
 #Vim configuration
 function config_vim() {
     highlight "\nConfiguring Vim"
-    if hash vim; then
+    if hash vim &> /dev/null; then
         cd
         if [ -d .vim ]; then
             fail "Vim configuration failed. Delete ~/.vim and retry"
@@ -63,11 +63,14 @@ function config_vim() {
 # Git configuration
 function config_git() {
     highlight "\nConfiguring git"
-    if hash git; then
-        git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"""
-        git config --global user.name "Srijan R Shetty"
-        git config --global user.email "srijan.shetty@gmail.com"
-        success "Git configured."
+    if hash git &> /dev/null; then
+        cd
+        if [ -f .gitconfig ]; then
+            fail "Git configuration exists. Delete ~./gitconfig and retry"
+        else
+            ln -s "${CONFDIR}/config/gitconfig" .gitconfig
+            success "Git configured."
+        fi
     else
         fail "Git configuration failed. Install git first"
         ERR=2
@@ -77,7 +80,7 @@ function config_git() {
 #ZSH configuration
 function config_zsh() {
     highlight "\nConfiguring zsh"
-    if hash zsh; then
+    if hash zsh &> /dev/null; then
         cd
         if [[ -d .zprezto ]]; then
             fail "Prezto configuration failed. Delete ~/.zprezto and retry"
@@ -122,7 +125,7 @@ function config_solarize() {
 #Synapse configuration
 function config_synapse() {
     highlight "\nConfiguring synapse"
-    if hash synapse; then
+    if hash synapse &> /dev/null; then
         if [ -e ~/.config/synapse/config.json ]; then
             fail "Synapse configuration failed. Delete ~/.config/synapse and retry"
             ERR=1
