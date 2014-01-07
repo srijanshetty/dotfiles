@@ -213,11 +213,11 @@ function config_sublime() {
     highlight "\nConfiguring sublime text"
     if hash subl; then
         cd ~/.config
-        if [ -d sublime-text3 ]; then
+        if [ -d sublime-text-3 ]; then
             fail "Sublime text configuration failed. Remove ~/.config/sublime-text3 and retry."
             ERR=1
         else
-            ln -s "${CONFDIR}/config/sublime-text3" sublime-text3 
+            ln -s "${CONFDIR}/config/sublime-text3" sublime-text-3 
             cd ${CONFDIR}
             success "Sublime Text configured"
         fi

@@ -24,3 +24,5 @@
         untracked = red
 [merge]
         log = true
+[push]
+	default = matching
