@@ -18,6 +18,7 @@ Available commands:
     -r | --remap-config         configure xmodmap 
     -a | --autojump             Install autojump
     -c | --config               apply all configuration options
+    --config-ssh                configure ssh
     --config-sublime            configure sumblime text
     --config-bare               bare bones configuration 
     --solarize                  solarize the terminal
@@ -227,6 +228,20 @@ function config_sublime() {
     fi
 }
 
+# configure ssh
+function config_ssh() {
+    highlight "\nConfiguring ssh"
+    cd ~/.ssh/
+    if [ -f config ]; then
+        fail "SSH configuration failed. Remove ~/ssh/config and retry."
+        ERR=1
+    else
+        ln -s "${CONFDIR}/config/sshconfig" config 
+        cd ${CONFDIR}
+        success "SSH configured"
+    fi
+}
+
 #Autoinstallers
 #Install everything
 function config() {
@@ -243,6 +258,7 @@ function config_bare() {
     config_git
     config_zsh
     config_vim
+    config_ssh
     config_screen
     install_autojump
     config_solarize
@@ -292,6 +308,9 @@ while [ -n "$1" ]; do
         
         -h | --help )
             help_text;;
+
+        --config-ssh)
+            config_ssh;;
 
         --config-sublime) 
             config_sublime;;

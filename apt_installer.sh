@@ -88,10 +88,9 @@ function install_build_tools {
     highlight "\nInstalling build tools"
 
     #python-setuptools is for easy_install
-    #g++ is for c++ compilation
     # apt_install python-setuptools
-    apt_install g++
     # apt_install rubygems
+    apt_install texlive
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
