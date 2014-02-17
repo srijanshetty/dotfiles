@@ -1,9 +1,5 @@
-config/sublime-text-3/Index/*
-config/sublime-text-3/Cache/*
-config/sublime-text-3/Local/*
-config/sublime-text-3/Packages/User/Package Control.cache/
-config/sublime-text-3/Packages/User/Package Control.last-run
-config/sublime-text-3/Backup
+config/sublime-text-3/*
+^config/sublime-text-3/Packages/User/Preferences.sublime-settings
 config/xmonad/history
 config/xmonad/xmonad.errors
 config/xmonad/xmonad.hi
