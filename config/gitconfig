@@ -8,7 +8,7 @@
 [apply]
         whitespace = fix
 [core]
-        excludesfile = ~/.gitignore
+	excludesfile = /home/srijan/.gitignore_global
         attributesfile = ~/.gitattributes
         whitespace = fix,space-before-tab,tab-in-indent,trailing-space
 [color "branch"]
