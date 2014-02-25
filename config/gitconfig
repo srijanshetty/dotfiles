@@ -1,28 +1,30 @@
 [alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [user]
-	name = Srijan R Shetty
-	email = srijan.shetty@gmail.com
+    name = Srijan R Shetty
+    email = srijan.shetty@gmail.com
 [color]
-        ui = always
+    ui = true
 [apply]
-        whitespace = fix
+    whitespace = fix
 [core]
-	excludesfile = /home/srijan/.gitignore_global
-        attributesfile = ~/.gitattributes
-        whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+    excludesfile = /home/srijan/.gitignore_global
+    attributesfile = ~/.gitattributes
+    whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+    autocrlf = false 
 [color "branch"]
-        current = yellow reverse
+    current = yellow bold 
+    remote = red reverse 
 [color "diff"]
-        meta = yellow bold
-        frag = magenta bold
-        old = red bold
-        new = green bold
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold 
+    new = green bold
 [color "status"]
-        added = green 
-        changed = yellow
-        untracked = red
+    added = green 
+    changed = yellow
+    untracked = red
 [merge]
-        log = true
+    log = true
 [push]
-	default = matching
+    default = matching
