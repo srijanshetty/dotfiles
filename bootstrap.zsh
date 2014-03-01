@@ -66,11 +66,22 @@ function config_git() {
     highlight "\nConfiguring git"
     if hash git &> /dev/null; then
         cd
+
+        # Configure git
         if [ -f .gitconfig ]; then
             fail "Git configuration exists. Delete ~./gitconfig and retry"
         else
             ln -s "${CONFDIR}/config/gitconfig" .gitconfig
+            ln -s "${CONFDIR}/config/gitignore_global" .gitignore_global
             success "Git configured."
+        fi
+
+        # Configure global gitignore
+        if [ -f .gitignore_global]; then
+            fail "Git ignore exists. Delete ~./gitignore_global and retry"
+        else
+            ln -s "${CONFDIR}/config/gitignore_global" .gitignore_global
+            success "Gitignore configurated"
         fi
     else
         fail "Git configuration failed. Install git first"

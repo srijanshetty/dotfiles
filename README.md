@@ -1,7 +1,6 @@
 # TODO
 - latex installer
 - texmf auto config
-- gitignore config
 - tmux config linking
 - ack-grep installing
 - curl installing
