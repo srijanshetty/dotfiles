@@ -7,12 +7,13 @@
 - curl installing
 - pandoc installing
 - yo installing
-- dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
 - weechat and its config
 - pip installation
 - tmux installation
 - tldr install
-
+- tmux-networkspeed
+- massrename
+- sysadmin
 
 # Must Have
 - Hemmingway

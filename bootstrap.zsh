@@ -15,7 +15,7 @@ Available commands:
     -s | --screen-config        configure screen
     -i | --xinitrc-config       configure xinitrc 
     -y | --synapse-config       configure synapse
-    -r | --remap-config         configure xmodmap 
+    -r | --remap-config         configure remap of keys
     -a | --autojump             Install autojump
     -c | --config               apply all configuration options
     --config-ssh                configure ssh
@@ -143,18 +143,16 @@ function config_synapse() {
 }
 
 #I haven't used it recently but still
-function config_xmodmap() {
+function config_remap() {
     highlight "\nConfiguring xmodmap"
+
     # Map caps lock to escape
-    cd
-    if [ -e .Xmodmap ]; then 
-        fail "Remap configuration failed. Delete ~/.xmodmap and retry"
-        ERR=1
+    if dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"; then 
+        success "Remap successful"
     else
-        ln -s ${CONFDIR}/config/Xmodmap .Xmodmap
-        success "Remap configured"
+        fail "Remap failed"
+        ERR=1
     fi
-    cd ${CONFDIR}
 }
 
 #This is for xinitrc
@@ -304,7 +302,7 @@ while [ -n "$1" ]; do
             config_synapse;;
 
         -r | --remap-config)
-            config_xmodmap;;
+            config_remap;;
         
         -h | --help )
             help_text;;
