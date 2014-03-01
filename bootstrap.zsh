@@ -13,6 +13,7 @@ Available commands:
     -g | --git-config           configure git
     -z | --zsh-config           configure zsh using Prezto
     -s | --screen-config        configure screen
+    -s | --tmux-config          configure tmux
     -i | --xinitrc-config       configure xinitrc 
     -y | --synapse-config       configure synapse
     -r | --remap-config         configure remap of keys
@@ -218,6 +219,25 @@ function config_screen() {
     fi
 }
 
+#Configuration file for tmux
+function config_tmux() {
+    highlight "\nConfiguring tmux"
+    if hash tmux; then
+        cd 
+        if [ -e .tmux.conf ]; then
+            fail "tmux configuration failed. Delete ~/.tmux.conf and retry"
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/tmux.conf" .tmux.conf
+            cd ${CONFDIR}
+            success "tmux configured"
+        fi
+    else
+        fail "tmux configuration failed. Install tmux first"
+        ERR=2
+    fi
+}
+
 #Configure sublime text
 function config_sublime() {
     highlight "\nConfiguring sublime text"
@@ -268,7 +288,7 @@ function config_bare() {
     config_zsh
     config_vim
     config_ssh
-    config_screen
+    config_tmux
     install_autojump
     config_solarize
 }
@@ -299,6 +319,9 @@ while [ -n "$1" ]; do
 
         -s | --screen-config)
             config_screen;;
+
+        -t | --tmux-config)
+            config_tmux;;
         
         -c | --config)
             config;;

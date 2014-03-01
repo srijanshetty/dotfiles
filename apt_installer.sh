@@ -10,12 +10,13 @@ Available options:
     -f | --full                        Full Installations
     -a | --ack                         Install ack 
     -x | --xmonad                      Install xmonad
-    -e | --essentials                  zsh, ack, git, vim and screen
+    -e | --essentials                  zsh, ack, git, vim and tmux
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
     -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor 
     -s | --system                      dstat, htop
     -b | --battery                     ibam, bumblebee, acpi, jupiter
-    --build                            g++, make, python-setuptools, rubygems
+    -w | --write                       texlive, pandoc
+    --build                            g++, make, pip
 
 _EOF_
 }
@@ -63,7 +64,7 @@ function install_essentials() {
     apt_install zsh
     apt_install git
     apt_install vim
-    apt_install screen
+    apt_install tmux
     install_ack
 }
 
@@ -90,7 +91,14 @@ function install_build_tools {
     #python-setuptools is for easy_install
     # apt_install python-setuptools
     # apt_install rubygems
+    apt_install pip
+}
+
+# Write tools
+function install_write_tools() {
+    highlight "\nInstalling write tools"
     apt_install texlive
+    apt_install pandoc
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
@@ -157,6 +165,7 @@ while [ -n "$1" ]; do
             install_essentials
             install_indicators
             install_battery
+            install_write_tools
             install_system;;
 
         -x | --xmonad) 
@@ -176,6 +185,9 @@ while [ -n "$1" ]; do
 
         -b | --battery)
             install_battery;;
+
+        -w | --write)
+            install_write_tools;;
 
         --build)
             install_build_tools;;

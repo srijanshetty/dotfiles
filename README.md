@@ -1,14 +1,8 @@
 # TODO
-- latex installer
 - texmf auto config
-- tmux config linking
-- ack-grep installing
 - curl installing
-- pandoc installing
 - yo installing
 - weechat and its config
-- pip installation
-- tmux installation
 - tldr install
 - tmux-networkspeed
 - massrename
@@ -24,7 +18,7 @@
 - zsh-dwim
 - ack-grep
 - yo
-- tldr (via npm)
+- tldr
 - weechat
 
 # Fun utilities
