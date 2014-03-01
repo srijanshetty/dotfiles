@@ -2,20 +2,35 @@
 - latex installer
 - texmf auto config
 - gitignore config
-- tmux config
+- tmux config linking
+- ack-grep installing
+- curl installing
+- pandoc installing
+- yo installing
+- dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
+- weechat and its config
+- pip installation
+- tmux installation
+- tldr install
 
-# Tweaks
-dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
+
+# Must Have
+- Hemmingway
+- pandoc
+- curl
+- pip
+- tex/detex
+- tmux
+- zsh-dwim
+- ack-grep
+- yo
+- tldr (via npm)
+- weechat
 
 # Fun utilities
-- pandoc
 - cowsay
 - sshcd
 - speedtest-cli (via pip)
 
-# Data Science
-
-# Must Have
-- Hemmingway
-- curl
-- install pip
+# Yeoman Generators
+- generator-io-slides
