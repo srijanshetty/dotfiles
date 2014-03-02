@@ -1,7 +1,5 @@
 # TODO
 - texmf auto config
-- curl installing
-- yo installing
 - weechat and its config
 - tldr install
 - tmux-networkspeed
