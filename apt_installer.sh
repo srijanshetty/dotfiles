@@ -107,7 +107,7 @@ function install_system() {
 function install_build_tools {
     highlight "\nInstalling build tools"
 
-    #python-setuptools is for easy_install
+    # python-setuptools is for easy_install
     # apt_install python-setuptools
     # apt_install rubygems
     apt_install pip

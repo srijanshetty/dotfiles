@@ -5,24 +5,36 @@
 - tmux-networkspeed
 - massrename
 - sysadmin
+- node install
 
-# Must Have
-- Hemmingway
-- pandoc
-- curl
-- pip
-- tex/detex
-- tmux
-- zsh-dwim
-- ack-grep
-- yo
-- tldr
+# Utilities
+
+## General
+- tmux 
+- vim
+- git
+- zsh
 - weechat
 
-# Fun utilities
+## Writing
+- pandoc
+- tex/detex
+
+## Development
+- curl
+- yo
+- pip
+- ack-grep
+- rvm
+
+## Miscellaneous
+- zsh-dwim
+- tldr
+
+## Fun utilities
 - cowsay
-- sshcd
+    - sshcd
 - speedtest-cli (via pip)
 
-# Yeoman Generators
-- generator-io-slides
+## Yeoman Generators
+    - generator-io-slides
