@@ -11,4 +11,16 @@ startup_message off
 # Default shell
 shell "/usr/bin/zsh"
 
+# Create windows
+chdir ~/Documents/notes
+screen -t NOTES vim TODO.md
+chdir ~
 
+# change the escape to j
+escape ^Jj
+
+# Open the screen on the second window
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10                                                            
+screen 1

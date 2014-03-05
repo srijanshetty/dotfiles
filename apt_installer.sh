@@ -10,12 +10,14 @@ Available options:
     -f | --full                        Full Installations
     -a | --ack                         Install ack 
     -x | --xmonad                      Install xmonad
-    -e | --essentials                  zsh, ack, git, vim and screen
+    -e | --essentials                  zsh, ack, git, vim and tmux
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
     -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor 
     -s | --system                      dstat, htop
     -b | --battery                     ibam, bumblebee, acpi, jupiter
-    --build                            g++, make, python-setuptools, rubygems
+    -w | --write                       texlive, pandoc
+    -d | --devel                       curl
+    --build                            g++, make, pip
 
 _EOF_
 }
@@ -31,6 +33,24 @@ function apt_install() {
             fail "$1 installation"
             ERR=1
         fi
+    fi
+}
+
+# a function to install something 
+function npm_install() {
+    if hash npm &> /dev/null; then
+        if hash $1 &> /dev/null; then
+            warn "$1 is already installed"
+        else
+            if npm install $1 &>/dev/null; then
+                success "$1 installed"
+            else
+                fail "$1 installation"
+                ERR=1
+            fi
+        fi
+    else
+        fail "NPM not installed. Install npm and then try"
     fi
 }
 
@@ -63,7 +83,7 @@ function install_essentials() {
     apt_install zsh
     apt_install git
     apt_install vim
-    apt_install screen
+    apt_install tmux
     install_ack
 }
 
@@ -87,11 +107,24 @@ function install_system() {
 function install_build_tools {
     highlight "\nInstalling build tools"
 
-    #python-setuptools is for easy_install
-    #g++ is for c++ compilation
+    # python-setuptools is for easy_install
     # apt_install python-setuptools
-    apt_install g++
     # apt_install rubygems
+    apt_install pip
+}
+
+# Write tools
+function install_write_tools() {
+    highlight "\nInstalling write tools"
+    apt_install texlive
+    apt_install pandoc
+}
+
+# devel tools
+function install_devel_tools() {
+    highlight "\nInstalling devel tools"
+    apt_install curl
+    npm_install yo
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
@@ -158,6 +191,7 @@ while [ -n "$1" ]; do
             install_essentials
             install_indicators
             install_battery
+            install_write_tools
             install_system;;
 
         -x | --xmonad) 
@@ -177,6 +211,12 @@ while [ -n "$1" ]; do
 
         -b | --battery)
             install_battery;;
+
+        -w | --write)
+            install_write_tools;;
+
+        -d | --devel)
+            install_devel_tools;;
 
         --build)
             install_build_tools;;

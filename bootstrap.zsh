@@ -13,11 +13,13 @@ Available commands:
     -g | --git-config           configure git
     -z | --zsh-config           configure zsh using Prezto
     -s | --screen-config        configure screen
+    -s | --tmux-config          configure tmux
     -i | --xinitrc-config       configure xinitrc 
     -y | --synapse-config       configure synapse
-    -r | --remap-config         configure xmodmap 
+    -r | --remap-config         configure remap of keys
     -a | --autojump             Install autojump
     -c | --config               apply all configuration options
+    --config-ssh                configure ssh
     --config-sublime            configure sumblime text
     --config-bare               bare bones configuration 
     --solarize                  solarize the terminal
@@ -65,11 +67,22 @@ function config_git() {
     highlight "\nConfiguring git"
     if hash git &> /dev/null; then
         cd
+
+        # Configure git
         if [ -f .gitconfig ]; then
             fail "Git configuration exists. Delete ~./gitconfig and retry"
         else
             ln -s "${CONFDIR}/config/gitconfig" .gitconfig
+            ln -s "${CONFDIR}/config/gitignore_global" .gitignore_global
             success "Git configured."
+        fi
+
+        # Configure global gitignore
+        if [ -f .gitignore_global]; then
+            fail "Git ignore exists. Delete ~./gitignore_global and retry"
+        else
+            ln -s "${CONFDIR}/config/gitignore_global" .gitignore_global
+            success "Gitignore configurated"
         fi
     else
         fail "Git configuration failed. Install git first"
@@ -142,18 +155,16 @@ function config_synapse() {
 }
 
 #I haven't used it recently but still
-function config_xmodmap() {
+function config_remap() {
     highlight "\nConfiguring xmodmap"
+
     # Map caps lock to escape
-    cd
-    if [ -e .Xmodmap ]; then 
-        fail "Remap configuration failed. Delete ~/.xmodmap and retry"
-        ERR=1
+    if dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"; then 
+        success "Remap successful"
     else
-        ln -s ${CONFDIR}/config/Xmodmap .Xmodmap
-        success "Remap configured"
+        fail "Remap failed"
+        ERR=1
     fi
-    cd ${CONFDIR}
 }
 
 #This is for xinitrc
@@ -208,6 +219,25 @@ function config_screen() {
     fi
 }
 
+#Configuration file for tmux
+function config_tmux() {
+    highlight "\nConfiguring tmux"
+    if hash tmux; then
+        cd 
+        if [ -e .tmux.conf ]; then
+            fail "tmux configuration failed. Delete ~/.tmux.conf and retry"
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/tmux.conf" .tmux.conf
+            cd ${CONFDIR}
+            success "tmux configured"
+        fi
+    else
+        fail "tmux configuration failed. Install tmux first"
+        ERR=2
+    fi
+}
+
 #Configure sublime text
 function config_sublime() {
     highlight "\nConfiguring sublime text"
@@ -227,6 +257,20 @@ function config_sublime() {
     fi
 }
 
+# configure ssh
+function config_ssh() {
+    highlight "\nConfiguring ssh"
+    cd ~/.ssh/
+    if [ -f config ]; then
+        fail "SSH configuration failed. Remove ~/ssh/config and retry."
+        ERR=1
+    else
+        ln -s "${CONFDIR}/config/sshconfig" config 
+        cd ${CONFDIR}
+        success "SSH configured"
+    fi
+}
+
 #Autoinstallers
 #Install everything
 function config() {
@@ -243,7 +287,8 @@ function config_bare() {
     config_git
     config_zsh
     config_vim
-    config_screen
+    config_ssh
+    config_tmux
     install_autojump
     config_solarize
 }
@@ -274,6 +319,9 @@ while [ -n "$1" ]; do
 
         -s | --screen-config)
             config_screen;;
+
+        -t | --tmux-config)
+            config_tmux;;
         
         -c | --config)
             config;;
@@ -288,10 +336,13 @@ while [ -n "$1" ]; do
             config_synapse;;
 
         -r | --remap-config)
-            config_xmodmap;;
+            config_remap;;
         
         -h | --help )
             help_text;;
+
+        --config-ssh)
+            config_ssh;;
 
         --config-sublime) 
             config_sublime;;
