@@ -11,7 +11,6 @@
     excludesfile = /home/srijan/.gitignore_global
     attributesfile = ~/.gitattributes
     whitespace = fix,space-before-tab,tab-in-indent,trailing-space
-    autocrlf = false 
 [color "branch"]
     current = yellow bold 
     remote = red reverse 
