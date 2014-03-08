@@ -37,4 +37,12 @@
 - speedtest-cli (via pip)
 
 ## Yeoman Generators
-    - generator-io-slides
+- generator-io-slides
+
+## Some nifty zsh tricks
+- cd to git home
+- zsh-dwim rm trick
+- auth
+- autojump
+- syntax highlighting
+- history substring

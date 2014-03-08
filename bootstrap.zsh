@@ -66,23 +66,20 @@ function config_vim() {
 function config_git() {
     highlight "\nConfiguring git"
     if hash git &> /dev/null; then
-        cd
-
+        cd 
         # Configure git
-        if [ -f .gitconfig ]; then
+        if [ -e .gitconfig ]; then
             fail "Git configuration exists. Delete ~./gitconfig and retry"
         else
-            ln -s "${CONFDIR}/config/gitconfig" .gitconfig
-            ln -s "${CONFDIR}/config/gitignore_global" .gitignore_global
+            ln -s "${CONFDIR}/config/git/gitconfig" .gitconfig
             success "Git configured."
         fi
 
         # Configure global gitignore
-        if [ -f .gitignore_global]; then
+        if [ -e .gitignore_global ]; then
             fail "Git ignore exists. Delete ~./gitignore_global and retry"
         else
-            ln -s "${CONFDIR}/config/gitignore_global" .gitignore_global
-            success "Gitignore configurated"
+            ln -s "${CONFDIR}/config/git/gitignore_global" .gitignore_global && success "Gitignore configurated"
         fi
     else
         fail "Git configuration failed. Install git first"
@@ -175,7 +172,7 @@ function config_xinitrc() {
         fail "Xinitrc configuration Failed. Delete ~/.xinitrc and retry"
         ERR=1
     else
-        ln -s "${CONFDIR}/config/xinitrc" .xinitrc
+        ln -s "${CONFDIR}/config/system/xinitrc" .xinitrc
         success "Xinitrc configured"
     fi
 }
@@ -209,7 +206,7 @@ function config_screen() {
             fail "Screen configuration failed. Delete ~/.screenrc and retry"
             ERR=1
         else
-            ln -s "${CONFDIR}/config/screenrc" .screenrc
+            ln -s "${CONFDIR}/config/system/screenrc" .screenrc
             cd ${CONFDIR}
             success "Screen configured"
         fi
@@ -265,7 +262,7 @@ function config_ssh() {
         fail "SSH configuration failed. Remove ~/ssh/config and retry."
         ERR=1
     else
-        ln -s "${CONFDIR}/config/sshconfig" config 
+        ln -s "${CONFDIR}/config/system/sshconfig" config 
         cd ${CONFDIR}
         success "SSH configured"
     fi
