@@ -6,9 +6,9 @@
 - massrename
 - sysadmin
 - node install
+- pip mps-youtube
 
 # Utilities
-
 ## General
 - tmux 
 - vim
@@ -33,8 +33,9 @@
 
 ## Fun utilities
 - cowsay
-    - sshcd
+- sshcd
 - speedtest-cli (via pip)
+- mps-youtube
 
 ## Yeoman Generators
 - generator-io-slides
