@@ -13,7 +13,7 @@ Available commands:
     -g | --git-config           configure git
     -z | --zsh-config           configure zsh using Prezto
     -s | --screen-config        configure screen
-    -s | --tmux-config          configure tmux
+    -t | --tmux-config          configure tmux
     -i | --xinitrc-config       configure xinitrc 
     -y | --synapse-config       configure synapse
     -r | --remap-config         configure remap of keys
