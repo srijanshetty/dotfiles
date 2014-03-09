@@ -7,6 +7,7 @@
 - sysadmin
 - node install
 - pip mps-youtube
+- pip beets
 
 # Utilities
 ## General
@@ -19,6 +20,10 @@
 ## Writing
 - pandoc
 - tex/detex
+
+## Music
+- mspyt
+- beets
 
 ## Development
 - curl
