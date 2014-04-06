@@ -8,6 +8,7 @@
 - node install
 - pip mps-youtube
 - pip beets
+- nvm
 
 # Utilities
 ## General
