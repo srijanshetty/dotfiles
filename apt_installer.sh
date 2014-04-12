@@ -153,6 +153,8 @@ function install_indicators {
 
     # the indicator for sensors
 	#sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
+    # sudo add-apt-repository ppa:nilarimogard/webupd8 && sudo apt-get update
+    apt_install todo-indicator
     apt_install indicator-sensors
 }
 

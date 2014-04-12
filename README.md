@@ -9,6 +9,7 @@
 - pip mps-youtube
 - pip beets
 - nvm
+- ipython
 
 # Utilities
 ## General
@@ -21,9 +22,10 @@
 ## Writing
 - pandoc
 - tex/detex
+- todo.txt
 
 ## Music
-- mspyt
+- mps-youtube(mpsyt)
 - beets
 
 ## Development
@@ -32,16 +34,17 @@
 - pip
 - ack-grep
 - rvm
+- ipython
+- multitail
+- underscore-cli (npm install)
 
 ## Miscellaneous
 - zsh-dwim
-- tldr
 
 ## Fun utilities
 - cowsay
 - sshcd
 - speedtest-cli (via pip)
-- mps-youtube
 
 ## Yeoman Generators
 - generator-io-slides
