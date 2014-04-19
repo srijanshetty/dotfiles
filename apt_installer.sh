@@ -16,7 +16,7 @@ Available options:
     -s | --system                      dstat, htop
     -b | --battery                     ibam, bumblebee, acpi, jupiter
     -w | --write                       texlive, pandoc
-    -d | --devel                       curl
+    -d | --devel                       curl, localtunnel
     --build                            g++, make, pip
 
 _EOF_
@@ -42,7 +42,7 @@ function npm_install() {
         if hash $1 &> /dev/null; then
             warn "$1 is already installed"
         else
-            if npm install $1 &>/dev/null; then
+            if npm install -g $1 &>/dev/null; then
                 success "$1 installed"
             else
                 fail "$1 installation"
@@ -125,6 +125,8 @@ function install_devel_tools() {
     highlight "\nInstalling devel tools"
     apt_install curl
     npm_install yo
+    npm_install localtunnel
+    apt_install ipython
 }
 
 # Tools for making sure ubuntu doesn't kill my battery

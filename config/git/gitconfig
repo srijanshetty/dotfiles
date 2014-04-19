@@ -4,7 +4,7 @@
     name = Srijan R Shetty
     email = srijan.shetty@gmail.com
 [color]
-    ui = true
+	ui = 1
 [apply]
     whitespace = fix
 [core]
@@ -27,3 +27,5 @@
     log = true
 [push]
     default = matching
+[help]
+	autocorrect = 1
