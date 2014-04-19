@@ -16,7 +16,8 @@ Available options:
     -s | --system                      dstat, htop
     -b | --battery                     ibam, bumblebee, acpi, jupiter
     -w | --write                       texlive, pandoc
-    -d | --devel                       curl, localtunnel
+    -d | --devel                       curl
+    -g | --github                      tmux-networkspeed, sysadmin
     --build                            g++, make, pip
 
 _EOF_
@@ -113,6 +114,41 @@ function install_build_tools {
     apt_install pip
 }
 
+# Some nifty libraries from Github
+function install_from_github() {
+    if [ -f ~/Documents/Github ]; then
+        cd ~/Documents/Github
+    else
+        mkdir -p ~/Documents/Github; cd 
+    fi
+
+    # Copy tmux-networkspeed
+    if [ ! -d tmux-networkspeed ]; then
+        git clone git@github.com:srijanshetty/tmux-networkspeed.git
+        if [ $? -eq 0 ]; then
+            success "tmux-networkspeed installed"
+        else
+            fail "tmux-networkspeed installation failed"
+        fi
+    else
+        warn "tmux-networkspeed already exists"
+    fi
+
+    # sysadmin tools
+    if [ ! -d tmux-networkspeed ]; then
+        git clone https://github.com/skx/sysadmin-util sysadmin
+        if [ $? -eq 0 ]; then
+            success "sysadmin tools installed"
+        else
+            fail "sysadmin tools installation failed"
+        fi
+    else
+        warn "sysadmin tools already exists"
+    fi
+
+    # massren
+}
+
 # Write tools
 function install_write_tools() {
     highlight "\nInstalling write tools"
@@ -125,7 +161,6 @@ function install_devel_tools() {
     highlight "\nInstalling devel tools"
     apt_install curl
     npm_install yo
-    npm_install localtunnel
     apt_install ipython
 }
 
@@ -221,6 +256,9 @@ while [ -n "$1" ]; do
 
         -d | --devel)
             install_devel_tools;;
+
+        -g | --github)
+            install_from_github;;
 
         --build)
             install_build_tools;;

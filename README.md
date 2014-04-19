@@ -1,11 +1,9 @@
 # TODO
 - texmf auto config
 - weechat and its config
-- tmux-networkspeed
-- massrename
-- sysadmin
 - node install
-- underscore-cli
+    - underscore-cli
+    - cabal
 
 # Utilities
 ## General
@@ -27,8 +25,7 @@
 - pip
 - ack-grep
 - ipython
-- underscore-cli
-- localtunnel
+- mbox
 
 ## Miscellaneous
 - zsh-dwim
@@ -47,6 +44,8 @@
 - multitail
 - todo.txt
 - rvm
+- underscore-cli
+- cabal
 
 ## Music
 - mps-youtube(mpsyt)
