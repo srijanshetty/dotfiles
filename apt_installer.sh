@@ -116,10 +116,10 @@ function install_build_tools {
 
 # Some nifty libraries from Github
 function install_from_github() {
-    if [ -f ~/Documents/Github ]; then
-        cd ~/Documents/Github
+    if [ -f ~/Documents/GitHub ]; then
+        cd ~/Documents/GitHub
     else
-        mkdir -p ~/Documents/Github; cd 
+        mkdir -p ~/Documents/GitHub; cd ~/Documents/GitHub
     fi
 
     # Copy tmux-networkspeed
@@ -145,6 +145,8 @@ function install_from_github() {
     else
         warn "sysadmin tools already exists"
     fi
+
+    cd -
 
     # massren
 }
