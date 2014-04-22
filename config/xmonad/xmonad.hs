@@ -27,23 +27,22 @@ main = spawn "killall unclutter;unclutter;" >> spawn "killall urxvtd;urxvtd -q -
                           , modMask = mod4Mask
                           , normalBorderColor  = "grey"
                           , terminal = "urxvtc"
-                          , XMonad.workspaces = ["read", "web", "code" ,"explorer", "media", "skype","torrent", "background-process"] 
+                          , XMonad.workspaces = ["read", "web", "code" ,"explorer", "media", "VM","torrent", "background-process"] 
                         }
                           where tiled = Tall 1 0.03 0.5
 
 myManageHook :: ManageHook
 myManageHook = composeAll [
                             moveC "Vlc" "media"
-                            , moveC "Google-chrome" "web"
+                            , moveC "chrome" "web"
                             , moveC "Firefox" "web"
                             , moveC "Transmission-gtk" "torrent"
                             , moveC "Nautilus" "explorer"
-                            , moveC "Banshee" "media"
                             , moveC "Evince" "read"
                             , moveC "Chmsee" "read"
                             , moveC "Linuxdcpp" "torrent"
                             , moveC "Anki" "read"
-                            , moveC "Skype" "skype"
+                            , moveC "VirtualBox" "VM"
                             , className =? "gnome-panel" --> doIgnore
                             , className =? "Mnemosyne" --> unfloat
                             , className =? "Gimp"	--> doFloat
