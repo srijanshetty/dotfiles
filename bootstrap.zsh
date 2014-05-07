@@ -8,20 +8,20 @@ USAGE: bootstrap.sh <arguments>
 
 Available commands:
 
-    -x | --xmonad-config        configure only xmonad 
+    -x | --xmonad-config        configure only xmonad
     -v | --vim-config           configure only vim
     -g | --git-config           configure git
     -z | --zsh-config           configure zsh using Prezto
     -s | --screen-config        configure screen
     -t | --tmux-config          configure tmux
-    -i | --xinitrc-config       configure xinitrc 
+    -i | --xinitrc-config       configure xinitrc
     -y | --synapse-config       configure synapse
     -r | --remap-config         configure remap of keys
     -a | --autojump             Install autojump
     -c | --config               apply all configuration options
     --config-ssh                configure ssh
     --config-sublime            configure sumblime text
-    --config-bare               bare bones configuration 
+    --config-bare               bare bones configuration
     --solarize                  solarize the terminal
     --test                      tester program
 
@@ -66,7 +66,7 @@ function config_vim() {
 function config_git() {
     highlight "\nConfiguring git"
     if hash git &> /dev/null; then
-        cd 
+        cd
         # Configure git
         if [ -e .gitconfig ]; then
             fail "Git configuration exists. Delete ~./gitconfig and retry"
@@ -156,7 +156,7 @@ function config_remap() {
     highlight "\nConfiguring xmodmap"
 
     # Map caps lock to escape
-    if dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"; then 
+    if dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"; then
         success "Remap successful"
     else
         fail "Remap failed"
@@ -167,7 +167,7 @@ function config_remap() {
 #This is for xinitrc
 function config_xinitrc() {
     highlight "\nConfiguring xinitrc"
-    cd 
+    cd
     if [ -e .xinitrc ]; then
         fail "Xinitrc configuration Failed. Delete ~/.xinitrc and retry"
         ERR=1
@@ -201,7 +201,7 @@ function config_xmonad() {
 function config_screen() {
     highlight "\nConfiguring screen"
     if hash screen; then
-        cd 
+        cd
         if [ -e .screenrc ]; then
             fail "Screen configuration failed. Delete ~/.screenrc and retry"
             ERR=1
@@ -220,7 +220,7 @@ function config_screen() {
 function config_tmux() {
     highlight "\nConfiguring tmux"
     if hash tmux; then
-        cd 
+        cd
         if [ -e .tmux.conf ]; then
             fail "tmux configuration failed. Delete ~/.tmux.conf and retry"
             ERR=1
@@ -244,7 +244,7 @@ function config_sublime() {
             fail "Sublime text configuration failed. Remove ~/.config/sublime-text3 and retry."
             ERR=1
         else
-            ln -s "${CONFDIR}/config/sublime-text3" sublime-text-3 
+            ln -s "${CONFDIR}/config/sublime-text3" sublime-text-3
             cd ${CONFDIR}
             success "Sublime Text configured"
         fi
@@ -262,7 +262,7 @@ function config_ssh() {
         fail "SSH configuration failed. Remove ~/ssh/config and retry."
         ERR=1
     else
-        ln -s "${CONFDIR}/config/system/sshconfig" config 
+        ln -s "${CONFDIR}/config/system/sshconfig" config
         cd ${CONFDIR}
         success "SSH configured"
     fi
@@ -301,7 +301,7 @@ ERR=0
 
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
-    case "$1" in 
+    case "$1" in
         -x | --xmonad-config)
             config_xmonad;;
 
@@ -319,10 +319,10 @@ while [ -n "$1" ]; do
 
         -t | --tmux-config)
             config_tmux;;
-        
+
         -c | --config)
             config;;
-        
+
         -a | --autojump)
             install_autojump;;
 
@@ -334,19 +334,19 @@ while [ -n "$1" ]; do
 
         -r | --remap-config)
             config_remap;;
-        
+
         -h | --help )
             help_text;;
 
         --config-ssh)
             config_ssh;;
 
-        --config-sublime) 
+        --config-sublime)
             config_sublime;;
 
         --config-bare)
             config_bare;;
-    
+
         --solarize)
             config_solarize;;
 

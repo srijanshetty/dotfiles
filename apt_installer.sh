@@ -8,11 +8,11 @@ USAGE: apt_installer <arguments>
 Available options:
 
     -f | --full                        Full Installations
-    -a | --ack                         Install ack 
+    -a | --ack                         Install ack
     -x | --xmonad                      Install xmonad
     -e | --essentials                  zsh, ack, git, vim and tmux
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
-    -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor 
+    -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor
     -s | --system                      dstat, htop
     -b | --battery                     ibam, bumblebee, acpi, jupiter
     -w | --write                       texlive, pandoc
@@ -23,7 +23,7 @@ Available options:
 _EOF_
 }
 
-# a function to install something 
+# a function to install something
 function apt_install() {
     if hash $1 &> /dev/null; then
         warn "$1 is already installed"
@@ -37,7 +37,7 @@ function apt_install() {
     fi
 }
 
-# a function to install something 
+# a function to install something
 function npm_install() {
     if hash npm &> /dev/null; then
         if hash $1 &> /dev/null; then
@@ -69,7 +69,7 @@ function install_ack() {
         # Dowlonad the ack script
         if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.08-single-file &>/dev/null; then
             chmod u+x "${HOME}/Documents/local/bin/ack"
-            success "ack installed" 
+            success "ack installed"
         else
             fail "ack installation"
             ERR=1
@@ -199,8 +199,7 @@ function install_indicators {
 
 function install_miscellaneous {
     # media utilies like flash
-	apt_install flashplugin-installer
-    apt_install vlc 
+    apt_install vlc
     apt_install pavucontrol
 
     # simple utilies like SSH, compatibility tools
@@ -223,8 +222,8 @@ ERR=0
 
 #Loop through arguments
 while [ -n "$1" ]; do
-    case "$1" in 
-        -a | --ack) 
+    case "$1" in
+        -a | --ack)
             install_ack;;
 
         -f | --full )
@@ -235,7 +234,7 @@ while [ -n "$1" ]; do
             install_write_tools
             install_system;;
 
-        -x | --xmonad) 
+        -x | --xmonad)
             install_xmonad;;
 
         -e | --essentials)
