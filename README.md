@@ -1,34 +1,35 @@
 # TODO
 - texmf auto config
+- sysdig
 - weechat and its config
-- node install
-    - underscore-cli
-    - cabal
+- underscore-cli
+- cabal
+- massrename
+- docker
 
 # Utilities
 ## General
-- tmux 
+- tmux
 - vim
 - git
 - zsh
-- weechat
 - massrename
 - sysadmin
+- Y-PPA-Manager
 
 ## Writing
 - pandoc
 - tex/detex
+- write-good.vim
 
 ## Development
 - curl
-- yo
 - pip
 - ack-grep
 - ipython
 - mbox
-
-## Miscellaneous
-- zsh-dwim
+- nvm
+- yo
 
 ## Some nifty zsh tricks
 - cd to git home
@@ -37,15 +38,15 @@
 - autojump
 - syntax highlighting
 - history substring
+- zsh-dwim
 
 # Test
 ## General
 - mbox
 - multitail
-- todo.txt
-- rvm
 - underscore-cli
 - cabal
+- sysdig
 
 ## Music
 - mps-youtube(mpsyt)
@@ -58,4 +59,3 @@
 
 ## Yeoman Generators
 - generator-io-slides
-

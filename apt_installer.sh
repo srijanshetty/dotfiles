@@ -12,11 +12,11 @@ Available options:
     -x | --xmonad                      Install xmonad
     -e | --essentials                  zsh, ack, git, vim and tmux
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
-    -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor
+    -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor, indicator-sysmon
     -s | --system                      dstat, htop
     -b | --battery                     ibam, bumblebee, acpi, jupiter
     -w | --write                       texlive, pandoc
-    -d | --devel                       curl
+    -d | --devel                       curl, nvm, ipython, yo
     -g | --github                      tmux-networkspeed, sysadmin
     --build                            g++, make, pip
 
@@ -67,7 +67,7 @@ function install_ack() {
         fi
 
         # Dowlonad the ack script
-        if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.08-single-file &>/dev/null; then
+        if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.12-single-file &>/dev/null; then
             chmod u+x "${HOME}/Documents/local/bin/ack"
             success "ack installed"
         else
@@ -109,8 +109,8 @@ function install_build_tools {
     highlight "\nInstalling build tools"
 
     # python-setuptools is for easy_install
-    # apt_install python-setuptools
     # apt_install rubygems
+    apt_install python-setuptools
     apt_install pip
 }
 
@@ -129,6 +129,7 @@ function install_from_github() {
             success "tmux-networkspeed installed"
         else
             fail "tmux-networkspeed installation failed"
+            ERR=1
         fi
     else
         warn "tmux-networkspeed already exists"
@@ -141,6 +142,7 @@ function install_from_github() {
             success "sysadmin tools installed"
         else
             fail "sysadmin tools installation failed"
+            ERR=1
         fi
     else
         warn "sysadmin tools already exists"
@@ -162,8 +164,11 @@ function install_write_tools() {
 function install_devel_tools() {
     highlight "\nInstalling devel tools"
     apt_install curl
-    npm_install yo
     apt_install ipython
+
+    # Install nvm and use the latest version of node
+    wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh && nvm install 0.10
+    npm_install yo
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
@@ -175,8 +180,10 @@ function install_battery {
     apt_install ibam
 
     # Bumblee the saviour of poor nVidia card laptops running linux
-	#sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
-	#sudo apt-get install -y bumblebee virtualgl linux-headers-generic
+	# sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
+    apt_install bumblebee
+    apt_install virtualgl
+    apt_install linux-headers-generic
 
     # Install jupiter for performance control
     #sudo add-apt-repository ppa:webupd8team/jupiter && sudo apt-get update
@@ -191,10 +198,12 @@ function install_indicators {
     apt_install fluxgui
 
     # the indicator for sensors
-	#sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
+	# sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
     # sudo add-apt-repository ppa:nilarimogard/webupd8 && sudo apt-get update
+    # sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor && sudo apt-get update
     apt_install todo-indicator
     apt_install indicator-sensors
+    apt_install indicator-sysmonitor
 }
 
 function install_miscellaneous {
@@ -207,8 +216,12 @@ function install_miscellaneous {
     apt_install ia32-libs
 
     # Synapse for immediate execution
-	#sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
+	# sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
     apt_install synapse
+
+    # Y PPA Manager
+    # sudo add-apt-repository ppa:webupd8team/y-ppa-manager && sudo apt-get update
+    apt_install y-ppa-manager
 }
 
 # source the helper functions
