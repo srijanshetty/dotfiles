@@ -201,9 +201,13 @@ function install_indicators {
 	# sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
     # sudo add-apt-repository ppa:nilarimogard/webupd8 && sudo apt-get update
     # sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor && sudo apt-get update
-    apt_install todo-indicator
+    # sudo add-apt-repository ppa:jconti/recent-notifications && sudo apt-get update
     apt_install indicator-sensors
     apt_install indicator-sysmonitor
+    apt_install indicator-weather
+    apt_install indicator-multiload
+    apt_install indicator-notifications
+    apt_install recent-notifications
 }
 
 function install_miscellaneous {
