@@ -79,7 +79,8 @@ function config_git() {
         if [ -e .gitignore_global ]; then
             fail "Git ignore exists. Delete ~./gitignore_global and retry"
         else
-            ln -s "${CONFDIR}/config/git/gitignore_global" .gitignore_global && success "Gitignore configurated"
+            ln -s "${CONFDIR}/config/git/gitignore_global" .gitignore_global
+            success "Global gitignore configured"
         fi
     else
         fail "Git configuration failed. Install git first"
