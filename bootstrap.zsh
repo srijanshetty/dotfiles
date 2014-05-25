@@ -2,7 +2,7 @@
 
 #Help text
 function help_text() {
-cat <<- _EOF_
+cat <<- _EOH_
 
 USAGE: bootstrap.sh <arguments>
 
@@ -16,6 +16,7 @@ Available commands:
     -t | --tmux-config          configure tmux
     -i | --xinitrc-config       configure xinitrc
     -y | --synapse-config       configure synapse
+    -n | --node-config          configure node
     -r | --remap-config         configure remap of keys
     -a | --autojump             Install autojump
     -c | --config               apply all configuration options
@@ -25,7 +26,7 @@ Available commands:
     --solarize                  solarize the terminal
     --test                      tester program
 
-_EOF_
+_EOH_
 }
 
 # Installation functions
@@ -236,7 +237,12 @@ function config_tmux() {
     fi
 }
 
-#Configure sublime text
+# Configure Node
+function config_node() {
+    nvm install 10.28
+}
+
+# Configure sublime text
 function config_sublime() {
     highlight "\nConfiguring sublime text"
     if hash subl; then
@@ -269,8 +275,8 @@ function config_ssh() {
     fi
 }
 
-#Autoinstallers
-#Install everything
+# Autoinstallers
+# Install everything
 function config() {
     config_bare
     config_xmonad
@@ -278,9 +284,10 @@ function config() {
     config_xmodmap
     config_synapse
     config_sublime
+    config_node
 }
 
-#Install only essential stuff
+# Install only essential stuff
 function config_bare() {
     config_git
     config_zsh
@@ -291,10 +298,10 @@ function config_bare() {
     config_solarize
 }
 
-#Store the configuration directory for use by the functions
+# Store the configuration directory for use by the functions
 CONFDIR=${PWD}
 
-#for helper function
+# for helper function
 source scripts/helper.sh
 
 # flag for errors
@@ -320,6 +327,9 @@ while [ -n "$1" ]; do
 
         -t | --tmux-config)
             config_tmux;;
+
+        -n | --node-config)
+            config_node;;
 
         -c | --config)
             config;;

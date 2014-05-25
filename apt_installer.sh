@@ -10,7 +10,7 @@ Available options:
     -f | --full                        Full Installations
     -a | --ack                         Install ack
     -x | --xmonad                      Install xmonad
-    -e | --essentials                  zsh, ack, git, vim and tmux
+    -e | --essentials                  zsh, ack, git, vim, tmux, nvm
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
     -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor, indicator-sysmon
     -s | --system                      dstat, htop
@@ -23,35 +23,13 @@ Available options:
 _EOF_
 }
 
-# a function to install something
-function apt_install() {
-    if hash $1 &> /dev/null; then
-        warn "$1 is already installed"
+# Install NVM
+function install_nvm() {
+    if hash nvm &> /dev/null; then
+        # Pass statement
+        echo "Success" &> /dev/null
     else
-        if sudo apt-get install -y $1 &>/dev/null; then
-            success "$1 installed"
-        else
-            fail "$1 installation"
-            ERR=1
-        fi
-    fi
-}
-
-# a function to install something
-function npm_install() {
-    if hash npm &> /dev/null; then
-        if hash $1 &> /dev/null; then
-            warn "$1 is already installed"
-        else
-            if npm install -g $1 &>/dev/null; then
-                success "$1 installed"
-            else
-                fail "$1 installation"
-                ERR=1
-            fi
-        fi
-    else
-        fail "NPM not installed. Install npm and then try"
+        wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh -
     fi
 }
 
@@ -79,12 +57,13 @@ function install_ack() {
 
 # zsh, ack, vim ,git and screen
 function install_essentials() {
-    highlight "\nInstalling ZSH, VIM, GIT, SCREEN"
+    highlight "\nInstalling essentials: zsh, vim, git, tmux"
 
     apt_install zsh
     apt_install git
     apt_install vim
     apt_install tmux
+    install_nvm
     install_ack
 }
 
@@ -99,23 +78,22 @@ function install_xmonad() {
 
 # System monitoring utilies
 function install_system() {
-    highlight "\nInstalling System Utilities"
+    highlight "\nInstalling System Utilities: dstat, htop"
     apt_install dstat
     apt_install htop
 }
 
 # Build tools
-function install_build_tools {
-    highlight "\nInstalling build tools"
+function install_build_tools() {
+    highlight "\nInstalling build tools: pip, python-setuptools"
 
     # python-setuptools is for easy_install
-    # apt_install rubygems
     apt_install python-setuptools
     apt_install pip
 }
 
 # Some nifty libraries from Github
-function install_from_github() {
+function install_from_github({
     if [ -f ~/Documents/GitHub ]; then
         cd ~/Documents/GitHub
     else
@@ -155,19 +133,16 @@ function install_from_github() {
 
 # Write tools
 function install_write_tools() {
-    highlight "\nInstalling write tools"
+    highlight "\nInstalling write tools: TeX, pandoc"
     apt_install texlive
     apt_install pandoc
 }
 
 # devel tools
 function install_devel_tools() {
-    highlight "\nInstalling devel tools"
+    highlight "\nInstalling devel tools: curl, ipython, yo"
     apt_install curl
     apt_install ipython
-
-    # Install nvm and use the latest version of node
-    wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh && nvm install 0.10
     npm_install yo
 }
 
@@ -200,7 +175,6 @@ function install_indicators {
     # the indicator for sensors
 	# sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
     # sudo add-apt-repository ppa:nilarimogard/webupd8 && sudo apt-get update
-    # sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor && sudo apt-get update
     # sudo add-apt-repository ppa:jconti/recent-notifications && sudo apt-get update
     apt_install indicator-sensors
     apt_install indicator-sysmonitor
@@ -210,11 +184,17 @@ function install_indicators {
     apt_install recent-notifications
 }
 
-function install_miscellaneous {
-    # media utilies like flash
-    apt_install vlc
+function install_music () {
     apt_install pavucontrol
+    apt_install vlc
+    apt_install beets
 
+    # pip install pylast
+    # pip install flask
+
+}
+
+function install_miscellaneous {
     # simple utilies like SSH, compatibility tools
     apt_install openssh-server
     apt_install ia32-libs

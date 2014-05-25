@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Debug messages 
+# Debug messages
 NORMAL=$(tput sgr0)
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
@@ -22,7 +22,7 @@ function success() {
 }
 
 function highlight() {
-        echo "${UNDERLINE_ON}$*${UNDERLINE_OFF}" 
+        echo "${UNDERLINE_ON}$*${UNDERLINE_OFF}"
 }
 
 function inRepo {
@@ -30,3 +30,36 @@ function inRepo {
         grep "$1" $file
     done
 }
+
+# function to install something using apt-get
+function apt_install() {
+    if hash $1 &> /dev/null; then
+        warn "$1 is already installed"
+    else
+        if sudo apt-get install -y $1 &>/dev/null; then
+            success "$1 installed"
+        else
+            fail "$1 installation"
+            ERR=1
+        fi
+    fi
+}
+
+# a function to install something using npm
+function npm_install() {
+    if hash npm &> /dev/null; then
+        if hash $1 &> /dev/null; then
+            warn "$1 is already installed"
+        else
+            if npm install -g $1 &>/dev/null; then
+                success "$1 installed"
+            else
+                fail "$1 installation"
+                ERR=1
+            fi
+        fi
+    else
+        fail "NPM not installed. Install npm and then try"
+    fi
+}
+
