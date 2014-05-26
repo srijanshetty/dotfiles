@@ -1,4 +1,5 @@
 # TODO
+- move the apt_installer to a common base
 - texmf auto config
 - sysdig
 - weechat and its config
