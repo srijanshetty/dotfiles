@@ -32,11 +32,21 @@ function inRepo {
 }
 
 # function to install something using apt-get
-function apt_install() {
+function installer() {
+    if hash apt-get &> /dev/null; then
+        installing_software="apt-get"
+        echo "apt-get"
+    elif hash pact &> /dev/null; then
+        installing_software="pact"
+        echo "pact"
+    else
+        fail "Cannot Install"
+    fi
+
     if hash $1 &> /dev/null; then
         warn "$1 is already installed"
     else
-        if sudo apt-get install -y $1 &>/dev/null; then
+        if sudo ${installing_software} install -y $1 &>/dev/null; then
             success "$1 installed"
         else
             fail "$1 installation"
@@ -62,4 +72,3 @@ function npm_install() {
         fail "NPM not installed. Install npm and then try"
     fi
 }
-

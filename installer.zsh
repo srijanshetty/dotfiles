@@ -3,7 +3,7 @@
 function help_text() {
 cat << _EOH_
 
-USAGE: apt_installer <arguments>
+USAGE: installer <arguments>
 
 Available options:
 
@@ -120,10 +120,10 @@ function install_from_github() {
 function install_essentials() {
     highlight "\nInstalling essentials: zsh, vim, git, tmux"
 
-    apt_install git
-    apt_install vim
-    apt_install tmux
-    apt_install zsh
+    installer git
+    installer vim
+    installer tmux
+    installer zsh
     install_nvm
     install_ack
 }
@@ -133,16 +133,16 @@ function install_xmonad() {
     highlight "\nInstalling xmonad"
 
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
-    apt_install gnome-panel
-    apt_install xmonad
+    installer gnome-panel
+    installer xmonad
 }
 
 # System monitoring utilies
 function install_system() {
     highlight "\nInstalling System Utilities: dstat, htop"
 
-    apt_install dstat
-    apt_install htop
+    installer dstat
+    installer htop
 }
 
 # Build tools
@@ -150,22 +150,22 @@ function install_build_tools() {
     highlight "\nInstalling build tools: pip, python-setuptools"
 
     # python-setuptools is for easy_install
-    apt_install python-setuptools
-    apt_install pip
+    installer python-setuptools
+    installer pip
 }
 
 # Write tools
 function install_write_tools() {
     highlight "\nInstalling write tools: TeX, pandoc"
-    apt_install texlive
-    apt_install pandoc
+    installer texlive
+    installer pandoc
 }
 
 # devel tools
 function install_devel_tools() {
     highlight "\nInstalling devel tools: curl, ipython, yo"
-    apt_install curl
-    apt_install ipython
+    installer curl
+    installer ipython
     npm_install yo
 }
 
@@ -174,43 +174,43 @@ function install_battery {
     highlight "\nInstalling battery monitoring utilies"
 
     # Monitoring tools
-    apt_install acpi
-    apt_install ibam
+    installer acpi
+    installer ibam
 
     # Bumblee the saviour of poor nVidia card laptops running linux
 	# sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
-    apt_install bumblebee
-    apt_install virtualgl
-    apt_install linux-headers-generic
+    installer bumblebee
+    installer virtualgl
+    installer linux-headers-generic
 
     # Install jupiter for performance control
     #sudo add-apt-repository ppa:webupd8team/jupiter && sudo apt-get update
-    apt_install jupiter
+    installer jupiter
 }
 
 # have to keep a check on the temparature of the laptop
 function install_indicators {
     # the sensors which are required
-    apt_install lm-sensors
-    apt_install hddtemp
-    apt_install fluxgui
+    installer lm-sensors
+    installer hddtemp
+    installer fluxgui
 
     # the indicator for sensors
 	# sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
     # sudo add-apt-repository ppa:nilarimogard/webupd8 && sudo apt-get update
     # sudo add-apt-repository ppa:jconti/recent-notifications && sudo apt-get update
-    apt_install indicator-sensors
-    apt_install indicator-sysmonitor
-    apt_install indicator-weather
-    apt_install indicator-multiload
-    apt_install indicator-notifications
-    apt_install recent-notifications
+    installer indicator-sensors
+    installer indicator-sysmonitor
+    installer indicator-weather
+    installer indicator-multiload
+    installer indicator-notifications
+    installer recent-notifications
 }
 
 function install_music () {
-    apt_install pavucontrol
-    apt_install vlc
-    apt_install beets
+    installer pavucontrol
+    installer vlc
+    installer beets
 
     # pip install pylast
     # pip install flask
@@ -219,16 +219,16 @@ function install_music () {
 
 function install_miscellaneous {
     # simple utilies like SSH, compatibility tools
-    apt_install openssh-server
-    apt_install ia32-libs
+    installer openssh-server
+    installer ia32-libs
 
     # Synapse for immediate execution
 	# sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
-    apt_install synapse
+    installer synapse
 
     # Y PPA Manager
     # sudo add-apt-repository ppa:webupd8team/y-ppa-manager && sudo apt-get update
-    apt_install y-ppa-manager
+    installer y-ppa-manager
 }
 
 # source the helper functions
