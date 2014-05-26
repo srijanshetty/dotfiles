@@ -11,9 +11,9 @@ Available commands:
     -v | --vim-config           configure only vim
     -g | --git-config           configure git
     -z | --zsh-config           configure zsh using Prezto
-    -x | --xmonad-config        configure only xmonad
     -t | --tmux-config          configure tmux
     -n | --node-config          configure node
+    -x | --xmonad-config        configure only xmonad
     -s | --screen-config        configure screen
     -i | --xinitrc-config       configure xinitrc
     -y | --synapse-config       configure synapse

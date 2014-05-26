@@ -41,6 +41,9 @@
 - history substring
 - zsh-dwim
 
+## Music
+- beets
+
 # Test
 ## General
 - mbox
@@ -51,7 +54,6 @@
 
 ## Music
 - mps-youtube(mpsyt)
-- beets
 
 ## Fun utilities
 - cowsay
