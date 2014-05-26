@@ -8,15 +8,15 @@ USAGE: bootstrap.sh <arguments>
 
 Available commands:
 
-    -x | --xmonad-config        configure only xmonad
     -v | --vim-config           configure only vim
     -g | --git-config           configure git
     -z | --zsh-config           configure zsh using Prezto
-    -s | --screen-config        configure screen
+    -x | --xmonad-config        configure only xmonad
     -t | --tmux-config          configure tmux
+    -n | --node-config          configure node
+    -s | --screen-config        configure screen
     -i | --xinitrc-config       configure xinitrc
     -y | --synapse-config       configure synapse
-    -n | --node-config          configure node
     -r | --remap-config         configure remap of keys
     -a | --autojump             Install autojump
     -c | --config               apply all configuration options
@@ -25,22 +25,7 @@ Available commands:
     --config-bare               bare bones configuration
     --solarize                  solarize the terminal
     --test                      tester program
-
 _EOH_
-}
-
-# Installation functions
-function install_autojump() {
-    highlight "\nInstalling autojump"
-    # Install autojump
-    if hash autojump &> /dev/null; then
-        warn "Autojump is already installed"
-    else
-        cd shells/autojump
-        ./install.sh
-        cd ${CONFDIR}
-        success "Autojump installed"
-    fi
 }
 
 # Configuration Functions
@@ -119,6 +104,69 @@ function config_zsh() {
     fi
 }
 
+#Configuration file for tmux
+function config_tmux() {
+    highlight "\nConfiguring tmux"
+    if hash tmux; then
+        cd
+        if [ -e .tmux.conf ]; then
+            fail "tmux configuration failed. Delete ~/.tmux.conf and retry"
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/tmux.conf" .tmux.conf
+            cd ${CONFDIR}
+            success "tmux configured"
+        fi
+    else
+        fail "tmux configuration failed. Install tmux first"
+        ERR=2
+    fi
+}
+
+# Configure Node
+function config_node() {
+    nvm install 10.28
+}
+
+#Configure xmonad
+function config_xmonad() {
+    highlight "\nConfiguring xmonad"
+    if hash xmonad; then
+        cd
+        if [ -d .xmonad ]; then
+            fail "Xmonad configuration failed. Delete ~/.xmonad and retry"
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/xmonad" .xmonad
+            cd ${CONFDIR}
+            xmonad --recompile
+            success "Xmonad configured"
+        fi
+    else
+        fail "xmonad configuration failed. Install xmonad first"
+        ERR=2
+    fi
+}
+
+#Configuration file for screen
+function config_screen() {
+    highlight "\nConfiguring screen"
+    if hash screen; then
+        cd
+        if [ -e .screenrc ]; then
+            fail "Screen configuration failed. Delete ~/.screenrc and retry"
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/system/screenrc" .screenrc
+            cd ${CONFDIR}
+            success "Screen configured"
+        fi
+    else
+        fail "screen configuration failed. Install screen first"
+        ERR=2
+    fi
+}
+
 #Solarize the terminal
 function config_solarize() {
     highlight "\nConfiguring the color scheme"
@@ -179,69 +227,6 @@ function config_xinitrc() {
     fi
 }
 
-#Configure xmonad
-function config_xmonad() {
-    highlight "\nConfiguring xmonad"
-    if hash xmonad; then
-        cd
-        if [ -d .xmonad ]; then
-            fail "Xmonad configuration failed. Delete ~/.xmonad and retry"
-            ERR=1
-        else
-            ln -s "${CONFDIR}/config/xmonad" .xmonad
-            cd ${CONFDIR}
-            xmonad --recompile
-            success "Xmonad configured"
-        fi
-    else
-        fail "xmonad configuration failed. Install xmonad first"
-        ERR=2
-    fi
-}
-
-#Configuration file for screen
-function config_screen() {
-    highlight "\nConfiguring screen"
-    if hash screen; then
-        cd
-        if [ -e .screenrc ]; then
-            fail "Screen configuration failed. Delete ~/.screenrc and retry"
-            ERR=1
-        else
-            ln -s "${CONFDIR}/config/system/screenrc" .screenrc
-            cd ${CONFDIR}
-            success "Screen configured"
-        fi
-    else
-        fail "screen configuration failed. Install screen first"
-        ERR=2
-    fi
-}
-
-#Configuration file for tmux
-function config_tmux() {
-    highlight "\nConfiguring tmux"
-    if hash tmux; then
-        cd
-        if [ -e .tmux.conf ]; then
-            fail "tmux configuration failed. Delete ~/.tmux.conf and retry"
-            ERR=1
-        else
-            ln -s "${CONFDIR}/config/tmux.conf" .tmux.conf
-            cd ${CONFDIR}
-            success "tmux configured"
-        fi
-    else
-        fail "tmux configuration failed. Install tmux first"
-        ERR=2
-    fi
-}
-
-# Configure Node
-function config_node() {
-    nvm install 10.28
-}
-
 # Configure sublime text
 function config_sublime() {
     highlight "\nConfiguring sublime text"
@@ -276,17 +261,6 @@ function config_ssh() {
 }
 
 # Autoinstallers
-# Install everything
-function config() {
-    config_bare
-    config_xmonad
-    config_xinitrc
-    config_xmodmap
-    config_synapse
-    config_sublime
-    config_node
-}
-
 # Install only essential stuff
 function config_bare() {
     config_git
@@ -294,8 +268,18 @@ function config_bare() {
     config_vim
     config_ssh
     config_tmux
-    install_autojump
+}
+
+# Install everything
+function config() {
+    config_bare
     config_solarize
+    config_xmonad
+    config_xinitrc
+    config_xmodmap
+    config_synapse
+    config_sublime
+    config_node
 }
 
 # Store the configuration directory for use by the functions
@@ -333,9 +317,6 @@ while [ -n "$1" ]; do
 
         -c | --config)
             config;;
-
-        -a | --autojump)
-            install_autojump;;
 
         -i | --xinitrc-config)
             config_xinitrc;;

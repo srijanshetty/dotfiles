@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function help_text() {
-cat << _EOF_
+cat << _EOH_
 
 USAGE: apt_installer <arguments>
 
@@ -9,6 +9,9 @@ Available options:
 
     -f | --full                        Full Installations
     -a | --ack                         Install ack
+    -n | --nvm                         Install NVM
+    -at| --autojump                    Install autojump
+    -g | --github                      tmux-networkspeed, sysadmin
     -x | --xmonad                      Install xmonad
     -e | --essentials                  zsh, ack, git, vim, tmux, nvm
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
@@ -17,19 +20,38 @@ Available options:
     -b | --battery                     ibam, bumblebee, acpi, jupiter
     -w | --write                       texlive, pandoc
     -d | --devel                       curl, nvm, ipython, yo
-    -g | --github                      tmux-networkspeed, sysadmin
     --build                            g++, make, pip
+_EOH_
+}
 
-_EOF_
+# Installation functions
+function install_autojump() {
+    highlight "\nInstalling autojump"
+
+    if hash autojump &> /dev/null; then
+        warn "Autojump is already installed"
+    else
+        if cd shells/autojump && ./install.py; then
+            success "Autojump installed"
+            cd ${CONFDIR}
+        else
+            fail "Autojump failed"
+            ERR=1
+        fi
+    fi
 }
 
 # Install NVM
 function install_nvm() {
     if hash nvm &> /dev/null; then
-        # Pass statement
         echo "Success" &> /dev/null
     else
-        wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh -
+        if wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh - ; then
+            success "NVM installed"
+        else
+            fail "NVM"
+            ERR=1
+        fi
     fi
 }
 
@@ -39,9 +61,9 @@ function install_ack() {
         warn "ack already installed"
     else
         if [ -d ${HOME}/Documents/local/bin ]; then
-
+            echo "Success" &> /dev/null
         else
-            mkdir -p ${HOME}/local/bin
+            mkdir -p ${HOME}/Documents/local/bin
         fi
 
         # Dowlonad the ack script
@@ -55,45 +77,8 @@ function install_ack() {
     fi
 }
 
-# zsh, ack, vim ,git and screen
-function install_essentials() {
-    highlight "\nInstalling essentials: zsh, vim, git, tmux"
-
-    apt_install zsh
-    apt_install git
-    apt_install vim
-    apt_install tmux
-    install_nvm
-    install_ack
-}
-
-# Xmonad, the tiling manager
-function install_xmonad() {
-    highlight "\nInstalling xmonad"
-
-	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
-    apt_install gnome-panel
-    apt_install xmonad
-}
-
-# System monitoring utilies
-function install_system() {
-    highlight "\nInstalling System Utilities: dstat, htop"
-    apt_install dstat
-    apt_install htop
-}
-
-# Build tools
-function install_build_tools() {
-    highlight "\nInstalling build tools: pip, python-setuptools"
-
-    # python-setuptools is for easy_install
-    apt_install python-setuptools
-    apt_install pip
-}
-
 # Some nifty libraries from Github
-function install_from_github({
+function install_from_github() {
     if [ -f ~/Documents/GitHub ]; then
         cd ~/Documents/GitHub
     else
@@ -102,7 +87,7 @@ function install_from_github({
 
     # Copy tmux-networkspeed
     if [ ! -d tmux-networkspeed ]; then
-        git clone git@github.com:srijanshetty/tmux-networkspeed.git
+        git clone https://github.com/srijanshetty/tmux-networkspeed.git
         if [ $? -eq 0 ]; then
             success "tmux-networkspeed installed"
         else
@@ -129,6 +114,44 @@ function install_from_github({
     cd -
 
     # massren
+}
+
+# zsh, ack, vim ,git and screen
+function install_essentials() {
+    highlight "\nInstalling essentials: zsh, vim, git, tmux"
+
+    apt_install git
+    apt_install vim
+    apt_install tmux
+    apt_install zsh
+    install_nvm
+    install_ack
+}
+
+# Xmonad, the tiling manager
+function install_xmonad() {
+    highlight "\nInstalling xmonad"
+
+	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
+    apt_install gnome-panel
+    apt_install xmonad
+}
+
+# System monitoring utilies
+function install_system() {
+    highlight "\nInstalling System Utilities: dstat, htop"
+
+    apt_install dstat
+    apt_install htop
+}
+
+# Build tools
+function install_build_tools() {
+    highlight "\nInstalling build tools: pip, python-setuptools"
+
+    # python-setuptools is for easy_install
+    apt_install python-setuptools
+    apt_install pip
 }
 
 # Write tools
@@ -222,6 +245,12 @@ while [ -n "$1" ]; do
     case "$1" in
         -a | --ack)
             install_ack;;
+
+        -at| --autojump)
+            install_autojump;;
+
+        -n | --nvm)
+            install_nvm;;
 
         -f | --full )
             install_xmonad
