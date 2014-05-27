@@ -35,10 +35,8 @@ function inRepo {
 function installer() {
     if hash apt-get &> /dev/null; then
         installing_software="apt-get"
-        echo "apt-get"
     elif hash pact &> /dev/null; then
         installing_software="pact"
-        echo "pact"
     else
         fail "Cannot Install"
     fi
