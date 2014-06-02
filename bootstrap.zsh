@@ -14,7 +14,6 @@ Available commands:
     -t | --tmux-config          configure tmux
     -n | --node-config          configure node
     -x | --xmonad-config        configure only xmonad
-    -s | --screen-config        configure screen
     -i | --xinitrc-config       configure xinitrc
     -y | --synapse-config       configure synapse
     -r | --remap-config         configure remap of keys
@@ -148,25 +147,6 @@ function config_xmonad() {
     fi
 }
 
-#Configuration file for screen
-function config_screen() {
-    highlight "\nConfiguring screen"
-    if hash screen; then
-        cd
-        if [ -e .screenrc ]; then
-            fail "Screen configuration failed. Delete ~/.screenrc and retry"
-            ERR=1
-        else
-            ln -s "${CONFDIR}/config/system/screenrc" .screenrc
-            cd ${CONFDIR}
-            success "Screen configured"
-        fi
-    else
-        fail "screen configuration failed. Install screen first"
-        ERR=2
-    fi
-}
-
 #Solarize the terminal
 function config_solarize() {
     highlight "\nConfiguring the color scheme"
@@ -273,10 +253,10 @@ function config_bare() {
 # Install everything
 function config() {
     config_bare
+    config_xmodmap
+    config_xinitrc
     config_solarize
     config_xmonad
-    config_xinitrc
-    config_xmodmap
     config_synapse
     config_sublime
     config_node
@@ -305,9 +285,6 @@ while [ -n "$1" ]; do
 
         -z | --zsh-config)
             config_zsh;;
-
-        -s | --screen-config)
-            config_screen;;
 
         -t | --tmux-config)
             config_tmux;;
