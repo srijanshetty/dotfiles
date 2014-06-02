@@ -210,10 +210,11 @@ function install_indicators {
 function install_music () {
     installer pavucontrol
     installer vlc
-    installer beets
 
+    # Dependencies of beets for various plugins
     # pip install pylast
     # pip install flask
+    # pip install beets
 
 }
 

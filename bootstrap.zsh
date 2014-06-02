@@ -13,6 +13,7 @@ Available commands:
     -z | --zsh-config           configure zsh using Prezto
     -t | --tmux-config          configure tmux
     -n | --node-config          configure node
+    -m | --music-config         configure beets
     -x | --xmonad-config        configure only xmonad
     -i | --xinitrc-config       configure xinitrc
     -y | --synapse-config       configure synapse
@@ -125,6 +126,25 @@ function config_tmux() {
 # Configure Node
 function config_node() {
     nvm install 10.28
+}
+
+# Configure music
+function config_music() {
+    highlight "\nConfiguring Beets"
+    if hash beet; then
+        cd
+        if [ -d .config/beets ]; then
+            fail "Beets configuration failed. Delete ~/.config/beets and retry"
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/beets" .config/beets
+            cd ${CONFDIR}
+            success "Beets configured"
+        fi
+    else
+        fail "beets configuration failed. Install beet first"
+        ERR=2
+    fi
 }
 
 #Configure xmonad
@@ -291,6 +311,9 @@ while [ -n "$1" ]; do
 
         -n | --node-config)
             config_node;;
+
+        -m | --music-config)
+            config_music;;
 
         -c | --config)
             config;;
