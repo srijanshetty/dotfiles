@@ -24,6 +24,12 @@ Available options:
 _EOH_
 }
 
+# Installer for pip
+function install_pip() {
+    wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+    easy_install pip
+}
+
 # Installation functions
 function install_autojump() {
     highlight "\nInstalling autojump"
