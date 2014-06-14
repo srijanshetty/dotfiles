@@ -1,10 +1,28 @@
+# Test
+## General
+- vtop
+- mbox
+- multitail
+- underscore-cli
+- cabal
+- sysdig
+
+## Music
+- mps-youtube(mpsyt)
+
+## Fun utilities
+- cowsay
+- sshcd
+- speedtest-cli (via pip)
+
+## Yeoman Generators
+- generator-io-slides
+
 # TODO
-- move the apt_installer to a common base
 - texmf auto config
 - sysdig
 - weechat and its config
 - underscore-cli
-- cabal
 - massrename
 - docker
 
@@ -43,22 +61,3 @@
 
 ## Music
 - beets
-
-# Test
-## General
-- mbox
-- multitail
-- underscore-cli
-- cabal
-- sysdig
-
-## Music
-- mps-youtube(mpsyt)
-
-## Fun utilities
-- cowsay
-- sshcd
-- speedtest-cli (via pip)
-
-## Yeoman Generators
-- generator-io-slides
