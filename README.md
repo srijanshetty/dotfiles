@@ -1,3 +1,13 @@
+# TODO
+- texmf auto config
+- sysdig
+- weechat and its config
+- underscore-cli
+- massrename
+- docker
+- indicator-synapse
+- ledger
+
 # Test
 ## General
 - vtop
@@ -15,17 +25,6 @@
 - sshcd
 - speedtest-cli (via pip)
 
-## Yeoman Generators
-- generator-io-slides
-
-# TODO
-- texmf auto config
-- sysdig
-- weechat and its config
-- underscore-cli
-- massrename
-- docker
-
 # Utilities
 ## General
 - tmux
@@ -35,6 +34,7 @@
 - massrename
 - sysadmin
 - Y-PPA-Manager
+- ledger
 
 ## Writing
 - pandoc

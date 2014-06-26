@@ -1,6 +1,6 @@
 directory: ~/Music
 library: ~/.config/beets/musiclibrary.blb
-plugins: fetchart embedart lastgenre scrub web fromfilename play info duplicates
+plugins: fetchart embedart lastgenre scrub web fromfilename play info duplicates discogs
 play:
     command: vlc
 

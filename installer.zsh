@@ -17,7 +17,7 @@ Available options:
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
     -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor, indicator-sysmon
     -s | --system                      dstat, htop
-    -b | --battery                     ibam, bumblebee, acpi, jupiter
+    -b | --battery                     bumblebee, acpi, jupiter
     -w | --write                       texlive, pandoc
     -d | --devel                       curl, nvm, ipython, yo
     --build                            g++, make, pip
@@ -181,7 +181,6 @@ function install_battery {
 
     # Monitoring tools
     installer acpi
-    installer ibam
 
     # Bumblee the saviour of poor nVidia card laptops running linux
 	# sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
@@ -202,14 +201,15 @@ function install_indicators {
     installer fluxgui
 
     # the indicator for sensors
-	# sudo add-apt-repository ppa:noobslab/indicators && sudo apt-get update
-    # sudo add-apt-repository ppa:nilarimogard/webupd8 && sudo apt-get update
-    # sudo add-apt-repository ppa:jconti/recent-notifications && sudo apt-get update
-    installer indicator-sensors
+	# sudo add-apt-repository ppa:noobslab/indicators
+    # sudo add-apt-repository ppa:nilarimogard/webupd8
+    # sudo add-apt-repository ppa:jconti/recent-notifications
+    # sudo add-apt-repository ppa:atareao/atareao
+    # sudo apt-get update
     installer indicator-sysmonitor
-    installer indicator-weather
     installer indicator-multiload
-    installer indicator-notifications
+    installer my-weather-indicator
+    installer indicator-sensors
     installer recent-notifications
 }
 
@@ -221,6 +221,7 @@ function install_music () {
     # pip install pylast
     # pip install flask
     # pip install beets
+    # pip install discogs_client
 
 }
 
