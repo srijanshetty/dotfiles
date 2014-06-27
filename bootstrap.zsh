@@ -14,6 +14,7 @@ Available commands:
     -t | --tmux-config          configure tmux
     -n | --node-config          configure node
     -m | --music-config         configure beets
+    -w | --write-config         configure writing tools
     -x | --xmonad-config        configure only xmonad
     -i | --xinitrc-config       configure xinitrc
     -y | --synapse-config       configure synapse
@@ -143,6 +144,25 @@ function config_music() {
         fi
     else
         fail "beets configuration failed. Install beet first"
+        ERR=2
+    fi
+}
+
+#configure writing tools
+function config_write() {
+    highlight "Configuring LaTeX"
+    if hash pdflatex; then
+        cd
+        if [ -d texmf ]; then
+            fail "Texmf already exists. Delete ~/texmf and retry"
+            ERR=1
+        else
+            ln -s "${CONFDIR}/config/texmf" texmf
+            cd ${CONFDIR}
+            success "LaTeX configured"
+        fi
+    else
+        fail "LaTeX configuration failed. First Install latex"
         ERR=2
     fi
 }
@@ -314,6 +334,9 @@ while [ -n "$1" ]; do
 
         -m | --music-config)
             config_music;;
+
+        -w | --write-config)
+            config_write;;
 
         -c | --config)
             config;;
