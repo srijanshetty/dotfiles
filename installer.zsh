@@ -9,7 +9,6 @@ Available options:
 
     -f | --full                        Full Installations
     -a | --ack                         Install ack
-    -n | --nvm                         Install NVM
     -at| --autojump                    Install autojump
     -g | --github                      tmux-networkspeed, sysadmin
     -x | --xmonad                      Install xmonad
@@ -19,15 +18,39 @@ Available options:
     -s | --system                      dstat, htop
     -b | --battery                     bumblebee, acpi, jupiter
     -w | --write                       texlive, pandoc
-    -d | --devel                       curl, nvm, ipython, yo
-    --build                            g++, make, pip
+    -d | --devel                       curl, nvm, ipython, yo, haskell-platform, bower, gulp, grunt
+    --build                            pip, easy_install, pytho_setup, nvm
 _EOH_
+}
+
+# Install easy_install
+function install_easy_install() {
+    if hash easy_install; then
+        warn "easy_install is already installed"
+        ERR=2
+    else
+        if wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python; then
+            success "easy_install installed"
+        else
+            fail "easy_install installation failed."
+            ERR=1
+        fi
+    fi
 }
 
 # Installer for pip
 function install_pip() {
-    wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
-    easy_install pip
+    if hash pip; then
+        warn "pip is already installed"
+        ERR=2
+    else
+        if easy_install pip; then
+            success "pip installed"
+        else
+            fail "pip installation failed."
+            ERR=1
+        fi
+    fi
 }
 
 # Installation functions
@@ -50,12 +73,12 @@ function install_autojump() {
 # Install NVM
 function install_nvm() {
     if hash nvm &> /dev/null; then
-        echo "Success" &> /dev/null
+        warn "NVM is already installed"
     else
         if wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh - ; then
             success "NVM installed"
         else
-            fail "NVM"
+            fail "NVM installation failed"
             ERR=1
         fi
     fi
@@ -153,11 +176,11 @@ function install_system() {
 
 # Build tools
 function install_build_tools() {
-    highlight "\nInstalling build tools: pip, python-setuptools"
+    highlight "\nInstalling build tools: easy_install, pip, python-setuptools"
 
-    # python-setuptools is for easy_install
-    installer python-setuptools
-    installer pip
+    install_easy_install
+    install_pip
+    install_nvm
 }
 
 # Write tools
@@ -170,9 +193,21 @@ function install_write_tools() {
 # devel tools
 function install_devel_tools() {
     highlight "\nInstalling devel tools: curl, ipython, yo"
+
+    # General Development
     installer curl
+
+    # Python Installment
     installer ipython
+
+    # Development on NodeJS
     npm_install yo
+    npm_install bower
+    npm_install gulp
+    npm_install grunt
+
+    # Haskell and cabal
+    installer haskell-platform
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
@@ -218,10 +253,10 @@ function install_music () {
     installer vlc
 
     # Dependencies of beets for various plugins
-    # pip install pylast
-    # pip install flask
-    # pip install beets
-    # pip install discogs_client
+    pip install pylast
+    pip install flask
+    pip install discogs_client
+    pip install beets
 
 }
 
