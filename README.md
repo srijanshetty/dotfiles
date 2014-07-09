@@ -1,29 +1,22 @@
 # TODO
-- texmf auto config
 - sysdig
-- weechat and its config
 - underscore-cli
 - massrename
 - docker
 - indicator-synapse
 - ledger
+- YouCompleteMe
 
 # Test
 ## General
-- vtop
 - mbox
 - multitail
 - underscore-cli
 - cabal
 - sysdig
-
-## Music
-- mps-youtube(mpsyt)
-
-## Fun utilities
-- cowsay
-- sshcd
-- speedtest-cli (via pip)
+- write-good.vim
+- jrnl
+- aIRchat
 
 # Utilities
 ## General
@@ -34,12 +27,18 @@
 - massrename
 - sysadmin
 - Y-PPA-Manager
+- cabal(Haskell Platform)
+
+## Accounting
 - ledger
 
 ## Writing
 - pandoc
 - tex/detex
-- write-good.vim
+- jrnl
+
+## Music
+- beets
 
 ## Development
 - curl
@@ -49,6 +48,8 @@
 - mbox
 - nvm
 - yo
+- bower
+- gulp/grunt
 
 ## Some nifty zsh tricks
 - cd to git home
@@ -58,6 +59,3 @@
 - syntax highlighting
 - history substring
 - zsh-dwim
-
-## Music
-- beets
