@@ -12,11 +12,11 @@
 - mbox
 - multitail
 - underscore-cli
-- cabal
 - sysdig
 - write-good.vim
 - jrnl
-- aIRchat
+- irssi
+- id3tool
 
 # Utilities
 ## General
