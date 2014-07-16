@@ -17,6 +17,7 @@
 - jrnl
 - irssi
 - id3tool
+- cv
 
 # Utilities
 ## General
