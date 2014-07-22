@@ -8,23 +8,19 @@ USAGE: bootstrap.sh <arguments>
 
 Available commands:
 
+    -f | --full                 Install all options
     -v | --vim-config           configure only vim
     -g | --git-config           configure git
     -z | --zsh-config           configure zsh using Prezto
     -t | --tmux-config          configure tmux
-    -n | --node-config          configure node
-    -m | --music-config         configure beets
-    -w | --write-config         configure writing tools
-    -x | --xmonad-config        configure only xmonad
-    -i | --xinitrc-config       configure xinitrc
-    -y | --synapse-config       configure synapse
     -r | --remap-config         configure remap of keys
-    -a | --autojump             Install autojump
-    -c | --config               apply all configuration options
+    -x | --xmonad-config        configure only xmonad
+    -w | --write-config         configure writing tools
+    -m | --music-config         configure beets
     --config-ssh                configure ssh
     --config-sublime            configure sumblime text
     --config-bare               bare bones configuration
-    --solarize                  solarize the terminal
+    -solarize                  solarize the terminal
 _EOH_
 }
 
@@ -123,15 +119,10 @@ function config_tmux() {
     fi
 }
 
-# Configure Node
-function config_node() {
-    nvm install 10.28
-}
-
 # Configure music
 function config_music() {
     highlight "\nConfiguring Beets"
-    if hash beet; then
+    if hash beet &> /dev/null; then
         cd
         if [ -d .config/beets ]; then
             fail "Beets configuration failed. Delete ~/.config/beets and retry"
@@ -184,6 +175,8 @@ function config_xmonad() {
         fail "xmonad configuration failed. Install xmonad first"
         ERR=2
     fi
+
+    config_xinitrc
 }
 
 #Solarize the terminal
@@ -196,31 +189,12 @@ function config_solarize() {
         cp shells/dircolors.ansi-light ~/.dircolors-light
         cp shells/dircolors.ansi-dark ~/.dircolors-dark
         eval `dircolors ~/.dircolors-light`
-        shells/solarize/solarize
+        shells/solarize/install.sh
         success "Solarize configured"
     fi
 }
 
-#Synapse configuration
-function config_synapse() {
-    highlight "\nConfiguring synapse"
-    if hash synapse &> /dev/null; then
-        if [ -e ~/.config/synapse/config.json ]; then
-            fail "Synapse configuration failed. Delete ~/.config/synapse and retry"
-            ERR=1
-        else
-            cd ~/.config/synapse
-            ln -s "${CONFDIR}/config/synapse/config.json" config.json
-            success "Synapse configured"
-            cd $CONFDIR
-        fi
-    else
-        fail "Synapse configuration failed. Install synapse first"
-        ERR=2
-    fi
-}
-
-#I haven't used it recently but still
+# Remap directly
 function config_remap() {
     highlight "\nConfiguring xmodmap"
 
@@ -268,7 +242,12 @@ function config_sublime() {
 # configure ssh
 function config_ssh() {
     highlight "\nConfiguring ssh"
-    cd ~/.ssh/
+
+    if [ ! -d ~/.ssh ]; then
+        mkdir ~/.ssh
+    fi
+
+    cd ~/.ssh
     if [ -f config ]; then
         fail "SSH configuration failed. Remove ~/ssh/config and retry."
         ERR=1
@@ -290,15 +269,14 @@ function config_bare() {
 }
 
 # Install everything
-function config() {
+function config_fll() {
     config_bare
-    config_xmodmap
-    config_xinitrc
+    config_remap
     config_solarize
     config_xmonad
-    config_synapse
     config_sublime
-    config_node
+    config_write
+    config_music
 }
 
 # Store the configuration directory for use by the functions
@@ -328,23 +306,14 @@ while [ -n "$1" ]; do
         -t | --tmux-config)
             config_tmux;;
 
-        -n | --node-config)
-            config_node;;
-
         -m | --music-config)
             config_music;;
 
         -w | --write-config)
             config_write;;
 
-        -c | --config)
-            config;;
-
-        -i | --xinitrc-config)
-            config_xinitrc;;
-
-        -y | --synapse-config)
-            config_synapse;;
+        -f | --full)
+            config_full;;
 
         -r | --remap-config)
             config_remap;;

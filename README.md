@@ -8,6 +8,13 @@
 - YouCompleteMe
 - copy
 
+# Issues
+- Issues of nvm being a shell
+- ack is aliased
+- bower is aliased
+- npm doesn't become set when first installed
+- node configuration using nvm
+
 # Test
 ## General
 - mbox
