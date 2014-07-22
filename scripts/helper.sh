@@ -41,16 +41,42 @@ function installer() {
         fail "Cannot Install"
     fi
 
-    if hash $1 &> /dev/null; then
-        warn "$1 is already installed"
-    else
-        if sudo ${installing_software} install -y $1 &>/dev/null; then
-            success "$1 installed"
-        else
-            fail "$1 installation"
-            ERR=1
-        fi
-    fi
+    while [ -n "$1" ]; do
+        case "$1" in
+            -n )
+                shift
+                if hash $1 &> /dev/null; then
+                    warn "$1 is already installed"
+                    return
+                fi
+                ;;
+
+            -p )
+                shift
+                if sudo ${installing_software} install -y $1 &>/dev/null; then
+                    success "$1 installed"
+                else
+                    fail "$1 installation"
+                    ERR=1
+                fi
+                ;;
+
+            * )
+                if hash $1 &> /dev/null; then
+                    warn "$1 is already installed"
+                else
+                    if sudo ${installing_software} install -y $1 &>/dev/null; then
+                        success "$1 installed"
+                    else
+                        fail "$1 installation"
+                        ERR=1
+                    fi
+                fi
+                ;;
+        esac
+        shift
+    done
+
 }
 
 # a function to install something using npm
