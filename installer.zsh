@@ -9,48 +9,18 @@ Available options:
 
     -f | --full                        Full Installations
     -a | --ack                         Install ack
+    -s | --system                      dstat, htop
+    -e | --essentials                  zsh, ack, git, vim, tmux, nvm
     -at| --autojump                    Install autojump
     -g | --github                      tmux-networkspeed, sysadmin
     -x | --xmonad                      Install xmonad
-    -e | --essentials                  zsh, ack, git, vim, tmux, nvm
-    -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
-    -i | --indicators                  flux, hddtemp, sensors, sysmon, multiload, weather, recent
-    -s | --system                      dstat, htop
-    -b | --battery                     acpi, install bumbleebee, tlp and thermald yourself
     -w | --write                       texlive, pandoc
-    -d | --devel                       curl, nvm, ipython, yo, haskell-platform, bower, gulp, grunt
-    --build                            pip, easy_install, pytho_setup, nvm
+    -i | --indicators                  flux, hddtemp, sensors, sysmon, multiload, weather, recent
+    -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support
+    -b | --battery                     acpi, install bumbleebee, tlp and thermald yourself
+    -d | --devel                       yo, haskell-platform, bower, gulp, grunt
+    --build                            pip, easy_install, pytho-setuptools
 _EOH_
-}
-
-# Install easy_install
-function install_easy_install() {
-    if hash easy_install; then
-        warn "easy_install is already installed"
-        ERR=2
-    else
-        if wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python; then
-            success "easy_install installed"
-        else
-            fail "easy_install installation failed."
-            ERR=1
-        fi
-    fi
-}
-
-# Installer for pip
-function install_pip() {
-    if hash pip; then
-        warn "pip is already installed"
-        ERR=2
-    else
-        if easy_install pip; then
-            success "pip installed"
-        else
-            fail "pip installation failed."
-            ERR=1
-        fi
-    fi
 }
 
 # Installation functions
@@ -75,12 +45,8 @@ function install_nvm() {
     if hash nvm &> /dev/null; then
         warn "NVM is already installed"
     else
-        if wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh - ; then
-            success "NVM installed"
-        else
-            fail "NVM installation failed"
-            ERR=1
-        fi
+        wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh && sh ./install.sh
+        success "NVM installed"
     fi
 }
 
@@ -176,29 +142,22 @@ function install_system() {
 
 # Build tools
 function install_build_tools() {
-    highlight "\nInstalling build tools: easy_install, pip, python-setuptools"
+    highlight "\nInstalling build tools:"
 
-    install_easy_install
-    install_pip
-    install_nvm
+    installer -n easy_install -p python-setuptools
+    installer -n pip -p python-pip
 }
 
 # Write tools
 function install_write_tools() {
     highlight "\nInstalling write tools: TeX, pandoc"
-    installer texlive
+    installer -n latex -p texlive
     installer pandoc
 }
 
 # devel tools
 function install_devel_tools() {
-    highlight "\nInstalling devel tools: curl, ipython, yo"
-
-    # General Development
-    installer curl
-
-    # Python Installment
-    installer ipython
+    highlight "\nInstalling devel tools"
 
     # Development on NodeJS
     npm_install yo
@@ -226,15 +185,20 @@ function install_indicators {
     installer fluxgui
 
     # the indicator for sensors
-	# sudo add-apt-repository ppa:noobslab/indicators
-    # sudo add-apt-repository ppa:nilarimogard/webupd8
-    # sudo add-apt-repository ppa:jconti/recent-notifications
-    # sudo add-apt-repository ppa:atareao/atareao
-    # sudo apt-get update
+    add_ppa nilarimogard/webupd8 && sudo apt-get update
+    add_ppa atareao/atareao && sudo apt-get update
+
+    add_ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
     installer indicator-sysmonitor
+
+	add_ppa noobslab/indicators && sudo apt-get update
     installer indicator-multiload
     installer my-weather-indicator
+
+    add_ppa alexmurray/indicator-sensors && sudo apt-get update
     installer indicator-sensors
+
+    add_ppa jconti/recent-notifications && sudo apt-get update
     installer recent-notifications
 }
 
@@ -247,7 +211,6 @@ function install_music () {
     pip install flask
     pip install discogs_client
     pip install beets
-
 }
 
 function install_miscellaneous {
@@ -256,11 +219,11 @@ function install_miscellaneous {
     installer ia32-libs
 
     # Synapse for immediate execution
-	# sudo add-apt-repository ppa:noobslab/apps && sudo apt-get update
+	add_ppa noobslab/apps && sudo apt-get update
     installer synapse
 
     # Y PPA Manager
-    # sudo add-apt-repository ppa:webupd8team/y-ppa-manager && sudo apt-get update
+    add_ppa webupd8team/y-ppa-manager && sudo apt-get update
     installer y-ppa-manager
 }
 
