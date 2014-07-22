@@ -25,7 +25,6 @@ Available commands:
     --config-sublime            configure sumblime text
     --config-bare               bare bones configuration
     --solarize                  solarize the terminal
-    --test                      tester program
 _EOH_
 }
 

@@ -6,6 +6,7 @@
 - indicator-synapse
 - ledger
 - YouCompleteMe
+- copy
 
 # Test
 ## General

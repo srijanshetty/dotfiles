@@ -14,9 +14,9 @@ Available options:
     -x | --xmonad                      Install xmonad
     -e | --essentials                  zsh, ack, git, vim, tmux, nvm
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support, synapse
-    -i | --indicators                  flux, hddtemp, lm-sensors, indicator-sensor, indicator-sysmon
+    -i | --indicators                  flux, hddtemp, sensors, sysmon, multiload, weather, recent
     -s | --system                      dstat, htop
-    -b | --battery                     bumblebee, acpi, jupiter
+    -b | --battery                     acpi, install bumbleebee, tlp and thermald yourself
     -w | --write                       texlive, pandoc
     -d | --devel                       curl, nvm, ipython, yo, haskell-platform, bower, gulp, grunt
     --build                            pip, easy_install, pytho_setup, nvm
@@ -216,16 +216,6 @@ function install_battery {
 
     # Monitoring tools
     installer acpi
-
-    # Bumblee the saviour of poor nVidia card laptops running linux
-	# sudo add-apt-repository ppa:bumblebee/stable && sudo apt-get update
-    installer bumblebee
-    installer virtualgl
-    installer linux-headers-generic
-
-    # Install jupiter for performance control
-    #sudo add-apt-repository ppa:webupd8team/jupiter && sudo apt-get update
-    installer jupiter
 }
 
 # have to keep a check on the temparature of the laptop
