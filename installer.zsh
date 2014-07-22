@@ -108,11 +108,11 @@ function install_ack() {
 
 # Some nifty libraries from Github
 function install_from_github() {
-    if [ -f ~/Documents/GitHub ]; then
-        cd ~/Documents/GitHub
-    else
-        mkdir -p ~/Documents/GitHub; cd ~/Documents/GitHub
+    if [ ! -f ~/Documents/GitHub ]; then
+        mkdir -p ~/Documents/GitHub
     fi
+
+    cd ~/Documents/GitHub
 
     # Copy tmux-networkspeed
     if [ ! -d tmux-networkspeed ]; then
@@ -128,8 +128,8 @@ function install_from_github() {
     fi
 
     # sysadmin tools
-    if [ ! -d tmux-networkspeed ]; then
-        git clone https://github.com/skx/sysadmin-util sysadmin
+    if [ ! -d sysadmin ]; then
+        git clone https://github.com/skx/sysadmin-util.git sysadmin
         if [ $? -eq 0 ]; then
             success "sysadmin tools installed"
         else
