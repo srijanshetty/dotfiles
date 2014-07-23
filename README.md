@@ -4,8 +4,8 @@
 - massrename
 - docker
 - indicator-synapse
-- ledger
-- YouCompleteMe
+- onedrive
+- fstab
 - copy
 
 # Issues
@@ -14,6 +14,9 @@
 - bower is aliased
 - npm doesn't become set when first installed
 - node configuration using nvm
+- sh support
+- tmux/easy_install without sudo
+- ledger and Youcompleteme autoscript
 
 # Test
 ## General
