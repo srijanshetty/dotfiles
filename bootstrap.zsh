@@ -12,6 +12,7 @@ Available commands:
     -v | --vim-config           configure only vim
     -g | --git-config           configure git
     -z | --zsh-config           configure zsh using Prezto
+    -n | --node-configure       configure node
     -t | --tmux-config          configure tmux
     -r | --remap-config         configure remap of keys
     -x | --xmonad-config        configure only xmonad
@@ -25,7 +26,16 @@ _EOH_
 }
 
 # Configuration Functions
-#Vim configuration
+function config_node() {
+    if hash nvm &> /dev/null;then
+        nvm install v0.10.28 && nvm use v0.10.28
+        success "NVM installed"
+    else
+        fail "NVM is not installed"
+    fi
+}
+
+# Vim configuration
 function config_vim() {
     highlight "\nConfiguring Vim"
     if hash vim &> /dev/null; then
@@ -296,6 +306,9 @@ while [ -n "$1" ]; do
 
         -v | --vim-config)
             config_vim;;
+
+        -n | --node-config)
+            config_node;;
 
         -g | --git-config)
             config_git;;
