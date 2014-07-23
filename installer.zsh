@@ -8,10 +8,9 @@ USAGE: installer <arguments>
 Available options:
 
     -f | --full                        Full Installations
-    -a | --ack                         Install ack
-    -s | --system                      dstat, htop
-    -e | --essentials                  zsh, ack, git, vim, tmux, nvm
     -at| --autojump                    Install autojump
+    -s | --system                      dstat, htop
+    -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump
     -g | --github                      tmux-networkspeed, sysadmin
     -x | --xmonad                      Install xmonad
     -w | --write                       texlive, pandoc
@@ -20,107 +19,34 @@ Available options:
     -b | --battery                     acpi, install bumbleebee, tlp and thermald yourself
     -d | --devel                       yo, haskell-platform, bower, gulp, grunt
     --build                            pip, easy_install, pytho-setuptools
+    -t | --test                        Random tests
 _EOH_
 }
 
-# Installation functions
-function install_autojump() {
-    highlight "\nInstalling autojump"
-
-    if hash autojump &> /dev/null; then
-        warn "Autojump is already installed"
-    else
-        if cd shells/autojump && ./install.py; then
-            success "Autojump installed"
-            cd ${CONFDIR}
-        else
-            fail "Autojump failed"
-            ERR=1
-        fi
-    fi
+function test_function() {
+    highlight "\nRunning test function"
+    install_nvm
 }
 
-# Install NVM
-function install_nvm() {
-    if hash nvm &> /dev/null; then
-        warn "NVM is already installed"
-    else
-        wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh && sh ./install.sh
-        success "NVM installed"
-    fi
-}
-
-# Install ack
-function install_ack() {
-    if hash ack &> /dev/null; then
-        warn "ack already installed"
-    else
-        if [ -d ${HOME}/Documents/local/bin ]; then
-            echo "Success" &> /dev/null
-        else
-            mkdir -p ${HOME}/Documents/local/bin
-        fi
-
-        # Dowlonad the ack script
-        if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.12-single-file &>/dev/null; then
-            chmod u+x "${HOME}/Documents/local/bin/ack"
-            success "ack installed"
-        else
-            fail "ack installation"
-            ERR=1
-        fi
-    fi
-}
 
 # Some nifty libraries from Github
 function install_from_github() {
-    if [ ! -f ~/Documents/GitHub ]; then
-        mkdir -p ~/Documents/GitHub
-    fi
-
-    cd ~/Documents/GitHub
-
-    # Copy tmux-networkspeed
-    if [ ! -d tmux-networkspeed ]; then
-        git clone https://github.com/srijanshetty/tmux-networkspeed.git
-        if [ $? -eq 0 ]; then
-            success "tmux-networkspeed installed"
-        else
-            fail "tmux-networkspeed installation failed"
-            ERR=1
-        fi
-    else
-        warn "tmux-networkspeed already exists"
-    fi
-
-    # sysadmin tools
-    if [ ! -d sysadmin ]; then
-        git clone https://github.com/skx/sysadmin-util.git sysadmin
-        if [ $? -eq 0 ]; then
-            success "sysadmin tools installed"
-        else
-            fail "sysadmin tools installation failed"
-            ERR=1
-        fi
-    else
-        warn "sysadmin tools already exists"
-    fi
-
-    cd -
-
-    # massren
+    install_sysadmin || ERR=1
+    install_tmux_networkspeed || ERR=1
+    # Massrename
 }
 
-# zsh, ack, vim ,git and screen
+# zsh, ag, vim ,git and screen
 function install_essentials() {
-    highlight "\nInstalling essentials: zsh, vim, git, tmux"
+    highlight "\nInstalling essentials: zsh, vim, git, tmux, autojump, ag, nvm"
 
-    installer git
-    installer vim
-    installer tmux
-    installer zsh
-    install_nvm
-    install_ack
+    installer git || ERR=1
+    installer vim || ERR=1
+    installer tmux || ERR=1
+    installer zsh || ERR=1
+    installer -n ag -p silversearcher-ag || ERR=1
+    install_autojump || ERR=1
+    install_nvm || ERR=1
 }
 
 # Xmonad, the tiling manager
@@ -128,31 +54,31 @@ function install_xmonad() {
     highlight "\nInstalling xmonad"
 
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
-    installer gnome-panel
-    installer xmonad
+    installer gnome-panel || ERR=1
+    installer xmonad || ERR=1
 }
 
 # System monitoring utilies
 function install_system() {
     highlight "\nInstalling System Utilities: dstat, htop"
 
-    installer dstat
-    installer htop
+    installer dstat || ERR=1
+    installer htop || ERR=1
 }
 
 # Build tools
 function install_build_tools() {
     highlight "\nInstalling build tools:"
 
-    installer -n easy_install -p python-setuptools
-    installer -n pip -p python-pip
+    installer -n easy_install -p python-setuptools || ERR=1
+    installer -n pip -p python-pip || ERR=1
 }
 
 # Write tools
 function install_write_tools() {
     highlight "\nInstalling write tools: TeX, pandoc"
-    installer -n latex -p texlive
-    installer pandoc
+    installer -n latex -p texlive || ERR=1
+    installer pandoc || ERR=1
 }
 
 # devel tools
@@ -160,75 +86,72 @@ function install_devel_tools() {
     highlight "\nInstalling devel tools"
 
     # Development on NodeJS
-    npm_install yo
-    npm_install bower
-    npm_install gulp
-    npm_install grunt
+    npm_install yo || ERR=1
+    npm_install bower || ERR=1
+    npm_install gulp || ERR=1
+    npm_install grunt || ERR=1
 
     # Haskell and cabal
-    installer haskell-platform
+    installer haskell-platform || ERR=1
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
-function install_battery {
+function install_battery() {
     highlight "\nInstalling battery monitoring utilies"
 
     # Monitoring tools
-    installer acpi
+    installer acpi || ERR=1
 }
 
 # have to keep a check on the temparature of the laptop
-function install_indicators {
+function install_indicators() {
     # the sensors which are required
-    installer lm-sensors
-    installer hddtemp
-    installer fluxgui
+    installer lm-sensors || ERR=1
+    installer hddtemp || ERR=1
+    installer fluxgui || ERR=1
 
     # the indicator for sensors
     add_ppa nilarimogard/webupd8 && sudo apt-get update
     add_ppa atareao/atareao && sudo apt-get update
 
     add_ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
-    installer indicator-sysmonitor
+    installer indicator-sysmonitor || ERR=1
 
 	add_ppa noobslab/indicators && sudo apt-get update
-    installer indicator-multiload
-    installer my-weather-indicator
+    installer indicator-multiload || ERR=1
+    installer my-weather-indicator || ERR=1
 
     add_ppa alexmurray/indicator-sensors && sudo apt-get update
-    installer indicator-sensors
+    installer indicator-sensors || ERR=1
 
     add_ppa jconti/recent-notifications && sudo apt-get update
-    installer recent-notifications
+    installer recent-notifications || ERR=1
 }
 
 function install_music () {
-    installer pavucontrol
-    installer vlc
+    installer pavucontrol || ERR=1
+    installer vlc || ERR=1
 
     # Dependencies of beets for various plugins
-    pip install pylast
-    pip install flask
-    pip install discogs_client
-    pip install beets
+    pip install pylast || ERR=1
+    pip install flask || ERR=1
+    pip install discogs_client || ERR=1
+    pip install beets || ERR=1
 }
 
 function install_miscellaneous {
     # simple utilies like SSH, compatibility tools
-    installer openssh-server
-    installer ia32-libs
+    installer openssh-server || ERR=1
+    installer ia32-libs || ERR=1
 
     # Synapse for immediate execution
 	add_ppa noobslab/apps && sudo apt-get update
-    installer synapse
+    installer synapse || ERR=1
 
     # Y PPA Manager
     add_ppa webupd8team/y-ppa-manager && sudo apt-get update
-    installer y-ppa-manager
+    installer y-ppa-manager || ERR=1
 }
-
-# source the helper functions
-source scripts/helper.sh
 
 #Store the root directory
 CONFDIR=${PWD}
@@ -236,11 +159,15 @@ CONFDIR=${PWD}
 #For the error code
 ERR=0
 
+# source the helper functions
+source scripts/install-scripts.zsh
+source scripts/helper.sh
+
 #Loop through arguments
 while [ -n "$1" ]; do
     case "$1" in
-        -a | --ack)
-            install_ack;;
+        -a | --ag)
+            install_ag;;
 
         -at| --autojump)
             install_autojump;;
@@ -288,6 +215,9 @@ while [ -n "$1" ]; do
 
         -h | --help)
             help_text;;
+
+        -t | --test)
+            test_function;;
     esac
     shift
 done

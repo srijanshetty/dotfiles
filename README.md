@@ -9,12 +9,7 @@
 - copy
 
 # Issues
-- Issues of nvm being a shell
-- ack is aliased
 - bower is aliased
-- npm doesn't become set when first installed
-- node configuration using nvm
-- sh support
 - tmux/easy_install without sudo
 - ledger and Youcompleteme autoscript
 
@@ -55,7 +50,7 @@
 ## Development
 - curl
 - pip
-- ack-grep
+- ag
 - ipython
 - mbox
 - nvm
