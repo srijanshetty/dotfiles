@@ -1,5 +1,13 @@
 #!/bin/zsh
 
+# Use relative directories in sourcing
+CONFDIR="$(dirname $0)"
+[ -z $DOT_HELPER ] && source "${CONFDIR}/scripts/helper.sh"
+[ -z $DOT_INSTALL_SCRIPTS ] && source "${CONFDIR}/scripts/install-scripts.zsh"
+
+#For errors
+ERR=0
+
 function help_text() {
 cat << _EOH_
 
@@ -25,7 +33,6 @@ _EOH_
 
 function test_function() {
     highlight "\nRunning test function"
-    install_nvm
 }
 
 
@@ -152,16 +159,6 @@ function install_miscellaneous {
     add_ppa webupd8team/y-ppa-manager && sudo apt-get update
     installer y-ppa-manager || ERR=1
 }
-
-#Store the root directory
-CONFDIR=${PWD}
-
-#For the error code
-ERR=0
-
-# source the helper functions
-source scripts/install-scripts.zsh
-source scripts/helper.sh
 
 #Loop through arguments
 while [ -n "$1" ]; do

@@ -1,7 +1,32 @@
 #!/bin/zsh
 
-source ./helper.sh
+# Source required files
+DIR="$(dirname "$0")"
+[ -z $DOT_CONF ] && source "${DIR}/conf.sh"
+[ -z $DOT_HELPER ] && source "${DIR}/helper.sh"
 
+# Install PIP
+function install_pip() {
+    highlight "\nInstalling easy_setup"
+
+    wget http://peak.telecommunity.com/dist/ez_setup.py &> $logfile && python ez_setup.py &> $logfile && rm ez_setup.py &> $logfile
+
+    if [ $? -eq 0 ]; then
+        success "easy_setup installed"
+    else
+        fail "easy_setup installation failed"
+        return 1
+    fi
+
+    highlight "\nInstalling pip"
+    if easy_install pip &> $logfile; then
+        success "pip installed"
+    else
+        fail "pip installation failed"
+    fi
+}
+
+# To check whether something is inRepo
 function inRepo {
     for file in /etc/apt/sources.list.d/*.list; do
         grep "$1" $file
@@ -11,7 +36,7 @@ function inRepo {
 # function to install something using apt-get
 function installer() {
     if hash apt-get &> /dev/null; then
-        installing_software="apt-get"
+        installing_software="sudo apt-get"
     elif hash pact &> /dev/null; then
         installing_software="pact"
     else
@@ -32,7 +57,7 @@ function installer() {
 
             -p )
                 shift
-                if sudo ${installing_software} install -y $1 &>/dev/null; then
+                if ${installing_software} install -y $1 &>/dev/null; then
                     success "${APPLICATION_NAME} installed"
                     return 0
                 else
@@ -45,7 +70,7 @@ function installer() {
                 if hash $1 &> /dev/null; then
                     warn "$1 is already installed"
                 else
-                    if sudo ${installing_software} install -y $1 &>/dev/null; then
+                    if ${installing_software} install -y $1 &>/dev/null; then
                         success "$1 installed"
                         return 0
                     else
@@ -206,3 +231,6 @@ function install_sysadmin() {
     cd -
     return RETURN_VALUE
 }
+
+# To indicate that this script has been included
+DOT_INSTALL_SCRIPTS=1

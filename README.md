@@ -12,6 +12,8 @@
 - bower is aliased
 - tmux/easy_install without sudo
 - ledger and Youcompleteme autoscript
+- use a logger for debuggin
+- Have a small script to do git stuff and zsh in bootstrap
 
 # Test
 ## General

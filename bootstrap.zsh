@@ -1,5 +1,12 @@
 #!/bin/zsh
 
+# Store the configuration directory for use by the functions
+CONFDIR="$(dirname $0)"
+[ -z $DOT_HELPER ] && source "${CONFDIR}/scripts/helper.sh"
+
+# flag for errors
+ERR=0
+
 #Help text
 function help_text() {
 cat <<- _EOH_
@@ -44,8 +51,9 @@ function config_vim() {
             fail "Vim configuration failed. Delete ~/.vim and retry"
             ERR=1
         else
-            ln -s "${CONFDIR}/config/vim/vim" .vim
+            ln -s "${CONFDIR}/config/vim/vim" .vim;
             ln -s "${CONFDIR}/config/vim/vimrc" .vimrc
+            success "Vim configuration successful"
         fi
         cd $CONFDIR
     else
@@ -288,15 +296,6 @@ function config_fll() {
     config_write
     config_music
 }
-
-# Store the configuration directory for use by the functions
-CONFDIR=${PWD}
-
-# for helper function
-source scripts/helper.sh
-
-# flag for errors
-ERR=0
 
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
