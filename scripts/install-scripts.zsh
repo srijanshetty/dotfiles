@@ -1,9 +1,9 @@
 #!/bin/zsh
 
 # Source required files
-DIR="$(dirname "$0")"
-[ -z $DOT_CONF ] && source "${DIR}/conf.sh"
-[ -z $DOT_HELPER ] && source "${DIR}/helper.sh"
+DOT_DIR_NAME="$(dirname "$0")"
+[ -z $DOT_CONF ] && source "${DOT_DIR_NAME}/conf.sh"
+[ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/helper.sh"
 
 # Install PIP
 function install_pip() {

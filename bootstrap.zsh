@@ -1,8 +1,9 @@
 #!/bin/zsh
 
 # Store the configuration directory for use by the functions
-CONFDIR="$(dirname $0)"
-[ -z $DOT_HELPER ] && source "${CONFDIR}/scripts/helper.sh"
+DOT_DIR_NAME="$(dirname $0)"
+[ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/scripts/helper.sh"
+CONFDIR=$PWD
 
 # flag for errors
 ERR=0

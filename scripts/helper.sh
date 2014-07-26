@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 # Source required files
-DIR="$(dirname "$0")"
-[ -z $DOT_CONF ] && source "${DIR}/conf.sh"
+DOT_DIR_NAME="$(dirname "$0")"
+[ -z $DOT_CONF ] && source "${DOT_DIR_NAME}/conf.sh"
 
 # Debug messages
 NORMAL=$(tput sgr0)
