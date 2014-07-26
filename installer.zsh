@@ -26,7 +26,7 @@ Available options:
     -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support
     -b | --battery                     acpi, install bumbleebee, tlp and thermald yourself
     -d | --devel                       yo, haskell-platform, bower, gulp, grunt
-    --build                            pip, easy_install, pytho-setuptools
+    --build                            pip, easy_install
     -t | --test                        Random tests
 _EOH_
 }
@@ -75,10 +75,9 @@ function install_system() {
 
 # Build tools
 function install_build_tools() {
-    highlight "\nInstalling build tools:"
+    highlight "\nInstalling build tools: pip, easy_install"
 
-    installer -n easy_install -p python-setuptools || ERR=1
-    installer -n pip -p python-pip || ERR=1
+    install_pip || ERR=1
 }
 
 # Write tools
