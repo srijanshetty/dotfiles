@@ -16,14 +16,15 @@ USAGE: installer <arguments>
 Available options:
 
     -f | --full                        Full Installations
-    -at| --autojump                    Install autojump
-    -s | --system                      dstat, htop
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump
+    -at| --autojump                    Install autojump
+    -m | --music                       Beets
+    -s | --system                      dstat, htop
     -g | --github                      tmux-networkspeed, sysadmin
     -x | --xmonad                      Install xmonad
     -w | --write                       texlive, pandoc
     -i | --indicators                  flux, hddtemp, sensors, sysmon, multiload, weather, recent
-    -m | --miscellaneous               flash, vlc, music, ssh, 32-bit support
+    -u | --ubuntu-gui                  flash, vlc, ssh, 32-bit support
     -b | --battery                     acpi, install bumbleebee, tlp and thermald yourself
     -d | --devel                       yo, haskell-platform, bower, gulp, grunt
     --build                            pip, easy_install
@@ -41,6 +42,13 @@ function install_from_github() {
     install_sysadmin || ERR=1
     install_tmux_networkspeed || ERR=1
     # Massrename
+}
+
+# Build tools
+function install_build_tools() {
+    highlight "\nInstalling build tools: pip, easy_install"
+
+    install_pip || ERR=1
 }
 
 # zsh, ag, vim ,git and screen
@@ -73,13 +81,6 @@ function install_system() {
     installer htop || ERR=1
 }
 
-# Build tools
-function install_build_tools() {
-    highlight "\nInstalling build tools: pip, easy_install"
-
-    install_pip || ERR=1
-}
-
 # Write tools
 function install_write_tools() {
     highlight "\nInstalling write tools: TeX, pandoc"
@@ -99,6 +100,15 @@ function install_devel_tools() {
 
     # Haskell and cabal
     installer haskell-platform || ERR=1
+}
+
+function install_music () {
+    # Dependencies of beets for various plugins
+    highlight "\nInstalling music tools: beets"
+    pip install pylast || ERR=1
+    pip install flask || ERR=1
+    pip install discogs_client || ERR=1
+    pip install beets || ERR=1
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
@@ -134,18 +144,11 @@ function install_indicators() {
     installer recent-notifications || ERR=1
 }
 
-function install_music () {
+function install_miscellaneous {
+    # For music
     installer pavucontrol || ERR=1
     installer vlc || ERR=1
 
-    # Dependencies of beets for various plugins
-    pip install pylast || ERR=1
-    pip install flask || ERR=1
-    pip install discogs_client || ERR=1
-    pip install beets || ERR=1
-}
-
-function install_miscellaneous {
     # simple utilies like SSH, compatibility tools
     installer openssh-server || ERR=1
     installer ia32-libs || ERR=1
@@ -185,8 +188,11 @@ while [ -n "$1" ]; do
         -e | --essentials)
             install_essentials;;
 
-        -m | --miscellaneous)
+        -u | --ubunt-gui)
             install_miscellaneous ;;
+
+        -m | --music)
+            install_music;;
 
         -i | --indicators)
             install_indicators;;

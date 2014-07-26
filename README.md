@@ -4,7 +4,7 @@
 - ledger and Youcompleteme autoscript
 - use a logger for debuggin
 - Have a small script to do git stuff and zsh in bootstrap
-- Refactor bootstrap and installer with return
+- Refactor installer with return
 
 # TODO
 - sysdig
