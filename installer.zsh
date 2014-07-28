@@ -215,11 +215,12 @@ while [ -n "$1" ]; do
         --build)
             install_build_tools;;
 
-        -h | --help)
-            help_text;;
-
         -t | --test)
             test_function;;
+
+        * )
+            help_text;;
+
     esac
     shift
 done

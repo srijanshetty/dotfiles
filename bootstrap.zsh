@@ -3,10 +3,7 @@
 # Store the configuration directory for use by the functions
 DOT_DIR_NAME="$(dirname $0)"
 [ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/scripts/helper.sh"
-CONFDIR=$PWD
-
-# flag for errors
-ERR=0
+CONFDIR="$PWD"
 
 #Help text
 function help_text() {
@@ -33,44 +30,29 @@ Available commands:
 _EOH_
 }
 
-# Configuration Functions
-function config_node() {
-    if hash nvm &> /dev/null;then
-        if nvm install v0.10.28 && nvm use v0.10.28; then
-            success "NVM : configured"
-            return 0
-        else
-            fail "NVM : Error with NVM script"
-            return 1
-        fi
-    else
-        fail "NVM : nvm not installed"
-        return 1
-    fi
-}
-
 # Vim configuration
 function config_vim() {
     highlight "\nConfiguring Vim"
 
     if hash vim &> /dev/null; then
         if [ -d ~/.vim ]; then
-            fail "Vim : delete ~/.vim and retry"
+            fail "vim : delete ~/.vim and retry"
             return 1
         else
             if ln -s "${CONFDIR}/config/vim/vim" ~/.vim && ln -s "${CONFDIR}/config/vim/vimrc" ~/.vimrc; then
-                success "Vim : configured"
+                success "vim : configured"
                 return 0
             else
-                fail "Vim : Symbolic link creation failed"
+                fail "vim : failed to create symlinks"
                 return 1
             fi
         fi
     else
-        fail "Vim : Vim not installed"
+        fail "vim : install vim"
         return 1
     fi
 }
+
 
 # Git configuration
 function config_git() {
@@ -79,31 +61,32 @@ function config_git() {
     if hash git &> /dev/null; then
         # Configure git
         if [ -e ~/.gitconfig ]; then
-            fail "Git : delete ~./gitconfig and retry"
+            fail "git : delete ~./gitconfig and retry"
             return 1
         else
             if ln -s "${CONFDIR}/config/git/gitconfig" ~/.gitconfig; then
-                success "Git : configured."
+                success "git : configured."
             else
-                fail "Git : Symbolic link creation failed for git"
+                fail "git : failed to create symlinks"
                 return 0
             fi
         fi
 
         # Configure global gitignore
         if [ -e ~/.gitignore_global ]; then
-            fail "Git : ~/.gitignore_global and retry"
+            fail "git : ~/.gitignore_global and retry"
+            return 1
         else
             if ln -s "${CONFDIR}/config/git/gitignore_global" ~/.gitignore_global; then
-                success "Global gitignore configured"
+                success "git : global gitignore configured"
                 return 0
             else
-                fail "Git : Symbolic link for ~/.gitignore_global failed"
+                fail "git : failed to create symlinks"
                 return 1
             fi
         fi
     else
-        fail "Git : install git"
+        fail "git : install git"
         return 1
     fi
 }
@@ -113,7 +96,7 @@ function config_zsh() {
     highlight "\nConfiguring zsh"
 
     if hash zsh &> /dev/null; then
-        if [[ -d ~/.zprezto ]]; then
+        if [ -d ~/.zprezto ]; then
             fail "Prezto : delete ~/.zprezto and retry"
             return 1
         else
@@ -130,11 +113,11 @@ function config_zsh() {
                 ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
             done
 
-            success "Prezto : configured."
+            success "Prezto : configured"
             return 0
         fi
     else
-        fail "Zsh : install zsh"
+        fail "zsh : install zsh"
         return 1
     fi
 }
@@ -148,11 +131,11 @@ function config_tmux() {
             fail "tmux : delete ~/.tmux.conf and retry"
             return 1
         else
-            if ln -s "${CONFDIR}/config/tmux.conf" .tmux.conf; then
+            if ln -s "${CONFDIR}/config/tmux.conf" ~/.tmux.conf; then
                 success "tmux : configured"
                 return 0
             else
-                fail "tmux : Symbolic link failure"
+                fail "tmux : Symlink failure"
                 return 1
             fi
         fi
@@ -162,6 +145,21 @@ function config_tmux() {
     fi
 }
 
+# Configuration Functions
+function config_node() {
+    if hash nvm &> /dev/null;then
+        if nvm install v0.10.28 && nvm use v0.10.28; then
+            success "NVM : configured"
+            return 0
+        else
+            fail "NVM : Error with NVM script"
+            return 1
+        fi
+    else
+        fail "NVM : nvm not installed"
+        return 1
+    fi
+}
 # Configure music
 function config_music() {
     highlight "\nConfiguring Beets"
@@ -380,9 +378,6 @@ while [ -n "$1" ]; do
         -r | --remap-config)
             config_remap;;
 
-        -h | --help )
-            help_text;;
-
         --config-ssh)
             config_ssh;;
 
@@ -397,6 +392,10 @@ while [ -n "$1" ]; do
 
         --test)
             tester;;
+
+        -h | --help)
+            help_text;;
+
     esac
     shift
 done
