@@ -39,6 +39,8 @@ function test_function() {
 
 # Some nifty libraries from Github
 function install_from_github() {
+    highlight "\nInstalling GitHub utilities"
+
     install_sysadmin || ERR=1
     install_tmux_networkspeed || ERR=1
     # Massrename

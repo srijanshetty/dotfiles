@@ -112,10 +112,11 @@ function add_ppa() {
   if [ $? -ne 0 ]; then
     success "Adding ppa:$1"
     sudo add-apt-repository -y ppa:$1
+    return 0
   fi
 
   warn "ppa:$1 already exists"
-  return 0
+  return 1
 }
 
 # Installation functions
@@ -191,7 +192,7 @@ function install_tmux_networkspeed() {
 
     # Copy tmux-networkspeed
     if [ ! -d tmux-networkspeed ]; then
-        git clone https://github.com/srijanshetty/tmux-networkspeed.git
+        git clone https://github.com/srijanshetty/tmux-networkspeed.git &> $LOGFILE
         if [ $? -eq 0 ]; then
             success "tmux-networkspeed installed"
         else
@@ -217,7 +218,7 @@ function install_sysadmin() {
 
     # Copy tmux-networkspeed
     if [ ! -d sysadmin ]; then
-        git clone https://github.com/skx/sysadmin-util.git sysadmin
+        git clone https://github.com/skx/sysadmin-util.git sysadmin &> $LOGFILE
         if [ $? -eq 0 ]; then
             success "sysadmin tools installed"
         else
