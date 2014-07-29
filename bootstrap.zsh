@@ -283,23 +283,7 @@ function config_xinitrc() {
 function config_sublime() {
     highlight "\nConfiguring sublime text"
 
-    if hash subl &> /dev/null; then
-        if [ -d ~/.config/sublime-text-3 ]; then
-            fail "Sublime text : Remove ~/.config/sublime-text3 and retry."
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/sublime-text3" ~/.config/sublime-text-3;then
-                success "Sublime Text : configured"
-                return 0
-            else
-                fail "Sublime Text : symbolic link failure"
-                return 1
-            fi
-        fi
-    else
-        fail "Sublime text : Install sublime text and then retry"
-        return 1
-    fi
+    # Stub
 }
 
 # configure ssh
