@@ -92,6 +92,8 @@ function install_write_tools() {
 function install_devel_tools() {
     highlight "\nInstalling devel tools"
 
+    installer curl || ERR=1
+
     # Development on NodeJS
     npm_install yo || ERR=1
     npm_install bower || ERR=1
@@ -105,10 +107,10 @@ function install_devel_tools() {
 function install_music () {
     # Dependencies of beets for various plugins
     highlight "\nInstalling music tools: beets"
-    pip install pylast || ERR=1
-    pip install flask || ERR=1
-    pip install discogs_client || ERR=1
-    pip install beets || ERR=1
+    sudo pip install pylast || ERR=1
+    sudo pip install flask || ERR=1
+    sudo pip install discogs_client || ERR=1
+    sudo pip install beets || ERR=1
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
