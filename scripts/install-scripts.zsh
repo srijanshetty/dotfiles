@@ -9,7 +9,7 @@ DOT_DIR_NAME="$(dirname "$0")"
 function install_pip() {
     highlight "\nInstalling easy_setup"
 
-    wget http://peak.telecommunity.com/dist/ez_setup.py &> $logfile && python ez_setup.py &> $logfile && rm ez_setup.py &> $logfile
+    wget http://peak.telecommunity.com/dist/ez_setup.py &> $LOGFILE && python ez_setup.py &> $LOGFILE && rm ez_setup.py &> $LOGFILE
 
     if [ $? -eq 0 ]; then
         success "easy_setup installed"
@@ -19,7 +19,7 @@ function install_pip() {
     fi
 
     highlight "\nInstalling pip"
-    if easy_install pip &> $logfile; then
+    if easy_install pip &> $LOGFILE; then
         success "pip installed"
     else
         fail "pip installation failed"
