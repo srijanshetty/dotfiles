@@ -35,20 +35,12 @@ function inRepo {
 
 # function to install something using apt-get
 function installer() {
-    if hash apt-get &> /dev/null; then
-        installing_software="sudo apt-get"
-    elif hash pact &> /dev/null; then
-        installing_software="pact"
-    else
-        fail "Cannot Install"
-    fi
-
     APPLICATION_NAME=""
-    while [ -n "$1" ]; do
+    while [ -z "$1" ]; do
         case "$1" in
             -n )
                 shift
-                APPLICATION_NAME=$1
+                APPLICATION_NAME="$1"
                 if hash $1 &> /dev/null; then
                     warn "$1 is already installed"
                     return 0
@@ -57,7 +49,7 @@ function installer() {
 
             -p )
                 shift
-                if ${installing_software} install -y $1 &>/dev/null; then
+                if sudo apt-get install -y $1 &>/dev/null; then
                     success "${APPLICATION_NAME} installed"
                     return 0
                 else
@@ -70,7 +62,7 @@ function installer() {
                 if hash $1 &> /dev/null; then
                     warn "$1 is already installed"
                 else
-                    if ${installing_software} install -y $1 &>/dev/null; then
+                    if sudo apt-get install -y $1 &>/dev/null; then
                         success "$1 installed"
                         return 0
                     else
