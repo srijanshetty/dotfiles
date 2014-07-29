@@ -28,6 +28,7 @@ Available options:
     -b | --battery                     acpi, install bumbleebee, tlp and thermald yourself
     -d | --devel                       yo, haskell-platform, bower, gulp, grunt
     --build                            pip, easy_install
+    --sync                             onedrive,copy,dropbox
     -t | --test                        Random tests
 _EOH_
 }
@@ -123,6 +124,9 @@ function install_battery() {
     installer acpi || ERR=1
 }
 
+function install_sync() {
+
+}
 # have to keep a check on the temparature of the laptop
 function install_indicators() {
     # the sensors which are required
