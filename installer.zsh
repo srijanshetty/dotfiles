@@ -17,15 +17,16 @@ Available options:
 
     -f | --full                        Full Installations
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump
-    -at| --autojump                    Install autojump
-    -m | --music                       Beets
+    -at| --autojump                    autojump
+    -m | --music                       beets
+    -n | --node                        node
     -s | --system                      dstat, htop
     -g | --github                      tmux-networkspeed, sysadmin
-    -x | --xmonad                      Install xmonad
     -w | --write                       texlive, pandoc
     -i | --indicators                  flux, hddtemp, sensors, sysmon, multiload, weather, recent
+    -b | --battery                     acpi, bumbleebee, tlp
+    -x | --xmonad                      xmonad
     -u | --ubuntu-gui                  flash, vlc, ssh, 32-bit support
-    -b | --battery                     acpi, install bumbleebee, tlp and thermald yourself
     -d | --devel                       yo, haskell-platform, bower, gulp, grunt
     --build                            pip, easy_install
     --sync                             onedrive,copy,dropbox
@@ -35,8 +36,13 @@ _EOH_
 
 function test_function() {
     highlight "\nRunning test function"
+    install_nvm
 }
 
+function install_node() {
+    highlight "\nNVM"
+    install_nvm
+}
 
 # Some nifty libraries from Github
 function install_from_github() {
@@ -87,7 +93,9 @@ function install_system() {
 # Write tools
 function install_write_tools() {
     highlight "\nInstalling write tools: TeX, pandoc"
+
     installer -n latex -p texlive || ERR=1
+    installer -n xelatex -p texlive-xetex || ERR=1
     installer pandoc || ERR=1
 }
 
@@ -122,6 +130,16 @@ function install_battery() {
 
     # Monitoring tools
     installer acpi || ERR=1
+
+    highlight "\nUncomment bumblebee and tlp"
+    # Adding repos for bumblebee
+    # add ppa bumblebee/stable && sudo apt-get update
+    # sudo apt-get install bumblebee bumblebee-nvidia virtualgl linux-headers-generic
+
+    # tlp
+    # add_ppa linrunner/tlp && sudo apt-get update
+    # sudo apt-get install tlp tlp-rdw
+    # sudo tlp start
 }
 
 function install_sync() {
@@ -225,6 +243,9 @@ while [ -n "$1" ]; do
 
         -t | --test)
             test_function;;
+
+        -n | --node)
+            install_node;;
 
         * )
             help_text;;
