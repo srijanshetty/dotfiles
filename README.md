@@ -1,27 +1,27 @@
 # Issues
-- bower is aliased
-- tmux/easy_install without sudo
 - ledger and Youcompleteme autoscript
-- use a logger for debuggin
+- use a logger for debugging
+- nvm issue
 - Refactor installer with return
+- pip issue
 
 # TODO
-- sysdig
 - underscore-cli
 - massrename
 - docker
-- indicator-synapse
-- onedrive/copy/dropbox
+- onedrive/copy/dropbox/skype
 - fstab
+- empathy settings
+- keyboard shortcuts elementary
+- ledger conf
+
 
 # Test
 ## General
 - mbox
 - multitail
 - underscore-cli
-- sysdig
 - write-good.vim
-- jrnl
 - irssi
 - id3tool
 - cv
@@ -43,7 +43,6 @@
 ## Writing
 - pandoc
 - tex/detex
-- jrnl
 
 ## Music
 - beets
