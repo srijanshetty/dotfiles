@@ -41,7 +41,7 @@ function installer() {
             -n )
                 shift
                 APPLICATION_NAME="$1"
-                if hash $1 &> /dev/null; then
+                if hash $1 &> $LOGFILE; then
                     warn "$1 is already installed"
                     return 0
                 fi
@@ -49,7 +49,7 @@ function installer() {
 
             -p )
                 shift
-                if sudo apt-get install -y $1 &>/dev/null; then
+                if sudo apt-get install -y $1 &> $LOGFILE; then
                     success "${APPLICATION_NAME} installed"
                     return 0
                 else
@@ -59,10 +59,10 @@ function installer() {
                 ;;
 
             * )
-                if hash $1 &> /dev/null; then
+                if hash $1 &> $LOGFILE; then
                     warn "$1 is already installed"
                 else
-                    if sudo apt-get install -y $1 &>/dev/null; then
+                    if sudo apt-get install --force-yes -y $1 &> $LOGFILE; then
                         success "$1 installed"
                         return 0
                     else
@@ -84,7 +84,7 @@ function npm_install() {
             warn "$1 is already installed"
             return 0
         else
-            if npm install -g $1 &>/dev/null; then
+            if npm install -g $1 &> $LOGFILE; then
                 success "$1 installed"
                 return 0
             else
@@ -100,7 +100,7 @@ function npm_install() {
 
 # Function to add a ppa
 function add_ppa() {
-  grep -h "^deb.*$1" /etc/apt/sources.list.d/* &> /dev/null
+  grep -h "^deb.*$1" /etc/apt/sources.list.d/* &> $LOGFILE
   if [ $? -ne 0 ]; then
     success "Adding ppa:$1"
     sudo add-apt-repository -y ppa:$1
@@ -115,7 +115,7 @@ function add_ppa() {
 function install_autojump() {
     highlight "\nInstalling autojump"
 
-    if hash autojump &> /dev/null; then
+    if hash autojump &> $LOGFILE; then
         warn "Autojump is already installed"
         return 0
     fi
