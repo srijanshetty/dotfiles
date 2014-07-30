@@ -18,25 +18,24 @@ Available options:
     -f | --full                        Full Installations
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump
     -at| --autojump                    autojump
-    -m | --music                       beets
+    -m | --music                       beets, vlc
     -n | --node                        node
     -s | --system                      dstat, htop
     -g | --github                      tmux-networkspeed, sysadmin
-    -w | --write                       texlive, pandoc
-    -i | --indicators                  flux, hddtemp, sensors, sysmon, multiload, weather, recent
+    -w | --write                       texlive, pandoc, ledger
+    -i | --indicators                  flux, hddtemp, sensors, sysmon, multiload, weather, synapse
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
-    -u | --ubuntu-gui                  flash, vlc, ssh, 32-bit support
-    -d | --devel                       yo, haskell-platform, bower, gulp, grunt
+    -u | --ubuntu-gui                  vlc, ssh, 32-bit support, y-ppa-manager, dconf-tools
+    -d | --devel                       yo, haskell-platform, gulp
     --build                            pip, easy_install
-    --sync                             onedrive,copy,dropbox
+    --sync                             onedrive,copy,dropbox,skype
     -t | --test                        Random tests
 _EOH_
 }
 
 function test_function() {
     highlight "\nRunning test function"
-    install_nvm
 }
 
 function install_node() {
