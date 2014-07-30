@@ -36,7 +36,7 @@ function inRepo {
 # function to install something using apt-get
 function installer() {
     APPLICATION_NAME=""
-    while [ -z "$1" ]; do
+    while [ -n "$1" ]; do
         case "$1" in
             -n )
                 shift
