@@ -92,11 +92,15 @@ function install_system() {
 
 # Write tools
 function install_write_tools() {
-    highlight "\nInstalling write tools: TeX, pandoc"
+    highlight "\nInstalling write tools: TeX, pandoc, ledger"
 
     installer -n latex -p texlive || ERR=1
     installer -n xelatex -p texlive-xetex || ERR=1
     installer pandoc || ERR=1
+
+    # PPA for ledger
+    add_ppa mbudde/ledger && sudo apt-get update
+    installer ledger || ERR=1
 }
 
 # devel tools
@@ -107,9 +111,7 @@ function install_devel_tools() {
 
     # Development on NodeJS
     npm_install yo || ERR=1
-    npm_install bower || ERR=1
     npm_install gulp || ERR=1
-    npm_install grunt || ERR=1
 
     # Haskell and cabal
     installer haskell-platform || ERR=1
@@ -166,22 +168,22 @@ function install_indicators() {
     add_ppa alexmurray/indicator-sensors && sudo apt-get update
     installer indicator-sensors || ERR=1
 
-    add_ppa jconti/recent-notifications && sudo apt-get update
-    installer recent-notifications || ERR=1
+    # Synapse
+    add_ppa versable/elementary-update && sudo apt-get update
+    installer indicator-synapse || ERR=1
 }
 
 function install_miscellaneous {
+    highlight "\nInstalling Miscellaneous Utilities"
+
     # For music
     installer pavucontrol || ERR=1
     installer vlc || ERR=1
 
     # simple utilies like SSH, compatibility tools
     installer openssh-server || ERR=1
-    installer ia32-libs || ERR=1
-
-    # Synapse for immediate execution
-	add_ppa noobslab/apps && sudo apt-get update
-    installer synapse || ERR=1
+    installer -n dconf -p dconf-tools || ERR=1
+    # installer ia32-libs || ERR=1
 
     # Y PPA Manager
     add_ppa webupd8team/y-ppa-manager && sudo apt-get update
