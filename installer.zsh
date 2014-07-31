@@ -18,15 +18,15 @@ Available options:
     -f | --full                        Full Installations
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump
     -at| --autojump                    autojump
-    -m | --music                       beets, vlc
+    -m | --music                       beets, vlc, pavucontrol, plugins
     -n | --node                        node
     -s | --system                      dstat, htop
     -g | --github                      tmux-networkspeed, sysadmin
-    -w | --write                       texlive, pandoc, ledger
-    -i | --indicators                  flux, hddtemp, sensors, sysmon, multiload, weather, synapse
+    -w | --write                       texlive, pandoc, ledger, jrnl
+    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
-    -u | --ubuntu-gui                  vlc, ssh, 32-bit support, y-ppa-manager, dconf-tools
+    -u | --ubuntu-gui                  ssh, y-ppa-manager, conky-manager
     -d | --devel                       yo, haskell-platform, gulp
     --build                            pip, easy_install
     --sync                             onedrive,copy,dropbox,skype
@@ -100,6 +100,9 @@ function install_write_tools() {
     # PPA for ledger
     add_ppa mbudde/ledger && sudo apt-get update
     installer ledger || ERR=1
+
+    # jrnl
+    sudo pip install jrnl || ERR=1
 }
 
 # devel tools
@@ -118,11 +121,16 @@ function install_devel_tools() {
 
 function install_music () {
     # Dependencies of beets for various plugins
-    highlight "\nInstalling music tools: beets"
+    highlight "\nInstalling music tools: beets, vlc, pavucontrol, plugins"
     sudo pip install pylast || ERR=1
     sudo pip install flask || ERR=1
     sudo pip install discogs_client || ERR=1
     sudo pip install beets || ERR=1
+
+    # For music
+    installer pavucontrol || ERR=1
+    installer vlc || ERR=1
+    install ubuntu-restricted-extras || ERR=1
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
@@ -161,7 +169,6 @@ function install_indicators() {
     installer indicator-sysmonitor || ERR=1
 
 	add_ppa noobslab/indicators && sudo apt-get update
-    installer indicator-multiload || ERR=1
     installer my-weather-indicator || ERR=1
 
     add_ppa alexmurray/indicator-sensors && sudo apt-get update
@@ -175,14 +182,15 @@ function install_indicators() {
 function install_miscellaneous {
     highlight "\nInstalling Miscellaneous Utilities"
 
-    # For music
-    installer pavucontrol || ERR=1
-    installer vlc || ERR=1
-
     # simple utilies like SSH, compatibility tools
     installer openssh-server || ERR=1
-    installer -n dconf -p dconf-tools || ERR=1
+    installer dconf-tools || ERR=1
     # installer ia32-libs || ERR=1
+
+    # install conky-manager
+    add_ppa ppa:teejee2008/ppa && sudo apt-get update
+    installer conky-manager
+    # For theme http://www.teejeetech.in/2014/06/conky-manager-v2-themes.html
 
     # Y PPA Manager
     add_ppa webupd8team/y-ppa-manager && sudo apt-get update
