@@ -9,10 +9,9 @@
 -massrename
 -docker
 -onedrive/copy/dropbox/skype
+-sublime/firefox/chromium
 -fstab
 -keyboard shortcuts elementary
--ledger conf
--journal
 
 # Test
 ## General
@@ -21,6 +20,7 @@
 -write-good.vim
 -irssi
 -id3tool
+-ccze
 -cv
 -dconf-tools
 
@@ -29,10 +29,10 @@
 -tmux
 -vim
 -git
+    -massrename
+    -tmux-network-speed
+    -sysadmin
 -zsh
--massrename
--tmux-network-speed
--sysadmin
 -Y-PPA-Manager
 -conky-manager
 -cabal(Haskell Platform)
@@ -43,19 +43,21 @@
 ## Writing
 -pandoc
 -tex/detex
+-jrnl
 
 ## Music
 -beets
+-vlc
+-ubuntu-restricted-extras
 
 ## Development
 -curl
 -pip
+    -ipython
 -ag
--ipython
 -nvm
--yo
--bower
--gulp/grunt
+    -yo
+    -gulp
 
 ##Some nifty zsh tricks
 -cd to git home
