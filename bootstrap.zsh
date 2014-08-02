@@ -21,7 +21,7 @@ Available commands:
     -t | --tmux-config          configure tmux
     -r | --remap-config         configure remap of keys
     -x | --xmonad-config        configure only xmonad
-    -w | --write-config         configure writing tools
+    -u | --utilities            configure writing tools: LaTeX, ledger
     -m | --music-config         configure beets
     --config-ssh                configure ssh
     --config-sublime            configure sumblime text
@@ -184,8 +184,8 @@ function config_music() {
 }
 
 #configure writing tools
-function config_write() {
-    highlight "Configuring LaTeX"
+function config_utilities() {
+    highlight "Configuring LaTeX, Ledger"
 
     if hash pdflatex &> /dev/null; then
         if [ -d ~/texmf ]; then
@@ -202,6 +202,24 @@ function config_write() {
         fi
     else
         fail "LaTeX : install pdflatex"
+        return 1
+    fi
+
+    if hash ledger &> /dev/null; then
+        if [ -f ~/.ledgerrc ]; then
+            fail "Ledger : Delete ~/.ledgerrc and retry"
+            return 1
+        else
+            if ls -s "${CONFDIR}/utitilies/ledgerrc" ~/.ledgerrc; then
+                success "Ledger : configured"
+                return 0
+            else
+                fail "Ledger : symbolic link failure"
+                return 1
+            fi
+        fi
+    else
+        fail "Ledger : install ledger"
         return 1
     fi
 }
@@ -325,7 +343,7 @@ function config_fll() {
     config_solarize
     config_xmonad
     config_sublime
-    config_write
+    config_utilities
     config_music
 }
 
@@ -353,8 +371,8 @@ while [ -n "$1" ]; do
         -m | --music-config)
             config_music;;
 
-        -w | --write-config)
-            config_write;;
+        -u | --utilities)
+            config_utilities;;
 
         -f | --full)
             config_full;;
