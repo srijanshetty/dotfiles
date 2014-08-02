@@ -32,8 +32,8 @@ function highlight() {
 function configure() {
     highlight "\nConfiguring $1"
 
-    if hash vim &> "$LOGFILE"; then
-        if [ -d $2 ]; then
+    if hash "$1" &> "$LOGFILE"; then
+        if [ -e "$2" ]; then
             fail "$1 : delete $2 and retry"
             return 1
         else
