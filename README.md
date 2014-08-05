@@ -12,12 +12,13 @@
 -sublime/firefox/chromium
 -fstab
 -keyboard shortcuts elementary
+-dotjs
+-elinks
+-jrnl
+-geeknote
 
 # Test
 ## General
--mbox
--underscore-cli
--write-good.vim
 -irssi
 -id3tool
 -ccze
