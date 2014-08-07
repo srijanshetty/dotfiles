@@ -19,7 +19,6 @@ Available options:
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump
     -at| --autojump                    autojump
     -m | --music                       beets, vlc, pavucontrol, plugins
-    -n | --node                        node
     -s | --system                      dstat, htop
     -g | --github                      tmux-networkspeed, sysadmin
     -w | --write                       texlive, pandoc, ledger, jrnl
@@ -184,7 +183,6 @@ function install_miscellaneous {
 
     # simple utilies like SSH, compatibility tools
     installer openssh-server || ERR=1
-    installer dconf-tools || ERR=1
     # installer ia32-libs || ERR=1
 
     # install conky-manager
@@ -202,9 +200,6 @@ while [ -n "$1" ]; do
     case "$1" in
         -a | --ag)
             install_ag;;
-
-        -at| --autojump)
-            install_autojump;;
 
         -n | --nvm)
             install_nvm;;
@@ -252,9 +247,6 @@ while [ -n "$1" ]; do
 
         -t | --test)
             test_function;;
-
-        -n | --node)
-            install_node;;
 
         * )
             help_text;;
