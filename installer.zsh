@@ -16,8 +16,7 @@ USAGE: installer <arguments>
 Available options:
 
     -f | --full                        Full Installations
-    -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump
-    -at| --autojump                    autojump
+    -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump, open-ssh
     -m | --music                       beets, vlc, pavucontrol, plugins
     -s | --system                      dstat, htop
     -g | --github                      tmux-networkspeed, sysadmin
@@ -25,7 +24,6 @@ Available options:
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
-    -u | --ubuntu-gui                  ssh, y-ppa-manager, conky-manager
     -d | --devel                       yo, haskell-platform, gulp
     --build                            pip, easy_install
     --sync                             onedrive,copy,dropbox,skype
@@ -35,6 +33,40 @@ _EOH_
 
 function test_function() {
     highlight "\nRunning test function"
+}
+
+function install_latest() {
+    # Add git repo
+    # Add tmux repo
+    # Add vim repo
+}
+
+function install_elementary() {
+    # For most features
+    add_ppa ppa:versable/elementary-update
+    add_ppa heathbar/super-wingpanel
+
+    installer elementary-tweaks || ERR=1
+    installer super-wingpanel || ERR=1
+    installer indicator-synapse || ERR=1
+    installer elementary-wallpaper-collection || ERR=1
+    installer elementary-.*-theme elementary-.*-icons || ERR=1
+
+    highlight "\nInstalling Miscellaneous Utilities"
+
+    # installer ia32-libs || ERR=1
+
+    # install conky-manager
+    add_ppa ppa:teejee2008/ppa && sudo apt-get update
+    installer conky-manager
+    # For theme http://www.teejeetech.in/2014/06/conky-manager-v2-themes.html
+
+    # Y PPA Manager
+    add_ppa webupd8team/y-ppa-manager && sudo apt-get update
+    installer y-ppa-manager || ERR=1
+}
+
+function install_sync() {
 }
 
 function install_node() {
@@ -69,6 +101,7 @@ function install_essentials() {
     installer -n ag -p silversearcher-ag || ERR=1
     install_autojump || ERR=1
     install_nvm || ERR=1
+    installer openssh-server || ERR=1
 }
 
 # Xmonad, the tiling manager
@@ -172,27 +205,6 @@ function install_indicators() {
 
     add_ppa alexmurray/indicator-sensors && sudo apt-get update
     installer indicator-sensors || ERR=1
-
-    # Synapse
-    add_ppa versable/elementary-update && sudo apt-get update
-    installer indicator-synapse || ERR=1
-}
-
-function install_miscellaneous {
-    highlight "\nInstalling Miscellaneous Utilities"
-
-    # simple utilies like SSH, compatibility tools
-    installer openssh-server || ERR=1
-    # installer ia32-libs || ERR=1
-
-    # install conky-manager
-    add_ppa ppa:teejee2008/ppa && sudo apt-get update
-    installer conky-manager
-    # For theme http://www.teejeetech.in/2014/06/conky-manager-v2-themes.html
-
-    # Y PPA Manager
-    add_ppa webupd8team/y-ppa-manager && sudo apt-get update
-    installer y-ppa-manager || ERR=1
 }
 
 #Loop through arguments
@@ -217,9 +229,6 @@ while [ -n "$1" ]; do
 
         -e | --essentials)
             install_essentials;;
-
-        -u | --ubunt-gui)
-            install_miscellaneous ;;
 
         -m | --music)
             install_music;;
