@@ -24,7 +24,7 @@ Available options:
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
-    -d | --devel                       yo, haskell-platform, gulp
+    -d | --devel                       yo, haskell-platform, gulp, ipython
     --build                            pip, easy_install
     --sync                             onedrive,copy,dropbox,skype
     -t | --test                        Random tests
@@ -149,6 +149,7 @@ function install_devel_tools() {
 
     # Haskell and cabal
     installer haskell-platform || ERR=1
+    installer ipython || ERR=1
 }
 
 function install_music () {
