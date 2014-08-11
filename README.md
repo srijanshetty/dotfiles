@@ -18,7 +18,8 @@
 -id3tool
 -ccze
 -cv
--dconf-tools
+-ghwd
+-shutter
 
 # Utilities
 ## General
