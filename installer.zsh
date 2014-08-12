@@ -67,6 +67,7 @@ function install_elementary() {
 }
 
 function install_sync() {
+    # Dropbox, copy, onedrive
 }
 
 function install_node() {
