@@ -7,7 +7,7 @@
 
 # TODO
 -massrename
--docker
+-docker+vagrant+virtualbox
 -onedrive/copy/dropbox/skype
 -sublime/firefox/chromium
 -fstab
@@ -20,6 +20,9 @@
 -cv
 -ghwd
 -shutter
+    -shutter/ppa
+-trash
+    -npm install -g trash
 
 # Utilities
 ## General
