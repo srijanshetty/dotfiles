@@ -89,6 +89,10 @@ function install_build_tools() {
     highlight "\nInstalling build tools: pip, easy_install"
 
     install_pip || ERR=1
+    installer python-dev || ERR=1
+    installer cmake || ERR=1
+    installer build-essentila || ERR=1
+
 }
 
 # zsh, ag, vim ,git and screen
@@ -197,7 +201,10 @@ function install_indicators() {
 
     # the indicator for sensors
     add_ppa nilarimogard/webupd8 && sudo apt-get update
+
+    # Indicator for calendar
     add_ppa atareao/atareao && sudo apt-get update
+    installer calendar-indicator
 
     add_ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
     installer indicator-sysmonitor || ERR=1
