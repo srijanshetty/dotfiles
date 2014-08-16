@@ -2,7 +2,6 @@
 -Youcompleteme autoscript
 -use a logger for debugging
 -nvm issue
--Refactor installer with return
 -convert pip to a function
 
 # TODO
@@ -23,6 +22,7 @@
     -shutter/ppa
 -trash
     -npm install -g trash
+-crontab
 
 # Utilities
 ## General
@@ -33,9 +33,7 @@
     -tmux-network-speed
     -sysadmin
 -zsh
--Y-PPA-Manager
 -conky-manager
--cabal(Haskell Platform)
 
 ## Accounting
 -ledger
@@ -58,11 +56,12 @@
 -nvm
     -yo
     -gulp
+    -bower
+-cabal (Haskell Platform)
+-Y-PPA-Manager
 
-##Some nifty zsh tricks
+##ZSH awesomeness
 -cd to git home
--zsh-dwim rm trick
--auth
 -autojump
 -syntax highlighting
 -history substring
