@@ -17,7 +17,7 @@ Available options:
 
     -f | --full                        Full Installations
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump, open-ssh
-    -m | --music                       beets, vlc, pavucontrol, plugins
+    -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
     -s | --system                      dstat, htop, iotop
     -g | --github                      tmux-networkspeed, sysadmin
     -w | --write                       texlive, pandoc, ledger, jrnl
@@ -170,6 +170,7 @@ function install_music () {
     installer pavucontrol || ERR=1
     installer vlc || ERR=1
     install ubuntu-restricted-extras || ERR=1
+    installer id3tool || ERR=1
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
