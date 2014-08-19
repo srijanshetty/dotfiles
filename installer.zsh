@@ -18,7 +18,7 @@ Available options:
     -f | --full                        Full Installations
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump, open-ssh
     -m | --music                       beets, vlc, pavucontrol, plugins
-    -s | --system                      dstat, htop
+    -s | --system                      dstat, htop, iotop
     -g | --github                      tmux-networkspeed, sysadmin
     -w | --write                       texlive, pandoc, ledger, jrnl
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
@@ -124,6 +124,7 @@ function install_system() {
 
     installer dstat || ERR=1
     installer htop || ERR=1
+    installer iotop || ERR=1
 }
 
 # Write tools
