@@ -1,54 +1,71 @@
-# Issues
--Youcompleteme autoscript
--use a logger for debugging
--nvm issue
--convert pip to a function
+TODO
+-----
 
-# TODO
--massrename
+-npm completion
+-ranger :: GitHub
+-convert pip to a function
+-use a logger for debugging
 -docker+vagrant+virtualbox
 -onedrive/copy/dropbox/skype
 -sublime/firefox/chromium
--fstab
 -keyboard shortcuts elementary
+-fstab
 -dotjs
 -geeknote
 -irssi
--id3tool
 -ccze
 -cv
--ghwd
--shutter
-    -shutter/ppa
--trash
-    -npm install -g trash
+-shutter :: PPA
 -crontab
+-dconf-editor
 
-# Utilities
-## General
+-python-scapy
+-tcpdump
+
+Vim Specific
+------------
+
+-powerline
+    -powerline fonts
+-Youcompleteme autoscript
+
+General
+-------
+
 -tmux
 -vim
 -git
-    -massrename
     -tmux-network-speed
     -sysadmin
 -zsh
 -conky-manager
 
-## Accounting
--ledger
+System
+------
 
-## Writing
+-iotop
+-htop
+-dstat
+
+Writing & Accounts
+------------------
+
 -pandoc
 -tex/detex
 -jrnl
+-ledger
 
-## Music
+Music
+-----
+
+-id3tool
 -beets
 -vlc
 -ubuntu-restricted-extras
 
-## Development
+Development
+-----------
+
 -curl
 -pip
     -ipython
@@ -60,7 +77,9 @@
 -cabal (Haskell Platform)
 -Y-PPA-Manager
 
-##ZSH awesomeness
+ZSH
+---
+
 -cd to git home
 -autojump
 -syntax highlighting
