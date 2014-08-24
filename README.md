@@ -1,16 +1,21 @@
+Check
+-----
+
+-atraci
+
 TODO
 -----
 
+-xSwipe
+-ctags & cscope
 -npm completion
--ranger :: GitHub
--convert pip to a function
 -use a logger for debugging
 -docker+vagrant+virtualbox
--onedrive/copy/dropbox/skype
+-onedrive/copy/dropbox/skype/btsync
 -sublime/firefox/chromium
 -keyboard shortcuts elementary
 -fstab
--dotjs
+-dotjs :: Github
 -geeknote
 -irssi
 -ccze
@@ -18,7 +23,6 @@ TODO
 -shutter :: PPA
 -crontab
 -dconf-editor
-
 -python-scapy
 -tcpdump
 
@@ -28,6 +32,8 @@ Vim Specific
 -powerline
     -powerline fonts
 -Youcompleteme autoscript
+
+============================
 
 General
 -------
@@ -46,6 +52,7 @@ System
 -iotop
 -htop
 -dstat
+-ranger
 
 Writing & Accounts
 ------------------
@@ -61,7 +68,6 @@ Music
 -id3tool
 -beets
 -vlc
--ubuntu-restricted-extras
 
 Development
 -----------
@@ -76,6 +82,14 @@ Development
     -bower
 -cabal (Haskell Platform)
 -Y-PPA-Manager
+-ctags & cscope
+
+Sync
+----
+
+-Dropbox
+-Copy
+-BTsync
 
 ZSH
 ---
