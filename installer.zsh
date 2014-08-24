@@ -33,6 +33,7 @@ _EOH_
 
 function test_function() {
     highlight "\nRunning test function"
+    install_ranger
 }
 
 function install_latest() {
@@ -42,6 +43,8 @@ function install_latest() {
 }
 
 function install_elementary() {
+    highlight "\nInstalling Elementary Utilities"
+
     # For most features
     add_ppa ppa:versable/elementary-update
     add_ppa heathbar/super-wingpanel
@@ -51,10 +54,6 @@ function install_elementary() {
     installer indicator-synapse || ERR=1
     installer elementary-wallpaper-collection || ERR=1
     installer elementary-.*-theme elementary-.*-icons || ERR=1
-
-    highlight "\nInstalling Miscellaneous Utilities"
-
-    # installer ia32-libs || ERR=1
 
     # install conky-manager
     add_ppa ppa:teejee2008/ppa && sudo apt-get update
@@ -68,6 +67,10 @@ function install_elementary() {
 
 function install_sync() {
     # Dropbox, copy, onedrive
+
+    # btsync
+    sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync-repository.sh)"
+    installer btsync-gui || ERR=1
 }
 
 function install_node() {
@@ -81,6 +84,7 @@ function install_from_github() {
 
     install_sysadmin || ERR=1
     install_tmux_networkspeed || ERR=1
+    install_ranger || ERR=1
     # Massrename
 }
 
@@ -92,6 +96,9 @@ function install_build_tools() {
     installer python-dev || ERR=1
     installer cmake || ERR=1
     installer build-essentila || ERR=1
+    installer autoconf || ERR=1
+    installer automake || ERR=1
+    installer libtool || ERR=1
 
 }
 
@@ -156,6 +163,10 @@ function install_devel_tools() {
     # Haskell and cabal
     installer haskell-platform || ERR=1
     installer ipython || ERR=1
+
+    # For C
+    installer exuberant-ctags || ERR=1
+    installer cscope || ERR=1
 }
 
 function install_music () {

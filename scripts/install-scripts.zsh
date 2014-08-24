@@ -103,7 +103,7 @@ function add_ppa() {
   grep -h "^deb.*$1" /etc/apt/sources.list.d/* &> $LOGFILE
   if [ $? -ne 0 ]; then
     success "Adding ppa:$1"
-    sudo add-apt-repository -y ppa:$1
+    sudo add-apt-repository -y ppa:$1 | tee $LOGFILE
     return 0
   fi
 
@@ -120,7 +120,7 @@ function install_autojump() {
         return 0
     fi
 
-    if cd shells/autojump && ./install.py; then
+    if cd shells/autojump && ./install.py | tee $LOGFILE; then
         success "Autojump installed"
         cd ${CONFDIR}
         return 0
@@ -163,7 +163,7 @@ function install_ack() {
     fi
 
     # Dowlonad the ack script
-    if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.12-single-file; then
+    if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.12-single-file &> $LOGFILE; then
         chmod u+x "${HOME}/Documents/local/bin/ack"
         success "ack installed"
         return 0
@@ -184,8 +184,7 @@ function install_tmux_networkspeed() {
 
     # Copy tmux-networkspeed
     if [ ! -d tmux-networkspeed ]; then
-        git clone https://github.com/srijanshetty/tmux-networkspeed.git &> $LOGFILE
-        if [ $? -eq 0 ]; then
+        if git clone https://github.com/srijanshetty/tmux-networkspeed.git &> $LOGFILE; then
             success "tmux-networkspeed installed"
         else
             fail "tmux-networkspeed installation failed"
@@ -196,6 +195,35 @@ function install_tmux_networkspeed() {
     fi
 
     cd -
+    return RETURN_VALUE
+}
+
+function install_ranger() {
+    RETURN_VALUE=0
+
+    if [ ! -f ~/Documents/GitHub ]; then
+        mkdir -p ~/Documents/GitHub
+    fi
+
+    cd ~/Documents/GitHub
+
+    # check for ranger
+    if hash ranger &> $LOGFILE; then
+        warn "ranger already exists"
+    else
+        if [ ! -d ranger ]; then
+            if git clone https://github.com/hut/ranger.git &> $LOGFILE && cd ranger && sudo make install; then
+                success "ranger installed"
+            else
+                fail "ranger installation failed"
+                RETURN_VALUE=1
+            fi
+        else
+            warn "ranger directory already exists"
+        fi
+    fi
+
+    cd $CONFDIR
     return RETURN_VALUE
 }
 
@@ -210,8 +238,7 @@ function install_sysadmin() {
 
     # Copy tmux-networkspeed
     if [ ! -d sysadmin ]; then
-        git clone https://github.com/skx/sysadmin-util.git sysadmin &> $LOGFILE
-        if [ $? -eq 0 ]; then
+        if git clone https://github.com/skx/sysadmin-util.git sysadmin &> $LOGFILE; then
             success "sysadmin tools installed"
         else
             fail "sysadmin tools installation failed"
