@@ -6,6 +6,7 @@ Check
 TODO
 -----
 
+-Source Code Pro font
 -xSwipe
 -ctags & cscope
 -npm completion
