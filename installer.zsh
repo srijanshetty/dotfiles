@@ -53,7 +53,7 @@ function install_elementary() {
     installer super-wingpanel || ERR=1
     installer indicator-synapse || ERR=1
     installer elementary-wallpaper-collection || ERR=1
-    installer elementary-.*-theme elementary-.*-icons || ERR=1
+    installer dconf-editor || ERR=1
 
     # install conky-manager
     add_ppa ppa:teejee2008/ppa && sudo apt-get update
