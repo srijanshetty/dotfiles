@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# chkconfig: 35 90 12
+# description: Foo server
+#
+# Get function from functions library
+# . /etc/init.d/functions
+
+APPNAME="auth"
+
+# Start the service FOO
+start() {
+        /home/srijan/Documents/auth &>/dev/null &
+}
+
+# Restart the service FOO
+stop() {
+        pkill auth
+}
+
+### main logic ###
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status auth
+        ;;
+  restart|reload|condrestart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload|status}"
+        exit 1
+esac
+exit 0
