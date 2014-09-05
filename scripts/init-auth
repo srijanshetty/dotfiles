@@ -1,19 +1,19 @@
 #!/bin/bash
 #
 # chkconfig: 35 90 12
-# description: Foo server
+# description: firewall-auth
 #
 # Get function from functions library
 # . /etc/init.d/functions
 
 APPNAME="auth"
 
-# Start the service FOO
+# Start the service firewall-auth
 start() {
-        /home/srijan/Documents/auth &>/dev/null &
+        /home/srijan/Documents/firewall-auth &>/dev/null &
 }
 
-# Restart the service FOO
+# Restart the service firewall-auth
 stop() {
         pkill auth
 }
@@ -27,7 +27,7 @@ case "$1" in
         stop
         ;;
   status)
-        status auth
+        status firewall-auth
         ;;
   restart|reload|condrestart)
         stop
