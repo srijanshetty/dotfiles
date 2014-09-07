@@ -12,15 +12,15 @@
     attributesfile = ~/.gitattributes
     whitespace = fix,space-before-tab,tab-in-indent,trailing-space
 [color "branch"]
-    current = yellow bold 
-    remote = red reverse 
+    current = yellow bold
+    remote = red reverse
 [color "diff"]
     meta = yellow bold
-    frag = magenta bold
-    old = red bold 
+    frag = black bold
+    old = red bold
     new = green bold
 [color "status"]
-    added = green 
+    added = green
     changed = yellow
     untracked = red
 [merge]
@@ -28,4 +28,4 @@
 [push]
     default = matching
 [help]
-	autocorrect = 1
+	autocorrect = 0
