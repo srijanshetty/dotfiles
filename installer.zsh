@@ -95,10 +95,10 @@ function install_build_tools() {
     install_pip || ERR=1
     installer python-dev || ERR=1
     installer cmake || ERR=1
-    installer build-essentila || ERR=1
+    installer build-essentials || ERR=1
     installer autoconf || ERR=1
     installer automake || ERR=1
-    installer libtool || ERR=1
+    installer apt-file || ERR=1
 
 }
 
