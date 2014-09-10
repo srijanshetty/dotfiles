@@ -1,12 +1,10 @@
-Check
------
-
--atraci
-
 TODO
 -----
 
--Source Code Pro font
+-init script for auth and new auth
+-nmap
+-atraci
+-Source Code Pro font/Patched powerline fonts
 -xSwipe
 -ctags & cscope
 -npm completion
