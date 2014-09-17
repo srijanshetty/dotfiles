@@ -1,6 +1,3 @@
-[submodule "shells/solarize"]
-	path = shells/solarize
-	url = https://github.com/Anthony25/gnome-terminal-colors-solarized.git
 [submodule "shells/zsh/zprezto"]
 	path = shells/zsh/zprezto
 	url = https://github.com/srijanshetty/prezto.git

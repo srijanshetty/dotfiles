@@ -26,7 +26,6 @@ Available commands:
     --config-ssh                configure ssh
     --config-sublime            configure sumblime text
     --config-bare               bare bones configuration
-    -solarize                  solarize the terminal
 _EOH_
 }
 
@@ -263,22 +262,6 @@ function config_remap() {
     fi
 }
 
-#Solarize the terminal
-function config_solarize() {
-    highlight "\nConfiguring the color scheme"
-
-    if [ -e ~/.dircolors-light ]; then
-        fail "Solarize : Delete ~/.dircolors and retry"
-        return 1
-    else
-        cp shells/dircolors.ansi-light ~/.dircolors-light
-        cp shells/dircolors.ansi-dark ~/.dircolors-dark
-        eval `dircolors ~/.dircolors-light`
-        shells/solarize/install.sh
-        success "Solarize configured"
-    fi
-}
-
 #This is for xinitrc
 function config_xinitrc() {
     highlight "\nConfiguring xinitrc"
@@ -340,7 +323,6 @@ function config_bare() {
 function config_fll() {
     config_bare
     config_remap
-    config_solarize
     config_xmonad
     config_sublime
     config_utilities
@@ -388,9 +370,6 @@ while [ -n "$1" ]; do
 
         --config-bare)
             config_bare;;
-
-        --solarize)
-            config_solarize;;
 
         --test)
             tester;;
