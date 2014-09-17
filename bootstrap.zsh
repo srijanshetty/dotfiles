@@ -39,7 +39,7 @@ function config_vim() {
             fail "vim : delete ~/.vim and retry"
             return 1
         else
-            if ln -s "${CONFDIR}/config/vim/vim" ~/.vim && ln -s "${CONFDIR}/config/vim/vimrc" ~/.vimrc; then
+            if ln -s "${CONFDIR}/config/vim-plug/vim" ~/.vim && ln -s "${CONFDIR}/config/vim-plug/vimrc" ~/.vimrc; then
                 success "vim : configured"
                 return 0
             else
