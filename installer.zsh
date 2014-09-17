@@ -229,6 +229,11 @@ function install_indicators() {
     installer indicator-sensors || ERR=1
 }
 
+# In case the argument list is empty
+if [ -n "$1"]; then
+    help_text
+fi
+
 #Loop through arguments
 while [ -n "$1" ]; do
     case "$1" in

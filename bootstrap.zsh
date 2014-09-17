@@ -329,6 +329,11 @@ function config_fll() {
     config_music
 }
 
+# In case the argument list is empty
+if [ -n "$1"]; then
+    help_text
+fi
+
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
     case "$1" in
@@ -374,7 +379,7 @@ while [ -n "$1" ]; do
         --test)
             tester;;
 
-        -h | --help)
+        * )
             help_text;;
 
     esac
