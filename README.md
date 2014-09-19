@@ -1,13 +1,22 @@
 TODO
 -----
 
+-make symlinks for network and sysadmin in local bin
+-Declarative
+    -autorun
+    -symlinks
+-add a read action for overwriting
+    https://github.com/holman/dotfiles/blob/master/script/bootstrap
+-proxy function in custom
+
+-git annex
+-trash
 -init script for auth and new auth
--nmap
+-proxy script
 -atraci
 -Source Code Pro font/Patched powerline fonts
 -xSwipe
 -ctags & cscope
--npm completion
 -use a logger for debugging
 -docker+vagrant+virtualbox
 -onedrive/copy/dropbox/skype/btsync
@@ -22,16 +31,14 @@ TODO
 -shutter :: PPA
 -crontab
 -dconf-editor
--python-scapy
--tcpdump
 -rvm 'curl -sSL https://get.rvm.io | bash -s stable --ruby'
+
+-python-scapy
+-nmap
+-tcpdump
 
 Vim Specific
 ------------
-
--powerline
-    -powerline fonts
--Youcompleteme autoscript
 
 ============================
 
