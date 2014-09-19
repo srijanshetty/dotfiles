@@ -2,7 +2,7 @@
 
 # Store the configuration directory for use by the functions
 DOT_DIR_NAME="$(dirname $0)"
-[ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/scripts/helper.sh"
+[ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/helpers/helper.sh"
 CONFDIR="$PWD"
 
 #Help text

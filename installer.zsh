@@ -2,8 +2,8 @@
 
 # Use relative directories in sourcing
 CONFDIR="$(dirname $0)"
-[ -z $DOT_HELPER ] && source "${CONFDIR}/scripts/helper.sh"
-[ -z $DOT_INSTALL_SCRIPTS ] && source "${CONFDIR}/scripts/install-scripts.zsh"
+[ -z $DOT_HELPER ] && source "${CONFDIR}/helpers/helper.sh"
+[ -z $DOT_INSTALL_SCRIPTS ] && source "${CONFDIR}/helpers/install-scripts.zsh"
 
 #For errors
 ERR=0

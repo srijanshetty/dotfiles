@@ -2,7 +2,7 @@
 
 # Source required files
 DOT_DIR_NAME="$(dirname "$0")"
-[ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/helper.sh"
+[ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/../helpers/helper.sh"
 
 function run() {
     if pgrep $1 &> /dev/null; then
