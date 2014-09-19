@@ -1,13 +1,19 @@
 TODO
 -----
 
--make symlinks for network and sysadmin in local bin
+-move scripts into bin rather than custom. (This speeds up everything)
+-proxy function in custom/proxy manager
+-autosource symlinks
+-autosource local/bin : sysadmin, upspeed
 -Declarative
     -autorun
     -symlinks
 -add a read action for overwriting
     https://github.com/holman/dotfiles/blob/master/script/bootstrap
--proxy function in custom
+-use a logger for debugging
+
+TOOLS
+-----
 
 -git annex
 -trash
@@ -17,7 +23,6 @@ TODO
 -Source Code Pro font/Patched powerline fonts
 -xSwipe
 -ctags & cscope
--use a logger for debugging
 -docker+vagrant+virtualbox
 -onedrive/copy/dropbox/skype/btsync
 -sublime/firefox/chromium
@@ -36,9 +41,6 @@ TODO
 -python-scapy
 -nmap
 -tcpdump
-
-Vim Specific
-------------
 
 ============================
 
