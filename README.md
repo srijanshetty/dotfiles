@@ -3,11 +3,10 @@ TODO
 
 -move scripts into bin rather than custom. (This speeds up everything)
 -proxy function in custom/proxy manager
--autosource symlinks
 -autosource local/bin : sysadmin, upspeed
 -Declarative
-    -autorun
     -symlinks
+    -installer
 -add a read action for overwriting
     https://github.com/holman/dotfiles/blob/master/script/bootstrap
 -use a logger for debugging
@@ -43,6 +42,14 @@ TOOLS
 -tcpdump
 
 ============================
+Features
+-------
+
+# Autostart
+    - `autostart` will start the list of programs listed in ~/.autostartrc
+    - `autostart stop` will stop the list of programs listed in ~/.autostartrc
+
+#
 
 General
 -------

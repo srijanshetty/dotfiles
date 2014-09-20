@@ -1,0 +1,5 @@
+# This lists the files that I want to run as soon as I type autostart
+
+run 'xSwipe.pl' '/home/srijan/Documents/GitHub/xSwipe/xSwipe.pl'
+run 'btsync' 'btsync'
+run 'firewall-auth' '/home/srijan/Documents/firewall-auth'

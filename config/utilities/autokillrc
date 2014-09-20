@@ -1,0 +1,5 @@
+# This lists the files that I want to kill as soon as I type autostart kill
+
+processkill 'xSwipe.pl'
+processkill 'btsync'
+processkill 'firewall-auth'
