@@ -16,10 +16,9 @@ USAGE: installer <arguments>
 Available options:
 
     -f | --full                        Full Installations
-    -e | --essentials                  zsh, git, vim, tmux, nvm, ag, autojump, open-ssh
+    -e | --essentials                  zsh, git, vim, tmux, nvm, ag, open-ssh
     -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
     -s | --system                      dstat, htop, iotop
-    -g | --github                      tmux-networkspeed, sysadmin
     -w | --write                       texlive, pandoc, ledger, jrnl
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -b | --battery                     acpi, bumbleebee, tlp
@@ -78,16 +77,6 @@ function install_node() {
     install_nvm
 }
 
-# Some nifty libraries from Github
-function install_from_github() {
-    highlight "\nInstalling GitHub utilities"
-
-    install_sysadmin || ERR=1
-    install_tmux_networkspeed || ERR=1
-    install_ranger || ERR=1
-    # Massrename
-}
-
 # Build tools
 function install_build_tools() {
     highlight "\nInstalling build tools: pip, easy_install"
@@ -104,14 +93,13 @@ function install_build_tools() {
 
 # zsh, ag, vim ,git and screen
 function install_essentials() {
-    highlight "\nInstalling essentials: zsh, vim, git, tmux, autojump, ag, nvm"
+    highlight "\nInstalling essentials: zsh, vim, git, tmux, ag, nvm"
 
     installer git || ERR=1
     installer vim || ERR=1
     installer tmux || ERR=1
     installer zsh || ERR=1
     installer -n ag -p silversearcher-ag || ERR=1
-    install_autojump || ERR=1
     install_nvm || ERR=1
     installer openssh-server || ERR=1
 }
@@ -274,9 +262,6 @@ while [ -n "$1" ]; do
 
         -d | --devel)
             install_devel_tools;;
-
-        -g | --github)
-            install_from_github;;
 
         --build)
             install_build_tools;;

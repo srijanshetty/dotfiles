@@ -74,7 +74,6 @@ function installer() {
         esac
         shift
     done
-
 }
 
 # a function to install something using npm
@@ -109,25 +108,6 @@ function add_ppa() {
 
   warn "ppa:$1 already exists"
   return 1
-}
-
-# Installation functions
-function install_autojump() {
-    highlight "\nInstalling autojump"
-
-    if hash autojump &> $LOGFILE; then
-        warn "Autojump is already installed"
-        return 0
-    fi
-
-    if cd shells/autojump && ./install.py | tee $LOGFILE; then
-        success "Autojump installed"
-        cd ${CONFDIR}
-        return 0
-    else
-        fail "Autojump failed"
-        return 1
-    fi
 }
 
 # Install NVM
@@ -171,85 +151,6 @@ function install_ack() {
         fail "ack installation"
         return 1
     fi
-}
-
-function install_tmux_networkspeed() {
-    RETURN_VALUE=0
-
-    if [ ! -f ~/Documents/GitHub ]; then
-        mkdir -p ~/Documents/GitHub
-    fi
-
-    cd ~/Documents/GitHub
-
-    # Copy tmux-networkspeed
-    if [ ! -d tmux-networkspeed ]; then
-        if git clone https://github.com/srijanshetty/tmux-networkspeed.git &> $LOGFILE; then
-            success "tmux-networkspeed installed"
-        else
-            fail "tmux-networkspeed installation failed"
-            RETURN_VALUE=1
-        fi
-    else
-        warn "tmux-networkspeed already exists"
-    fi
-
-    cd -
-    return RETURN_VALUE
-}
-
-function install_ranger() {
-    RETURN_VALUE=0
-
-    if [ ! -f ~/Documents/GitHub ]; then
-        mkdir -p ~/Documents/GitHub
-    fi
-
-    cd ~/Documents/GitHub
-
-    # check for ranger
-    if hash ranger &> $LOGFILE; then
-        warn "ranger already exists"
-    else
-        if [ ! -d ranger ]; then
-            if git clone https://github.com/hut/ranger.git &> $LOGFILE && cd ranger && sudo make install; then
-                success "ranger installed"
-            else
-                fail "ranger installation failed"
-                RETURN_VALUE=1
-            fi
-        else
-            warn "ranger directory already exists"
-        fi
-    fi
-
-    cd $CONFDIR
-    return RETURN_VALUE
-}
-
-function install_sysadmin() {
-    RETURN_VALUE=0
-
-    if [ ! -f ~/Documents/GitHub ]; then
-        mkdir -p ~/Documents/GitHub
-    fi
-
-    cd ~/Documents/GitHub
-
-    # Copy tmux-networkspeed
-    if [ ! -d sysadmin ]; then
-        if git clone https://github.com/skx/sysadmin-util.git sysadmin &> $LOGFILE; then
-            success "sysadmin tools installed"
-        else
-            fail "sysadmin tools installation failed"
-            RETURN_VALUE=1
-        fi
-    else
-        warn "sysadmin tools already exists"
-    fi
-
-    cd -
-    return RETURN_VALUE
 }
 
 # To indicate that this script has been included
