@@ -17,10 +17,10 @@ Available options:
 
     -f | --full                        Full Installations
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, open-ssh
+    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
     -s | --system                      dstat, htop, iotop, trash
-    -u | --utilities                   texlive, pandoc, ledger, git-annex
-    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
+    -u | --utilities                   texlive, pandoc, ledger, git-annex, mr
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
     -d | --devel                       yo, haskell-platform, gulp, ipython
@@ -109,11 +109,12 @@ function install_xmonad() {
 
 # System monitoring utilies
 function install_system() {
-    highlight "\nInstalling System Utilities: dstat, htop"
+    highlight "\nInstalling System Utilities"
 
     installer dstat || ERR=1
     installer htop || ERR=1
     installer iotop || ERR=1
+    npm_install trash || ERR=1
 }
 
 # Utilities tools
@@ -132,6 +133,8 @@ function install_utilities() {
     add_ppa fmarier/git-annex && sudo apt-get update
     installer git-annex
 
+    # Install mr
+    install_mr || ERR=1
 }
 
 # devel tools
@@ -158,7 +161,7 @@ function install_devel_tools() {
 
 function install_music () {
     # Dependencies of beets for various plugins
-    highlight "\nInstalling music tools: beets, vlc, pavucontrol, plugins"
+    highlight "\nInstalling music tools"
     sudo pip install pylast || ERR=1
     sudo pip install flask || ERR=1
     sudo pip install discogs_client || ERR=1
@@ -189,11 +192,10 @@ function install_battery() {
     # sudo tlp start
 }
 
-function install_sync() {
-
-}
 # have to keep a check on the temparature of the laptop
 function install_indicators() {
+    highlight "\nInstalling indicators"
+
     # the sensors which are required
     installer lm-sensors || ERR=1
     installer hddtemp || ERR=1
