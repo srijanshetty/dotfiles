@@ -130,6 +130,24 @@ function install_nvm() {
     fi
 }
 
+# Install RVM
+function install_rvm() {
+    highlight "\nInstalling RVM"
+
+    if hash rvm &> $LOGFILE; then
+        warn "RVM already installed"
+        return 0
+    else
+        if curl -sSL https://get.rvm.io &> $LOGFILE | bash -s stable --ruby &> $LOGFILE; then
+            success "RVM Installed"
+            return 0
+        else
+            fail "RVM Installation failed"
+            return 1
+        fi
+    fi
+}
+
 # Install ack
 function install_ack() {
     if hash ack &> /dev/null; then
@@ -151,6 +169,31 @@ function install_ack() {
         fail "ack installation"
         return 1
     fi
+}
+
+function install_mr() {
+    RETURN_VALUE=0
+
+    if [ ! -f $GITHUB_DIR ]; then
+        mkdir -p $GITHUB_DIR
+    fi
+
+    cd $GITHUB_DIR
+
+    # Copy tmux-networkspeed
+    if [ ! -d tmux-networkspeed ]; then
+        if git clone https://github.com/joeyh/mr.git &> $LOGFILE; then
+            success "mr installed"
+        else
+            fail "mr installation failed"
+            RETURN_VALUE=1
+        fi
+    else
+        warn "mr already exists"
+    fi
+
+    cd -
+    return RETURN_VALUE
 }
 
 # To indicate that this script has been included

@@ -1,41 +1,35 @@
 TODO
 -----
 
+-create folder if not present and directory structure
+-Random gittips
+-Install mr & sync mrconfig
 -move scripts into bin rather than custom. (This speeds up everything)
--proxy function in custom/proxy manager
--autosource local/bin : sysadmin, upspeed
--Declarative
+-declarative
     -symlinks
     -installer
 -add a read action for overwriting
     https://github.com/holman/dotfiles/blob/master/script/bootstrap
 -use a logger for debugging
+-dotjs :: Github
 
 TOOLS
 -----
 
 -git annex
 -trash
--init script for auth and new auth
--proxy script
--atraci
 -Source Code Pro font/Patched powerline fonts
--xSwipe
--ctags & cscope
 -docker+vagrant+virtualbox
 -onedrive/copy/dropbox/skype/btsync
 -sublime/firefox/chromium
 -keyboard shortcuts elementary
 -fstab
--dotjs :: Github
 -geeknote
 -irssi
 -ccze
--cv
 -shutter :: PPA
 -crontab
 -dconf-editor
--rvm 'curl -sSL https://get.rvm.io | bash -s stable --ruby'
 
 -python-scapy
 -nmap
@@ -49,7 +43,23 @@ Features
     - `autostart` will start the list of programs listed in ~/.autostartrc
     - `autostart stop` will stop the list of programs listed in ~/.autostartrc
 
-#
+# Proxy
+    - Searches for a ~/.proxyrc file and loads the defined proxies
+    - proxy unset/set
+
+# ZSH-DWIM
+    - <C-u> magic for most commands
+
+# cd magic
+    - go to root git directory or ~
+
+# Autojump
+    - Jump to directories using j
+
+# Prezto modules
+    - history-substring
+    - syntax-highlight
+    - completions
 
 General
 -------
@@ -57,25 +67,28 @@ General
 -tmux
 -vim
 -git
-    -tmux-network-speed
-    -sysadmin
+    -refer to mrconfig
 -zsh
 -conky-manager
+-mr
 
 System
 ------
 
+-cv
 -iotop
 -htop
 -dstat
 -ranger
+-xSwipe
+-trash
 
 Writing & Accounts
 ------------------
 
 -pandoc
 -tex/detex
--jrnl
+-geeknote
 -ledger
 
 Music
@@ -92,6 +105,7 @@ Development
 -pip
     -ipython
 -ag
+-rvm
 -nvm
     -yo
     -gulp
@@ -105,13 +119,4 @@ Sync
 
 -Dropbox
 -Copy
--BTsync
-
-ZSH
----
-
--cd to git home
--autojump
--syntax highlighting
--history substring
--zsh-dwim
+-Btsync

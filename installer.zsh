@@ -155,6 +155,10 @@ function install_devel_tools() {
     # For C
     installer exuberant-ctags || ERR=1
     installer cscope || ERR=1
+
+    # RVM
+    install_rvm || ERR=1
+
 }
 
 function install_music () {
