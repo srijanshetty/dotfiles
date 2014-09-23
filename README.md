@@ -16,7 +16,6 @@ TODO
 TOOLS
 -----
 
--git annex
 -trash
 -Source Code Pro font/Patched powerline fonts
 -docker+vagrant+virtualbox
@@ -83,13 +82,14 @@ System
 -xSwipe
 -trash
 
-Writing & Accounts
+Utilities
 ------------------
 
 -pandoc
 -tex/detex
 -geeknote
 -ledger
+-git annex
 
 Music
 -----
