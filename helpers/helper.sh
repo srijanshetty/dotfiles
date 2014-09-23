@@ -14,41 +14,19 @@ UNDERLINE_OFF=$(tput rmul)
 
 # function to output messages on the console
 function fail() {
-        echo "[${RED} FAIL ${NORMAL}] $*" | tee "$LOGFILE"
+        echo "[${RED} FAIL ${NORMAL}] $*" | tee -a "$LOGFILE"
 }
 
 function warn() {
-        echo "[ ${YELLOW}WARN${NORMAL} ] $*" | tee "$LOGFILE"
+        echo "[ ${YELLOW}WARN${NORMAL} ] $*" | tee -a "$LOGFILE"
 }
 
 function success() {
-        echo "[${GREEN} OKAY ${NORMAL}] $*" | tee "$LOGFILE"
+        echo "[${GREEN} OKAY ${NORMAL}] $*" | tee -a "$LOGFILE"
 }
 
 function highlight() {
-       echo "${UNDERLINE_ON}$*${UNDERLINE_OFF}" | tee "$LOGFILE"
-}
-
-function configure() {
-    highlight "\nConfiguring $1"
-
-    if hash "$1" &> "$LOGFILE"; then
-        if [ -e "$2" ]; then
-            fail "$1 : delete $2 and retry"
-            return 1
-        else
-            if ln -s "$3" "$2" ; then
-                success "$1 : configured"
-                return 0
-            else
-                fail "$1 : failed to create symlinks"
-                return 1
-            fi
-        fi
-    else
-        fail "$1: install $1"
-        return 1
-    fi
+       echo "${UNDERLINE_ON}$*${UNDERLINE_OFF}" | tee -a "$LOGFILE"
 }
 
 # This indicates that helper has been sources

@@ -9,7 +9,7 @@ DOT_DIR_NAME="$(dirname "$0")"
 function install_pip() {
     highlight "\nInstalling easy_setup"
 
-    wget http://peak.telecommunity.com/dist/ez_setup.py &> $LOGFILE && python ez_setup.py &> $LOGFILE && rm ez_setup.py &> $LOGFILE
+    wget http://peak.telecommunity.com/dist/ez_setup.py &>> $LOGFILE && python ez_setup.py &>> $LOGFILE && rm ez_setup.py &>> $LOGFILE
 
     if [ $? -eq 0 ]; then
         success "easy_setup installed"
@@ -19,7 +19,7 @@ function install_pip() {
     fi
 
     highlight "\nInstalling pip"
-    if easy_install pip &> $LOGFILE; then
+    if easy_install pip &>> $LOGFILE; then
         success "pip installed"
     else
         fail "pip installation failed"
@@ -41,7 +41,7 @@ function installer() {
             -n )
                 shift
                 APPLICATION_NAME="$1"
-                if hash $1 &> $LOGFILE; then
+                if hash $1 &>> $LOGFILE; then
                     warn "$1 is already installed"
                     return 0
                 fi
@@ -49,7 +49,7 @@ function installer() {
 
             -p )
                 shift
-                if sudo apt-get install -y $1 &> $LOGFILE; then
+                if sudo apt-get install -y $1 &>> $LOGFILE; then
                     success "${APPLICATION_NAME} installed"
                     return 0
                 else
@@ -59,10 +59,10 @@ function installer() {
                 ;;
 
             * )
-                if hash $1 &> $LOGFILE; then
+                if hash $1 &>> $LOGFILE; then
                     warn "$1 is already installed"
                 else
-                    if sudo apt-get install --force-yes -y $1 &> $LOGFILE; then
+                    if sudo apt-get install --force-yes -y $1 &>> $LOGFILE; then
                         success "$1 installed"
                         return 0
                     else
@@ -83,7 +83,7 @@ function npm_install() {
             warn "$1 is already installed"
             return 0
         else
-            if npm install -g $1 &> $LOGFILE; then
+            if npm install -g $1 &>> $LOGFILE; then
                 success "$1 installed"
                 return 0
             else
@@ -99,10 +99,10 @@ function npm_install() {
 
 # Function to add a ppa
 function add_ppa() {
-  grep -h "^deb.*$1" /etc/apt/sources.list.d/* &> $LOGFILE
+  grep -h "^deb.*$1" /etc/apt/sources.list.d/* &>> $LOGFILE
   if [ $? -ne 0 ]; then
     success "Adding ppa:$1"
-    sudo add-apt-repository -y ppa:$1 | tee $LOGFILE
+    sudo add-apt-repository -y ppa:$1 | tee -a $LOGFILE
     return 0
   fi
 
@@ -134,11 +134,11 @@ function install_nvm() {
 function install_rvm() {
     highlight "\nInstalling RVM"
 
-    if hash rvm &> $LOGFILE; then
+    if hash rvm &>> $LOGFILE; then
         warn "RVM already installed"
         return 0
     else
-        if curl -sSL https://get.rvm.io &> $LOGFILE | bash -s stable --ruby &> $LOGFILE; then
+        if curl -sSL https://get.rvm.io &>> $LOGFILE | bash -s stable --ruby &>> $LOGFILE; then
             success "RVM Installed"
             return 0
         else
@@ -161,7 +161,7 @@ function install_ack() {
     fi
 
     # Dowlonad the ack script
-    if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.12-single-file &> $LOGFILE; then
+    if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.12-single-file &>> $LOGFILE; then
         chmod u+x "${HOME}/Documents/local/bin/ack"
         success "ack installed"
         return 0
@@ -182,7 +182,7 @@ function install_mr() {
 
     # Copy tmux-networkspeed
     if [ ! -d tmux-networkspeed ]; then
-        if git clone https://github.com/joeyh/mr.git &> $LOGFILE; then
+        if git clone https://github.com/joeyh/mr.git &>> $LOGFILE; then
             success "mr installed"
         else
             fail "mr installation failed"
