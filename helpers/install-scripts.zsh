@@ -174,7 +174,7 @@ function install_ack() {
 function install_mr() {
     RETURN_VALUE=0
 
-    if [ ! -f $GITHUB_DIR ]; then
+    if [ ! -d $GITHUB_DIR ]; then
         mkdir -p $GITHUB_DIR
     fi
 
