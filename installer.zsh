@@ -18,8 +18,8 @@ Available options:
     -f | --full                        Full Installations
     -e | --essentials                  zsh, git, vim, tmux, nvm, ag, open-ssh
     -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
-    -s | --system                      dstat, htop, iotop
-    -w | --write                       texlive, pandoc, ledger, jrnl
+    -s | --system                      dstat, htop, iotop, trash
+    -u | --utilities                   texlive, pandoc, ledger, git-annex
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
@@ -32,7 +32,6 @@ _EOH_
 
 function test_function() {
     highlight "\nRunning test function"
-    install_ranger
 }
 
 function install_latest() {
@@ -70,11 +69,6 @@ function install_sync() {
     # btsync
     sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync-repository.sh)"
     installer btsync-gui || ERR=1
-}
-
-function install_node() {
-    highlight "\nNVM"
-    install_nvm
 }
 
 # Build tools
@@ -122,9 +116,9 @@ function install_system() {
     installer iotop || ERR=1
 }
 
-# Write tools
-function install_write_tools() {
-    highlight "\nInstalling write tools: TeX, pandoc, ledger"
+# Utilities tools
+function install_utilities() {
+    highlight "\nInstalling Utilities"
 
     installer -n latex -p texlive || ERR=1
     installer -n xelatex -p texlive-xetex || ERR=1
@@ -134,8 +128,10 @@ function install_write_tools() {
     add_ppa mbudde/ledger && sudo apt-get update
     installer ledger || ERR=1
 
-    # jrnl
-    sudo pip install jrnl || ERR=1
+    # Git annex
+    add_ppa fmarier/git-annex && sudo apt-get update
+    installer git-annex
+
 }
 
 # devel tools
@@ -158,7 +154,6 @@ function install_devel_tools() {
 
     # RVM
     install_rvm || ERR=1
-
 }
 
 function install_music () {
@@ -240,7 +235,7 @@ while [ -n "$1" ]; do
             install_essentials
             install_indicators
             install_battery
-            install_write_tools
+            install_utilities
             install_system;;
 
         -x | --xmonad)
@@ -261,8 +256,8 @@ while [ -n "$1" ]; do
         -b | --battery)
             install_battery;;
 
-        -w | --write)
-            install_write_tools;;
+        -w | --utilities)
+            install_utilities;;
 
         -d | --devel)
             install_devel_tools;;
