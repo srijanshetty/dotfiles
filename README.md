@@ -1,22 +1,28 @@
-TODO
------
+DIRECTORY STUCTURE
+------------------
 
--create folder if not present and directory structure
--Random gittips
--Install mr & sync mrconfig
--move scripts into bin rather than custom. (This speeds up everything)
--declarative
-    -symlinks
-    -installer
--add a read action for overwriting
-    https://github.com/holman/dotfiles/blob/master/script/bootstrap
--use a logger for debugging
--dotjs :: Github
+- ~/Documents/GitHub
+- ~/Documents/local/bin
+- ~/.zprezto/modules/custom/external
+- ~/Documents/dotfiles
+
+MANAGER
+-------
+
+- make conf.sh global?
+- symlink manager for symlinks
+    - Make bootstrap like installer; viz make symlink creation declarative
+    - https://github.com/holman/dotfiles/blob/master/script/bootstrap
+- manager which installs files to zsh
+    - Define the place to clone and to install these files for autosource
+    - autosourcing is left to something else
+    - Keep all zsh files in manager-zsh
+    - Copy files to ~.zprezto/modules/custom/external
 
 TOOLS
 -----
 
--trash
+-Random gittips
 -Source Code Pro font/Patched powerline fonts
 -docker+vagrant+virtualbox
 -onedrive/copy/dropbox/skype/btsync
@@ -113,6 +119,7 @@ Development
 -cabal (Haskell Platform)
 -Y-PPA-Manager
 -ctags & cscope
+-dotjs
 
 Sync
 ----

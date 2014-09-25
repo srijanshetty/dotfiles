@@ -26,13 +26,6 @@ function install_pip() {
     fi
 }
 
-# To check whether something is inRepo
-function inRepo {
-    for file in /etc/apt/sources.list.d/*.list; do
-        grep "$1" $file
-    done
-}
-
 # function to install something using apt-get
 function installer() {
     APPLICATION_NAME=""
@@ -128,29 +121,7 @@ function install_rvm() {
     fi
 }
 
-# Install ack
-function install_ack() {
-    if hash ack &> /dev/null; then
-        warn "ack already installed"
-        return 0
-    fi
-
-    # Create the directory
-    if [ ! -d ${HOME}/Documents/local/bin ]; then
-        mkdir -p ${HOME}/Documents/local/bin
-    fi
-
-    # Dowlonad the ack script
-    if wget -O "${HOME}/Documents/local/bin/ack" http://beyondgrep.com/ack-2.12-single-file &>> $LOGFILE; then
-        chmod u+x "${HOME}/Documents/local/bin/ack"
-        success "ack installed"
-        return 0
-    else
-        fail "ack installation"
-        return 1
-    fi
-}
-
+# install mr
 function install_mr() {
     RETURN_VALUE=0
 
@@ -160,8 +131,8 @@ function install_mr() {
 
     cd $GITHUB_DIR
 
-    # Copy tmux-networkspeed
-    if [ ! -d tmux-networkspeed ]; then
+    # Copy mr
+    if [ ! -d mr ]; then
         if git clone https://github.com/joeyh/mr.git &>> $LOGFILE; then
             success "mr installed"
         else
