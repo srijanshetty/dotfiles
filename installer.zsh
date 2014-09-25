@@ -16,7 +16,7 @@ USAGE: installer <arguments>
 Available options:
 
     -f | --full                        Full Installations
-    -e | --essentials                  zsh, git, vim, tmux, nvm, ag
+    -e | --essentials                  zsh, git, vim, tmux, ag
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
     -s | --system                      dstat, htop, iotop, trash
@@ -87,15 +87,13 @@ function install_build_tools() {
 
 # zsh, ag, vim ,git and screen
 function install_essentials() {
-    highlight "\nInstalling essentials: zsh, vim, git, tmux, ag, nvm"
+    highlight "\nInstalling essentials: zsh, vim, git, tmux, ag"
 
     installer git || ERR=1
     installer vim || ERR=1
     installer tmux || ERR=1
     installer zsh || ERR=1
     installer -n ag -p silversearcher-ag || ERR=1
-    which nvm
-    # install_nvm || ERR=1
 }
 
 # Xmonad, the tiling manager
@@ -228,9 +226,6 @@ while [ -n "$1" ]; do
     case "$1" in
         -a | --ag)
             install_ag;;
-
-        -n | --nvm)
-            install_nvm;;
 
         -f | --full )
             install_xmonad

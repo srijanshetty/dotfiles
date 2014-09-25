@@ -110,26 +110,6 @@ function add_ppa() {
   return 1
 }
 
-# Install NVM
-function install_nvm() {
-    highlight "\nInstalling NVM"
-
-    export NVM_DIR=~/.nvm
-    if which nvm &> /dev/null; then
-        warn "NVM is already installed"
-        return 0
-    fi
-
-    # Get the install script
-    if wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.12.0/install.sh | bash &>> $LOGFILE; then
-        success "NVM installed"
-        return 0
-    else
-        fail "NVM not installed"
-        return 1
-    fi
-}
-
 # Install RVM
 function install_rvm() {
     highlight "\nInstalling RVM"

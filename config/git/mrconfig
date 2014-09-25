@@ -42,3 +42,7 @@ checkout = git clone 'https://github.com/xybu92/onedrive-d.git' 'onedrive-d'
 
 [Documents/www/zeppelin]
 checkout = git clone 'git@github.com:gdg-x/zeppelin.git' 'zeppelin'
+
+[.nvm]
+checkout = git clone 'https://github.com/creationix/nvm.git' '.nvm'
+update = git checkout master && git pull && git checkout `git describe --abbrev=0 --tags`
