@@ -115,13 +115,13 @@ function install_nvm() {
     highlight "\nInstalling NVM"
 
     export NVM_DIR=~/.nvm
-    if hash nvm &> /dev/null; then
+    if which nvm &> /dev/null; then
         warn "NVM is already installed"
         return 0
     fi
 
     # Get the install script
-    if wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.12.0/install.sh | bash; then
+    if wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.12.0/install.sh | bash &>> $LOGFILE; then
         success "NVM installed"
         return 0
     else

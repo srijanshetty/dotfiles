@@ -16,7 +16,7 @@ USAGE: installer <arguments>
 Available options:
 
     -f | --full                        Full Installations
-    -e | --essentials                  zsh, git, vim, tmux, nvm, ag, open-ssh
+    -e | --essentials                  zsh, git, vim, tmux, nvm, ag
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
     -s | --system                      dstat, htop, iotop, trash
@@ -94,8 +94,8 @@ function install_essentials() {
     installer tmux || ERR=1
     installer zsh || ERR=1
     installer -n ag -p silversearcher-ag || ERR=1
-    install_nvm || ERR=1
-    installer openssh-server || ERR=1
+    which nvm
+    # install_nvm || ERR=1
 }
 
 # Xmonad, the tiling manager
