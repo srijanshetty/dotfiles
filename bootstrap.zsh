@@ -23,10 +23,33 @@ Available commands:
     -x | --xmonad-config        configure only xmonad
     -u | --utilities            configure writing tools: LaTeX, ledger
     -m | --music-config         configure beets
+    -d | --setup-dir            setup the directory structure
     --config-ssh                configure ssh
     --config-sublime            configure sumblime text
     --config-bare               bare bones configuration
 _EOH_
+}
+
+function setup_dir() {
+    if [ ! -d $GITHUB_DIR ]; then
+        if mkdir -p $GITHUB_DIR; then
+            success "Created GitHub directory at $GITHUB_DIR"
+        else
+            fail "Creation of GitHub directory failed at $GITHUB_DIR"
+        fi
+    else
+        warn "GitHub directory exists at $GITHUB_DIR"
+    fi
+
+    if [ ! -d $LOCAL_BIN ]; then
+        if mkdir -p $LOCAL_BIN; then
+            success "Created local directory at $LOCAL_BIN"
+        else
+            fail "Creation of local directory failed at $LOCAL_BIN"
+        fi
+    else
+        warn "Local directory exists at $LOCAL_BIN"
+    fi
 }
 
 # Vim configuration
@@ -84,8 +107,30 @@ function config_git() {
                 return 1
             fi
         fi
+
     else
         fail "git : install git"
+        return 1
+    fi
+
+    highlight "\nConfiguring mr"
+
+    if hash mr &> /dev/null; then
+        # Configure mr
+        if [ -e ~/.mrconfig ]; then
+            fail "mr : ~/.mrconfig and retry"
+            return 1
+        else
+            if ln -s "${CONFDIR}/config/git/mrconfig" ~/.mrconfig; then
+                success "mr : mr configured"
+                return 0
+            else
+                fail "mr : failed to create symlinks"
+                return 1
+            fi
+        fi
+    else
+        fail "mr : install mr"
         return 1
     fi
 }
@@ -379,7 +424,10 @@ while [ -n "$1" ]; do
         --test)
             tester;;
 
-        * )
+        -d | --setup-dir)
+            setup_dir;;
+
+       * )
             help_text;;
 
     esac
