@@ -1,8 +1,11 @@
 #!/bin/zsh
 
+# This indicates that helper has been sources
+DOT_HELPER=1
+
 # Source required files
-DOT_DIR_NAME="$(dirname "$0")"
-configfile="${DOT_DIR_NAME}/../config.cfg"
+HELPER_DIR="$(dirname "$0")"
+configfile="${HELPER_DIR}/../config.cfg"
 configfile_secured=/tmp/config.cfg
 
 # Debug messages
@@ -47,6 +50,3 @@ fi
 
 # now source it, either the original or the filtered variant
 source "$configfile"
-
-# This indicates that helper has been sources
-DOT_HELPER=1

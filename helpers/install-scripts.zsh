@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 # Source required files
-DOT_DIR_NAME="$(dirname "$0")"
-[ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/helper.sh"
+HELPER_DIR="$(dirname "$0")"
+[ -z $DOT_HELPER ] && source "${HELPER_DIR}/helper.sh"
 
 # Install PIP
 function install_pip() {
@@ -153,4 +153,4 @@ function install_mr() {
 }
 
 # To indicate that this script has been included
-DOT_INSTALL_SCRIPTS=1
+DOT_INSTALL=1

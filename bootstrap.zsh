@@ -1,9 +1,8 @@
 #!/bin/zsh
 
 # Store the configuration directory for use by the functions
-DOT_DIR_NAME="$(dirname $0)"
-[ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/helpers/helper.sh"
 CONFDIR="$PWD"
+[ -z $DOT_HELPER ] && source "${CONFDIR}/helpers/helper.sh"
 
 #Help text
 function help_text() {

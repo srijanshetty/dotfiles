@@ -21,6 +21,7 @@ MANAGER
 TOOLS
 -----
 
+-better logging
 -cowsay
 -Random gittips
 -Source Code Pro font/Patched powerline fonts

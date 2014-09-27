@@ -3,7 +3,7 @@
 # Use relative directories in sourcing
 CONFDIR="$(dirname $0)"
 [ -z $DOT_HELPER ] && source "${CONFDIR}/helpers/helper.sh"
-[ -z $DOT_INSTALL_SCRIPTS ] && source "${CONFDIR}/helpers/install-scripts.zsh"
+[ -z $DOT_INSTALL ] && source "${CONFDIR}/helpers/install-scripts.zsh"
 
 #For errors
 ERR=0
@@ -32,6 +32,7 @@ _EOH_
 
 function test_function() {
     highlight "\nRunning test function"
+
 }
 
 function install_latest() {
