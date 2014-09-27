@@ -2,7 +2,6 @@
 
 # Source required files
 DOT_DIR_NAME="$(dirname "$0")"
-[ -z $DOT_CONF ] && source "${DOT_DIR_NAME}/conf.sh"
 [ -z $DOT_HELPER ] && source "${DOT_DIR_NAME}/helper.sh"
 
 # Install PIP
@@ -29,6 +28,7 @@ function install_pip() {
 # function to install something using apt-get
 function installer() {
     APPLICATION_NAME=""
+
     while [ -n "$1" ]; do
         case "$1" in
             -n )
@@ -41,6 +41,11 @@ function installer() {
                 ;;
 
             -p )
+                if [ -z $APPLICATION_NAME ]; then
+                    fail "No Application name provided in installer"
+                    return 1
+                fi
+
                 shift
                 if sudo apt-get install -y $1 &>> $LOGFILE; then
                     success "${APPLICATION_NAME} installed"

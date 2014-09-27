@@ -2,7 +2,8 @@
 
 # Source required files
 DOT_DIR_NAME="$(dirname "$0")"
-[ -z $DOT_CONF ] && source "${DOT_DIR_NAME}/conf.sh"
+configfile="${DOT_DIR_NAME}/../config.cfg"
+configfile_secured=/tmp/config.cfg
 
 # Debug messages
 NORMAL=$(tput sgr0)
@@ -28,6 +29,24 @@ function success() {
 function highlight() {
        echo "${UNDERLINE_ON}$*${UNDERLINE_OFF}" | tee -a "$LOGFILE"
 }
+
+# Check if the configfile exists
+if [ ! -f $configfile ]; then
+    echo "[ ${YELLOW}WARN${NORMAL} ] Config file not found"
+    exit 1
+fi
+
+# check if the file contains something we don't want
+if egrep -q -v '^#|^[^ ]*=[^;]*' "$configfile"; then
+  warn "Config file is unclean" >&2
+
+  # filter the original to a new file
+  egrep '^#|^[^ ]*=[^;&]*'  "$configfile" > "$configfile_secured"
+  mv "$configfile_secured" "$configfile"
+fi
+
+# now source it, either the original or the filtered variant
+source "$configfile"
 
 # This indicates that helper has been sources
 DOT_HELPER=1
