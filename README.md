@@ -1,23 +1,22 @@
 DIRECTORY STUCTURE
 ------------------
 
-- ~/Documents/GitHub
-- ~/Documents/local/bin
-- ~/.zprezto/modules/custom/external
-- ~/Documents/dotfiles
+-~/Documents/GitHub
+-~/Documents/local/bin
+-~/.zprezto/modules/custom/external
+-~/Documents/dotfiles
 
 MANAGER
 -------
 
-- make conf.sh global?
-- symlink manager for symlinks
-    - Make bootstrap like installer; viz make symlink creation declarative
-    - https://github.com/holman/dotfiles/blob/master/script/bootstrap
-- manager which installs files to zsh
-    - Define the place to clone and to install these files for autosource
-    - autosourcing is left to something else
-    - Keep all zsh files in manager-zsh
-    - Copy files to ~.zprezto/modules/custom/external
+-symlink manager for symlinks
+    -Make bootstrap like installer; viz make symlink creation declarative
+    -https://github.com/holman/dotfiles/blob/master/script/bootstrap
+-manager which installs files to zsh
+    -Define the place to clone and to install these files for autosource
+    -autosourcing is left to something else
+    -Keep all zsh files in manager-zsh
+    -Copy files to ~.zprezto/modules/custom/external
 
 TOOLS
 -----

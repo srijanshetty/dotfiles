@@ -82,7 +82,6 @@ function install_build_tools() {
     installer autoconf || ERR=1
     installer automake || ERR=1
     installer apt-file || ERR=1
-
 }
 
 # zsh, ag, vim ,git and screen
@@ -217,16 +216,13 @@ function install_indicators() {
 }
 
 # In case the argument list is empty
-if [ -z "$1"]; then
+if [ -z "$1" ]; then
     help_text
 fi
 
 #Loop through arguments
 while [ -n "$1" ]; do
     case "$1" in
-        -a | --ag)
-            install_ag;;
-
         -f | --full )
             install_xmonad
             install_essentials
