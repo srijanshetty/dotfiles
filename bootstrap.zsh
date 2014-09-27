@@ -1,8 +1,10 @@
 #!/bin/zsh
 
+
 # Store the configuration directory for use by the functions
-CONFDIR="$PWD"
+CONFDIR="$(dirname "$0")"
 [ -z $DOT_HELPER ] && source "${CONFDIR}/helpers/helper.sh"
+[ -z $DOT_CONFIGURE ] && source "${CONFDIR}/helpers/configure.zsh"
 
 #Help text
 function help_text() {
@@ -24,114 +26,42 @@ Available commands:
     -m | --music-config         configure beets
     -d | --setup-dir            setup the directory structure
     --config-ssh                configure ssh
-    --config-sublime            configure sumblime text
-    --config-bare               bare bones configuration
 _EOH_
-}
-
-function setup_dir() {
-    if [ ! -d $GITHUB_DIR ]; then
-        if mkdir -p $GITHUB_DIR; then
-            success "Created GitHub directory at $GITHUB_DIR"
-        else
-            fail "Creation of GitHub directory failed at $GITHUB_DIR"
-        fi
-    else
-        warn "GitHub directory exists at $GITHUB_DIR"
-    fi
-
-    if [ ! -d $LOCAL_BIN ]; then
-        if mkdir -p $LOCAL_BIN; then
-            success "Created local directory at $LOCAL_BIN"
-        else
-            fail "Creation of local directory failed at $LOCAL_BIN"
-        fi
-    else
-        warn "Local directory exists at $LOCAL_BIN"
-    fi
 }
 
 # Vim configuration
 function config_vim() {
     highlight "\nConfiguring Vim"
-
-    if hash vim &> /dev/null; then
-        if [ -d ~/.vim ]; then
-            fail "vim : delete ~/.vim and retry"
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/vim-plug/vim" ~/.vim && ln -s "${CONFDIR}/config/vim-plug/vimrc" ~/.vimrc; then
-                success "vim : configured"
-                return 0
-            else
-                fail "vim : failed to create symlinks"
-                return 1
-            fi
-        fi
-    else
-        fail "vim : install vim"
-        return 1
-    fi
+    configure-d "VIM" "${CONFDIR}/config/vim-plug/vim/"  ~/.vim || ERR=1
+    configure-f "VIM" "${CONFDIR}/config/vim-plug/vimrc" ~/.vimrc || ERR=1
 }
 
 
 # Git configuration
 function config_git() {
     highlight "\nConfiguring git"
+    configure-f "GIT" "${CONFDIR}/config/git/gitconfig" ~/.gitconfig || ERR=1
+    configure-f "GIT" "${CONFDIR}/config/git/gitignore_global" ~/.gitignore_global || ERR=1
+    configure-f "GIT" "${CONFDIR}/config/git/mrconfig" ~/.mrconfig || ERR=1
+}
 
-    if hash git &> /dev/null; then
-        # Configure git
-        if [ -e ~/.gitconfig ]; then
-            fail "git : delete ~./gitconfig and retry"
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/git/gitconfig" ~/.gitconfig; then
-                success "git : configured."
-            else
-                fail "git : failed to create symlinks"
-                return 0
-            fi
-        fi
+#Configuration file for tmux
+function config_tmux() {
+    highlight "\nConfiguring tmux"
+    configure-f "TMUX" "${CONFDIR}/config/tmux.conf" ~/.tmux.conf
+}
 
-        # Configure global gitignore
-        if [ -e ~/.gitignore_global ]; then
-            fail "git : ~/.gitignore_global and retry"
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/git/gitignore_global" ~/.gitignore_global; then
-                success "git : global gitignore configured"
-                return 0
-            else
-                fail "git : failed to create symlinks"
-                return 1
-            fi
-        fi
+# Configure music
+function config_music() {
+    highlight "\nConfiguring Beets"
+    configure-d "BEETS" "${CONFDIR}/config/beets" ~/.config/beets
+}
 
-    else
-        fail "git : install git"
-        return 1
-    fi
-
-    highlight "\nConfiguring mr"
-
-    if hash mr &> /dev/null; then
-        # Configure mr
-        if [ -e ~/.mrconfig ]; then
-            fail "mr : ~/.mrconfig and retry"
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/git/mrconfig" ~/.mrconfig; then
-                success "mr : mr configured"
-                return 0
-            else
-                fail "mr : failed to create symlinks"
-                return 1
-            fi
-        fi
-    else
-        fail "mr : install mr"
-        return 1
-    fi
+#configure writing tools
+function config_utilities() {
+    highlight "Configuring LaTeX, Ledger"
+    configure-d "LaTeX" "${CONFDIR}/config/texmf" ~/texmf
+    configure-d "LEDGER" "${CONFDIR}/utitilies/ledgerrc" ~/.ledgerrc
 }
 
 #ZSH configuration
@@ -165,29 +95,6 @@ function config_zsh() {
     fi
 }
 
-#Configuration file for tmux
-function config_tmux() {
-    highlight "\nConfiguring tmux"
-
-    if hash tmux; then
-        if [ -e ~/.tmux.conf ]; then
-            fail "tmux : delete ~/.tmux.conf and retry"
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/tmux.conf" ~/.tmux.conf; then
-                success "tmux : configured"
-                return 0
-            else
-                fail "tmux : Symlink failure"
-                return 1
-            fi
-        fi
-    else
-        fail "tmux : install tmux"
-        return 1
-    fi
-}
-
 # Configuration Functions
 function config_node() {
     if hash nvm &> /dev/null;then
@@ -200,69 +107,6 @@ function config_node() {
         fi
     else
         fail "NVM : nvm not installed"
-        return 1
-    fi
-}
-# Configure music
-function config_music() {
-    highlight "\nConfiguring Beets"
-
-    if hash beet &> /dev/null; then
-        if [ -d ~/.config/beets ]; then
-            fail "Beets : delete ~/.config/beets and retry"
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/beets" ~/.config/beets;then
-                success "Beets : configured"
-                return 0
-            else
-                fail "Beets : symbolic link failure"
-                return 1
-            fi
-        fi
-    else
-        fail "beets : install beet"
-        return 1
-    fi
-}
-
-#configure writing tools
-function config_utilities() {
-    highlight "Configuring LaTeX, Ledger"
-
-    if hash pdflatex &> /dev/null; then
-        if [ -d ~/texmf ]; then
-            fail "LaTex : Delete ~/texmf and retry"
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/texmf" ~/texmf;then
-                success "LaTeX : configured"
-                return 0
-            else
-                fail "LaTex : symbolic link failure"
-                return 1
-            fi
-        fi
-    else
-        fail "LaTeX : install pdflatex"
-        return 1
-    fi
-
-    if hash ledger &> /dev/null; then
-        if [ -f ~/.ledgerrc ]; then
-            fail "Ledger : Delete ~/.ledgerrc and retry"
-            return 1
-        else
-            if ls -s "${CONFDIR}/utitilies/ledgerrc" ~/.ledgerrc; then
-                success "Ledger : configured"
-                return 0
-            else
-                fail "Ledger : symbolic link failure"
-                return 1
-            fi
-        fi
-    else
-        fail "Ledger : install ledger"
         return 1
     fi
 }
@@ -289,7 +133,7 @@ function config_xmonad() {
         return 1
     fi
 
-    config_xinitrc
+    configure-f "${CONFDIR}/config/system/xinitrc" ~/.xinitrc
 }
 
 # Remap directly
@@ -306,30 +150,6 @@ function config_remap() {
     fi
 }
 
-#This is for xinitrc
-function config_xinitrc() {
-    highlight "\nConfiguring xinitrc"
-
-    if [ -e ~/.xinitrc ]; then
-        fail "Xinitrc : Delete ~/.xinitrc and retry"
-        return 1
-    else
-        if ln -s "${CONFDIR}/config/system/xinitrc" ~/.xinitrc;then
-            success "Xinitrc : configured"
-            return 0
-        else
-            fail "Xinitrc : symbolic link failure"
-            return 1
-        fi
-    fi
-}
-
-# Configure sublime text
-function config_sublime() {
-    highlight "\nConfiguring sublime text"
-
-    # Stub
-}
 
 # configure ssh
 function config_ssh() {
@@ -353,24 +173,31 @@ function config_ssh() {
     fi
 }
 
-# Autoinstallers
-# Install only essential stuff
-function config_bare() {
-    config_git
-    config_zsh
-    config_vim
-    config_ssh
-    config_tmux
+#setup the directories
+function setup_dir() {
+    if [ ! -d $GITHUB_DIR ]; then
+        if mkdir -p $GITHUB_DIR; then
+            success "Created GitHub directory at $GITHUB_DIR"
+        else
+            fail "Creation of GitHub directory failed at $GITHUB_DIR"
+        fi
+    else
+        warn "GitHub directory exists at $GITHUB_DIR"
+    fi
+
+    if [ ! -d $LOCAL_BIN ]; then
+        if mkdir -p $LOCAL_BIN; then
+            success "Created local directory at $LOCAL_BIN"
+        else
+            fail "Creation of local directory failed at $LOCAL_BIN"
+        fi
+    else
+        warn "Local directory exists at $LOCAL_BIN"
+    fi
 }
 
 # Install everything
 function config_fll() {
-    config_bare
-    config_remap
-    config_xmonad
-    config_sublime
-    config_utilities
-    config_music
 }
 
 # In case the argument list is empty
@@ -413,12 +240,6 @@ while [ -n "$1" ]; do
 
         --config-ssh)
             config_ssh;;
-
-        --config-sublime)
-            config_sublime;;
-
-        --config-bare)
-            config_bare;;
 
         --test)
             tester;;
