@@ -1,26 +1,25 @@
 DIRECTORY STUCTURE
 ------------------
 
--~/Documents/GitHub
--~/Documents/local/bin
--~/.zprezto/modules/custom/external
--~/Documents/dotfiles
+- We enforce a directory structure which contains the two things:
+    - **GitHub**: ~/Documents/GitHub
+    - **Local Bin**: ~/Documents/local/bin
 
-MANAGER
--------
+TODO
+-----
 
--symlink manager for symlinks
-    -Make bootstrap like installer; viz make symlink creation declarative
-    -https://github.com/holman/dotfiles/blob/master/script/bootstrap
+# Manager
 -manager which installs files to zsh
     -part of custom
     -clone files to .zsh-manager and copy to external/completions
 
-TOOLS
------
-
--cowsay
+# General
 -better logging
+-symlinks for local bin
+    -https://github.com/holman/dotfiles/blob/master/script/bootstrap
+
+# Tools
+-cowsay
 -Random gittips
 -Source Code Pro font/Patched powerline fonts
 -docker+vagrant+virtualbox
@@ -34,94 +33,86 @@ TOOLS
 -shutter :: PPA
 -crontab
 -dconf-editor
-
 -python-scapy
 -nmap
 -tcpdump
 
-============================
 Features
--------
+---------
 
-# Autostart
+# Custom
+## Autostart
     - `autostart` will start the list of programs listed in ~/.autostartrc
     - `autostart stop` will stop the list of programs listed in ~/.autostartrc
 
-# Proxy
+## Proxy
     - Searches for a ~/.proxyrc file and loads the defined proxies
     - proxy unset/set
 
-# ZSH-DWIM
+## ZSH-DWIM
     - <C-u> magic for most commands
 
-# cd magic
+## cd magic
     - go to root git directory or ~
 
-# Autojump
+## Autojump
     - Jump to directories using j
 
-# Prezto modules
+## Prezto modules
     - history-substring
     - syntax-highlight
     - completions
 
-General
--------
+## Plugin manager
 
--tmux
--vim
--git
-    -mr and mrconfig
--zsh
--conky-manager
-
-System
-------
-
--cv
--iotop
--htop
--dstat
--ranger
--xSwipe
--trash
-
-Utilities
-------------------
-
--pandoc
--tex/detex
--geeknote
--ledger
--git annex
-
-Music
+TOOLS
 -----
 
--id3tool
--beets
--vlc
+# General
+    -tmux
+    -vim
+    -git
+        -mr and mrconfig
+    -zsh
+    -conky-manager
 
-Development
------------
+# System
+    -cv
+    -iotop
+    -htop
+    -dstat
+    -ranger
+    -xSwipe
+    -trash
 
--curl
--pip
-    -ipython
--ag
--rvm
--nvm
-    -yo
-    -gulp
-    -bower
--cabal (Haskell Platform)
--Y-PPA-Manager
--ctags & cscope
--dotjs
+# Utilities
+    -pandoc
+    -tex/detex
+    -geeknote
+    -ledger
+    -git annex
 
-Sync
-----
+# Music
+    -id3tool
+    -beets
+    -vlc
 
--Dropbox
--Copy
--Btsync
+# Development
+    -curl
+    -pip
+        -ipython
+    -ag
+    -rvm
+    -nvm
+        -yo
+        -gulp
+        -bower
+    -cabal (Haskell Platform)
+    -Y-PPA-Manager
+    -ctags & cscope
+    -dotjs
+
+# Sync
+    -Dropbox
+    -Copy
+    -Btsync
