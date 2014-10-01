@@ -3,6 +3,7 @@
 # Source required files
 HELPER_DIR="$(dirname "$0")"
 [ -z $DOT_HELPER ] && source "${HELPER_DIR}/helper.sh"
+[ -z $DOT_CONFIGURE ] && source "${HELPER_DIR}/configure.zsh"
 
 # Install PIP
 function install_pip() {
@@ -138,7 +139,7 @@ function install_mr() {
 
     # Copy mr
     if [ ! -d mr ]; then
-        if git clone https://github.com/joeyh/mr.git &>> $LOGFILE; then
+        if git clone https://github.com/joeyh/mr.git myrepos &>> $LOGFILE; then
             success "mr installed"
         else
             fail "mr installation failed"
@@ -147,6 +148,9 @@ function install_mr() {
     else
         warn "mr already exists"
     fi
+
+    # configure mr
+    configure "MR" "${GITHUB_DIR}/myrepos/mr" "${LOCAL_BIN}/mr" || RETURN_VALUE=1
 
     cd -
     return RETURN_VALUE

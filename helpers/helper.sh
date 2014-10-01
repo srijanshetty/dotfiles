@@ -41,6 +41,7 @@ fi
 
 # check if the file contains something we don't want
 if egrep -q -v '^#|^[^ ]*=[^;]*' "$configfile"; then
+  export LOGFILE=/dev/null
   warn "Config file is unclean" >&2
 
   # filter the original to a new file

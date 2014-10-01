@@ -43,6 +43,8 @@ function config_git() {
     configure "GIT" "${CONFDIR}/config/git/gitignore_global" ~/.gitignore_global || ERR=1
     configure "GIT" "${CONFDIR}/config/git/mrconfig" ~/.mrconfig || ERR=1
 
+    # setup the directory structure
+    setup_dir
 }
 
 #Configuration file for tmux
