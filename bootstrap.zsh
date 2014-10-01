@@ -22,7 +22,7 @@ Available commands:
     -t | --tmux-config          configure tmux
     -r | --remap-config         configure remap of keys
     -x | --xmonad-config        configure only xmonad
-    -u | --utilities            configure writing tools: LaTeX, ledger
+    -u | --utilities            configure writing tools
     -m | --music-config         configure beets
     -d | --setup-dir            setup the directory structure
     --config-ssh                configure ssh
@@ -32,67 +32,68 @@ _EOH_
 # Vim configuration
 function config_vim() {
     highlight "\nConfiguring Vim"
-    configure-d "VIM" "${CONFDIR}/config/vim-plug/vim/"  ~/.vim || ERR=1
-    configure-f "VIM" "${CONFDIR}/config/vim-plug/vimrc" ~/.vimrc || ERR=1
+    configure "VIM" "${CONFDIR}/config/vim-plug/vim/"  ~/.vim || ERR=1
+    configure "VIM" "${CONFDIR}/config/vim-plug/vimrc" ~/.vimrc || ERR=1
 }
-
 
 # Git configuration
 function config_git() {
     highlight "\nConfiguring git"
-    configure-f "GIT" "${CONFDIR}/config/git/gitconfig" ~/.gitconfig || ERR=1
-    configure-f "GIT" "${CONFDIR}/config/git/gitignore_global" ~/.gitignore_global || ERR=1
-    configure-f "GIT" "${CONFDIR}/config/git/mrconfig" ~/.mrconfig || ERR=1
+    configure "GIT" "${CONFDIR}/config/git/gitconfig" ~/.gitconfig || ERR=1
+    configure "GIT" "${CONFDIR}/config/git/gitignore_global" ~/.gitignore_global || ERR=1
+    configure "GIT" "${CONFDIR}/config/git/mrconfig" ~/.mrconfig || ERR=1
+
 }
 
 #Configuration file for tmux
 function config_tmux() {
     highlight "\nConfiguring tmux"
-    configure-f "TMUX" "${CONFDIR}/config/tmux.conf" ~/.tmux.conf
+    configure "TMUX" "${CONFDIR}/config/tmux.conf" ~/.tmux.conf
 }
 
 # Configure music
 function config_music() {
     highlight "\nConfiguring Beets"
-    configure-d "BEETS" "${CONFDIR}/config/beets" ~/.config/beets
+    configure "BEETS" "${CONFDIR}/config/beets" ~/.config/beets
 }
 
 #configure writing tools
 function config_utilities() {
     highlight "Configuring LaTeX, Ledger"
-    configure-d "LaTeX" "${CONFDIR}/config/texmf" ~/texmf
-    configure-d "LEDGER" "${CONFDIR}/utitilies/ledgerrc" ~/.ledgerrc
+    configure "LaTeX" "${CONFDIR}/config/texmf" ~/texmf
+    configure "LEDGER" "${CONFDIR}/utitilies/ledgerrc" ~/.ledgerrc
+}
+
+#Configure xmonad
+function config_xmonad() {
+    highlight "\nConfiguring xmonad"
+    configure "XMONAD" "${CONFDIR}/config/xmonad" ~/.xmonad && xmonad --recompile
+    configure "XINITRC" "${CONFDIR}/config/system/xinitrc" ~/.xinitrc
+}
+
+# configure ssh
+function config_ssh() {
+    highlight "\nConfiguring ssh"
+    configure "SSH" "${CONFDIR}/config/system/sshconfig" ~/.ssh/config
 }
 
 #ZSH configuration
 function config_zsh() {
     highlight "\nConfiguring zsh"
 
-    if hash zsh &> /dev/null; then
-        if [ -d ~/.zprezto ]; then
-            fail "Prezto : delete ~/.zprezto and retry"
-            return 1
-        else
-            # change default shell to zsh
-            if [ -n $ZSH_NAME ]; then
-                warn "The current shell is zsh"
-            else
-                chsh -s /bin/zsh
-            fi
-
-            ln -s "${CONFDIR}/shells/zsh/zprezto" ~/.zprezto
-            setopt EXTENDED_GLOB
-            for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-                ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-            done
-
-            success "Prezto : configured"
-            return 0
-        fi
+    # change default shell to zsh
+    if [ -n $ZSH_NAME ]; then
+        success "The current shell is zsh"
     else
-        fail "zsh : install zsh"
-        return 1
+        chsh -s /bin/zsh && success "Changed the shell to zsh"
     fi
+
+    configure "ZSH" "${CONFDIR}/shells/zsh/zprezto" ~/.zprezto
+
+    setopt EXTENDED_GLOB
+    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+    done
 }
 
 # Configuration Functions
@@ -111,31 +112,6 @@ function config_node() {
     fi
 }
 
-#Configure xmonad
-function config_xmonad() {
-    highlight "\nConfiguring xmonad"
-
-    if hash xmonad &>/dev/null ; then
-        if [ -d ~/.xmonad ]; then
-            fail "Xmonad : Delete ~/.xmonad and retry"
-            return 1
-        else
-            if ln -s "${CONFDIR}/config/xmonad" ~/.xmonad && xmonad --recompile; then
-                success "Xmonad : configured"
-                return 0
-            else
-                fail "Xmond : symbolic link failure"
-                return 1
-            fi
-        fi
-    else
-        fail "xmonad : Install xmonad"
-        return 1
-    fi
-
-    configure-f "${CONFDIR}/config/system/xinitrc" ~/.xinitrc
-}
-
 # Remap directly
 function config_remap() {
     highlight "\nConfiguring xmodmap"
@@ -147,29 +123,6 @@ function config_remap() {
     else
         fail "Remap : failed"
         return 1
-    fi
-}
-
-
-# configure ssh
-function config_ssh() {
-    highlight "\nConfiguring ssh"
-
-    if [ ! -d ~/.ssh ]; then
-        mkdir ~/.ssh
-    fi
-
-    if [ -f ~/.ssh/config ]; then
-        fail "SSH : Remove ~/ssh/config and retry."
-        return 1
-    else
-        if ln -s "${CONFDIR}/config/system/sshconfig" ~/.ssh/config;then
-            success "SSH : configured"
-            return 0
-        else
-            fail "SSH : symbolic link failure"
-            return 1
-        fi
     fi
 }
 
@@ -197,7 +150,7 @@ function setup_dir() {
 }
 
 # Install everything
-function config_fll() {
+function config_full() {
 }
 
 # In case the argument list is empty
