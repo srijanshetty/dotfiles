@@ -4,6 +4,9 @@ checkout = git clone 'https://github.com/joeyh/myrepos.git' 'myrepos'
 
 [Documents/GitHub/sysadmin]
 checkout = git clone 'https://github.com/skx/sysadmin-util.git' 'sysadmin'
+link =
+    cd ..
+    ln -s ${PWD}/sysadmin $LOCAL_BIN
 
 [Documents/GitHub/wifikill]
 checkout = git clone 'https://github.com/roglew/wifikill.git' 'wifikill'
@@ -13,29 +16,37 @@ checkout = git clone 'git://git.gnome.org/california' 'california'
 
 [Documents/GitHub/tmux-networkspeed]
 checkout = git clone 'https://github.com/srijanshetty/tmux-networkspeed.git' 'tmux-networkspeed'
+link =
+    ln -s ${PWD}/downspeed $LOCAL_BIN
+    ln -s ${PWD}/upspeed $LOCAL_BIN
 
 [Documents/GitHub/dotjs-ubuntu]
-checkout = git clone 'https://github.com/glenbot/dotjs-ubuntu.git' 'dotjs-ubuntu' && cd dotjs-ubuntu && rake install
+checkout = git clone 'https://github.com/glenbot/dotjs-ubuntu.git' 'dotjs-ubuntu'
+update = ln -s ${PWD}/bin/djsd $LOCAL_BIN
+link = ln -s ${PWD}/bin/djsd $LOCAL_BIN
 
 [Documents/GitHub/xSwipe]
 checkout = git clone 'https://github.com/iberianpig/xSwipe.git' 'xSwipe'
 update = git pull --rebase
+link = ln -s ${PWD}/xSwipe.pl $LOCAL_BIN
 
 [Documents/GitHub/autojump]
 checkout = git clone 'https://github.com/joelthelion/autojump.git' 'autojump' && cd autojump && ./install.py
+update = git pull && ./install.py
 
 [Documents/GitHub/ranger]
 checkout = git clone 'git://git.savannah.nongnu.org/ranger.git' 'ranger' && cd ranger && sudo make install
+update = git pull && sudo make install
 
 [Documents/GitHub/cv]
 checkout = git clone 'https://github.com/Xfennec/cv.git' 'cv' && cd cv && make && sudo make install
+update = git pull && make && sudo make install
 
 [Documents/GitHub/neovim]
 checkout = git clone 'git@github.com:neovim/neovim.git' 'neovim'
 
 [Documents/GitHub/geeknote]
 checkout = git clone 'git://github.com/VitaliyRodnenko/geeknote.git' 'geeknote' && cd geeknote && sudo python setup.py install
-update = git pull --rebase
 
 [Documents/GitHub/onedrive-d]
 checkout = git clone 'https://github.com/xybu92/onedrive-d.git' 'onedrive-d'
@@ -50,3 +61,7 @@ update = git checkout master && git pull && git checkout `git describe --abbrev=
 [Documents/GitHub/git-extras]
 checkout = git clone 'git@github.com:visionmedia/git-extras.git' 'git-extras'
 update = git pull && sudo make install
+
+[Documents/GitHub/pushbullet-bash]
+checkout = git clone 'git@github.com:Red5d/pushbullet-bash.git' 'pushbullet-bash'
+link = ln -s ${PWD}/pushbullet $LOCAL_BIN

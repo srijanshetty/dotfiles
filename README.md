@@ -15,8 +15,7 @@ TODO
 
 # General
 -better logging
--symlinks for local bin
-    -https://github.com/holman/dotfiles/blob/master/script/bootstrap
+-Read config.cfg in custom
 
 # Tools
 -cowsay
