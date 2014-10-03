@@ -15,17 +15,17 @@ USAGE: bootstrap.sh <arguments>
 Available commands:
 
     -f | --full                 Install all options
-    -v | --vim-config           configure only vim
-    -g | --git-config           configure git
-    -z | --zsh-config           configure zsh using Prezto
-    -n | --node-configure       configure node
-    -t | --tmux-config          configure tmux
-    -r | --remap-config         configure remap of keys
-    -x | --xmonad-config        configure only xmonad
+    -v | --vim                  configure vim
+    -g | --git                  configure git
+    -z | --zsh                  configure zsh using Prezto
+    -n | --node                 configure node
+    -t | --tmux                 configure tmux
+    -r | --remap                configure remap of keys
+    -x | --xmonad               configure xmonad
     -u | --utilities            configure writing tools
-    -m | --music-config         configure beets
-    -d | --setup-dir            setup the directory structure
-    --config-ssh                configure ssh
+    -m | --music                configure beets
+    -d | --dir                  setup the directory structure
+    -s | --ssh-config           configure ssh
 _EOH_
 }
 
@@ -163,25 +163,25 @@ fi
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
     case "$1" in
-        -x | --xmonad-config)
+        -x | --xmonad)
             config_xmonad;;
 
-        -v | --vim-config)
+        -v | --vim)
             config_vim;;
 
-        -n | --node-config)
+        -n | --node)
             config_node;;
 
-        -g | --git-config)
+        -g | --git)
             config_git;;
 
-        -z | --zsh-config)
+        -z | --zsh)
             config_zsh;;
 
-        -t | --tmux-config)
+        -t | --tmux)
             config_tmux;;
 
-        -m | --music-config)
+        -m | --music)
             config_music;;
 
         -u | --utilities)
@@ -190,16 +190,16 @@ while [ -n "$1" ]; do
         -f | --full)
             config_full;;
 
-        -r | --remap-config)
+        -r | --remap)
             config_remap;;
 
-        --config-ssh)
+        -s | --ssh)
             config_ssh;;
 
         --test)
             tester;;
 
-        -d | --setup-dir)
+        -d | --dir)
             setup_dir;;
 
        * )
