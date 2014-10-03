@@ -216,6 +216,9 @@ function install_indicators() {
 
     add_ppa alexmurray/indicator-sensors && sudo apt-get update
     installer indicator-sensors || ERR=1
+
+    add_ppa ppa:shutter/ppa && sudo apt-get update
+    installer shutter || ERR=1
 }
 
 # In case the argument list is empty
