@@ -50,19 +50,19 @@ function config_git() {
 #Configuration file for tmux
 function config_tmux() {
     highlight "\nConfiguring tmux"
-    configure "TMUX" "${CONFDIR}/config/tmux.conf" ~/.tmux.conf
+    configure "TMUX" "${CONFDIR}/config/system/tmux.conf" ~/.tmux.conf
 }
 
 # Configure music
 function config_music() {
     highlight "\nConfiguring Beets"
-    configure "BEETS" "${CONFDIR}/config/beets" ~/.config/beets
+    configure "BEETS" "${CONFDIR}/config/music/beets" ~/.config/beets
 }
 
 #configure writing tools
 function config_utilities() {
     highlight "Configuring LaTeX, Ledger"
-    configure "LaTeX" "${CONFDIR}/config/texmf" ~/texmf
+    configure "LaTeX" "${CONFDIR}/config/utilites/texmf" ~/texmf
     configure "LEDGER" "${CONFDIR}/utitilies/ledgerrc" ~/.ledgerrc
 }
 
