@@ -1,11 +1,15 @@
 [xSwipe]
     name = xSwipe.pl
-    path = /home/srijan/Documents/GitHub/xSwipe/xSwipe.pl
+    path = xSwipe.pl
 
 [firewall-auth]
     name = firewall-auth
-    path = /home/srijan/Documents/firewall-auth
+    path = firewall-auth
 
 [btsync]
     name = btsync
     path = btsync
+
+[shout]
+    name = shout
+    path = shout

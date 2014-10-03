@@ -4,9 +4,9 @@ checkout = git clone 'https://github.com/joeyh/myrepos.git' 'myrepos'
 
 [Documents/GitHub/sysadmin]
 checkout = git clone 'https://github.com/skx/sysadmin-util.git' 'sysadmin'
-link =
-    cd ..
-    ln -s ${PWD}/sysadmin $LOCAL_BIN
+link = 
+	   cd ..
+	   ln -s ${PWD}/sysadmin $LOCAL_BIN
 
 [Documents/GitHub/wifikill]
 checkout = git clone 'https://github.com/roglew/wifikill.git' 'wifikill'
@@ -16,9 +16,9 @@ checkout = git clone 'git://git.gnome.org/california' 'california'
 
 [Documents/GitHub/tmux-networkspeed]
 checkout = git clone 'https://github.com/srijanshetty/tmux-networkspeed.git' 'tmux-networkspeed'
-link =
-    ln -s ${PWD}/downspeed $LOCAL_BIN
-    ln -s ${PWD}/upspeed $LOCAL_BIN
+link = 
+	   ln -s ${PWD}/downspeed $LOCAL_BIN
+	   ln -s ${PWD}/upspeed $LOCAL_BIN
 
 [Documents/GitHub/dotjs-ubuntu]
 checkout = git clone 'https://github.com/glenbot/dotjs-ubuntu.git' 'dotjs-ubuntu'
@@ -65,3 +65,6 @@ update = git pull && sudo make install
 [Documents/GitHub/pushbullet-bash]
 checkout = git clone 'git@github.com:Red5d/pushbullet-bash.git' 'pushbullet-bash'
 link = ln -s ${PWD}/pushbullet $LOCAL_BIN
+
+[Documents/GitHub/Vaprobash]
+checkout = git clone 'git@github.com:fideloper/Vaprobash.git' 'Vaprobash'
