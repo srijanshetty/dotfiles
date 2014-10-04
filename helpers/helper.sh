@@ -3,11 +3,6 @@
 # This indicates that helper has been sources
 DOT_HELPER=1
 
-# Source required files
-HELPER_DIR="$(dirname "$0")"
-configfile="${HELPER_DIR}/../config.cfg"
-configfile_secured=/tmp/config.cfg
-
 # Debug messages
 NORMAL=$(tput sgr0)
 RED=$(tput setaf 1)
@@ -33,21 +28,29 @@ function highlight() {
        echo "${UNDERLINE_ON}$*${UNDERLINE_OFF}" | tee -a "$LOGFILE"
 }
 
-# Check if the configfile exists
-if [ ! -f $configfile ]; then
-    echo "[ ${YELLOW}WARN${NORMAL} ] Config file not found"
-    exit 1
-fi
+function checkconf() {
+    configfile_secured=/tmp/config.cfg
+    # Check if the configfile exists
+    if [ ! -f $1 ]; then
+        echo "[ ${YELLOW}WARN${NORMAL} ] Config file not found"
+        exit 1
+    fi
 
-# check if the file contains something we don't want
-if egrep -q -v '^#|^[^ ]*=[^;]*' "$configfile"; then
-  export LOGFILE=/dev/null
-  warn "Config file is unclean" >&2
+    # check if the file contains something we don't want
+    if egrep -q -v '^#|^[^ ]*=[^;]*' "$1"; then
+      export LOGFILE=/dev/null
+      warn "Config file is unclean" >&2
 
-  # filter the original to a new file
-  egrep '^#|^[^ ]*=[^;&]*'  "$configfile" > "$configfile_secured"
-  mv "$configfile_secured" "$configfile"
-fi
+      # filter the original to a new file
+      egrep '^#|^[^ ]*=[^;&]*'  "$1" > "$configfile_secured"
+      mv "$configfile_secured" "$1"
+    fi
 
-# now source it, either the original or the filtered variant
-source "$configfile"
+    # now source it, either the original or the filtered variant
+    source "$1"
+}
+
+# Source required files
+HELPER_DIR="$(dirname "$0")"
+configfile="${HELPER_DIR}/../config.cfg"
+checkconf $configfile
