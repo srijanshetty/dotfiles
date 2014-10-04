@@ -50,6 +50,10 @@ function checkconf() {
     source "$1"
 }
 
+fucntion log() {
+    echo "\n[$(date)]: $*" &>> $LOGFILE
+}
+
 # Source required files
 HELPER_DIR="$(dirname "$0")"
 configfile="${HELPER_DIR}/../config.cfg"
