@@ -1,2 +1,2 @@
---file ~/accounts/account.dat
+--file ~/accounts/account.ledger
 --pager less
