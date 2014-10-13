@@ -68,3 +68,6 @@ link = ln -s ${PWD}/pushbullet $LOCAL_BIN
 
 [Documents/GitHub/Vaprobash]
 checkout = git clone 'git@github.com:fideloper/Vaprobash.git' 'Vaprobash'
+
+[.zsh/antigen-hs]
+checkout = git clone 'git@github.com:srijanshetty/antigen-hs.git' 'antigen-hs'

@@ -1,16 +1,14 @@
 TODO
 -----
 
-# Manager
-    -manager which installs files to zsh
-        -part of custom
-        -clone files to .zsh-manager and copy to external/completions
-
 # General
     -better logging
     -Read config.cfg in custom
     -Make custom faster
     -Random gittips MOTD
+    -links
+        -btsync
+        -firewall-auth
 
 # Test
     -MEGA and ondedrip-d
