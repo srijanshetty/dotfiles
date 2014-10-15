@@ -4,6 +4,7 @@ TODO
 # General
     -better logging
     -Read config.cfg in custom
+    -antigen-hs installer
     -Make custom faster
     -Random gittips MOTD
     -links
@@ -13,6 +14,8 @@ TODO
 # Test
     -MEGA and ondedrip-d
     -indicator sysmon
+    -photoqt
+    -youtube-dl
 
 # Tools
     -browsersync & shout
