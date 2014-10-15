@@ -142,12 +142,22 @@ function setup_dir() {
 
     if [ ! -d $LOCAL_BIN ]; then
         if mkdir -p $LOCAL_BIN; then
-            success "Created local directory at $LOCAL_BIN"
+            success "Created local bin at $LOCAL_BIN"
         else
-            fail "Creation of local directory failed at $LOCAL_BIN"
+            fail "Creation of local bin failed at $LOCAL_BIN"
         fi
     else
-        warn "Local directory exists at $LOCAL_BIN"
+        warn "Local bin exists at $LOCAL_BIN"
+    fi
+
+    if [ ! -d $SANDBOX_DIR ]; then
+        if mkdir -p $SANDBOX_DIR; then
+            success "Created sandbox at $SANDBOX_DIR"
+        else
+            fail "Creation of sandbox failed at $SANDBOX_DIR"
+        fi
+    else
+        warn "Sandbox exists at $SANDBOX_DIR"
     fi
 }
 

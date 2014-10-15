@@ -38,6 +38,7 @@ Features
     - We enforce a directory structure which contains the two things:
         - **GitHub**: ~/Documents/GitHub
         - **Local Bin**: ~/Documents/local/bin
+        - **Sandbox**: ~/Documents/sandbox
 
 # Custom
 ## Autostart
