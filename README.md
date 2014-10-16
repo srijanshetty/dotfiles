@@ -10,6 +10,7 @@ TODO
     -links
         -btsync
         -firewall-auth
+    -Get the media management via copy sorted
 
 # Test
     -MEGA and ondedrip-d
@@ -76,6 +77,15 @@ Features
     - **neovim**:
     - **onedrive-d**:
     - **pushbullet-bash**:
+
+# Managers
+    -npm: tools
+    -mr: all git repos
+    -vcsh: projects
+    -vim-plug: vim-plugins
+    -antigen-hs: zsh-plugins
+    -git-annex: Books, Movies
+
 
 TOOLS
 -----

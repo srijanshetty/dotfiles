@@ -130,16 +130,6 @@ function config_remap() {
 
 #setup the directories
 function setup_dir() {
-    if [ ! -d $GITHUB_DIR ]; then
-        if mkdir -p $GITHUB_DIR; then
-            success "Created GitHub directory at $GITHUB_DIR"
-        else
-            fail "Creation of GitHub directory failed at $GITHUB_DIR"
-        fi
-    else
-        warn "GitHub directory exists at $GITHUB_DIR"
-    fi
-
     if [ ! -d $LOCAL_BIN ]; then
         if mkdir -p $LOCAL_BIN; then
             success "Created local bin at $LOCAL_BIN"
