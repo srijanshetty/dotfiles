@@ -2,21 +2,22 @@ TODO
 -----
 
 # General
+    -track projects
     -better logging
     -Read config.cfg in custom
     -antigen-hs installer
-    -Make custom faster
-    -Random gittips MOTD
+    -autostartrc
+    -Media management using Copy
     -links
         -btsync
-        -firewall-auth
-    -Get the media management via copy sorted
 
 # Test
     -MEGA and ondedrip-d
     -indicator sysmon
     -photoqt
     -youtube-dl
+    -everpad
+    -keybase
 
 # Tools
     -browsersync & shout
@@ -30,8 +31,6 @@ TODO
     -fstab
     -ccze
     -crontab
-    -dconf-editor
-    -python-scapy
     -nmap
     -tcpdump
 
@@ -55,7 +54,6 @@ Features
     - **history-substring**
     - **syntax-highlight**
     - **completions**
-    - **zsh-dwim** : <C-u> magic for most commands
 
 ## Custom functions
     - **upload** : upload a file to server
@@ -66,36 +64,36 @@ Features
     - **proxy** : set unset proxy
     - **cd magic** : go to root git directory or ~
 
-## GitHub
-    - **Vaprobash**: provisioning scripts for vagrant
-    - **git extras**: git subcommands
-    - **sysadmin**:
-    - **wifikill**:
-    - **tmux-networkspeed**:
-    - **dotjs-ubuntu**:
-    - **xSwipe**:
-    - **neovim**:
-    - **onedrive-d**:
-    - **pushbullet-bash**:
+## GitHub : Check mrconfig for the same
 
-# Managers
-    -npm: tools
-    -mr: all git repos
-    -vcsh: projects
-    -vim-plug: vim-plugins
-    -antigen-hs: zsh-plugins
-    -git-annex: Books, Movies
+## Vim Plugins : Check out vimrc
 
+## How I manage files
+    Projects        :               ?                   Dropbox
+    Writing         :               Everpad             Evernote
+
+    Flashcards      :               Anki                Anki
+    Music           :               Beets               Copy
+    Movies          :               git-annex           Copy
+    Books           :               git-annex           Copy
+    Photos          :               -                   Dropbox
 
 TOOLS
 -----
+
+# Manager
+    -npm                :           Node utilities
+    -mr                 :           Git Repos
+    -vim-plug           :           vim-plugins
+    -antigen-hs         :           ZSH-plugins
+    -git-annex          :           Books, Movies
+    -vcsh               :           Projects
 
 # General
     -tmux
     -vim
     -git
     -zsh
-    -mr
 
 # System
     -cv
@@ -108,6 +106,7 @@ TOOLS
 
 # UI
     -conky-manager
+    -dconf-editor
     -indicators
         -flux
         -temperature
@@ -120,7 +119,6 @@ TOOLS
     -tex/detex
     -geeknote
     -ledger
-    -git annex
 
 # Music
     -id3tool
