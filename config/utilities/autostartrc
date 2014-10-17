@@ -9,7 +9,3 @@
 [btsync]
     name = btsync
     path = btsync
-
-[shout]
-    name = shout
-    path = shout
