@@ -72,14 +72,6 @@ checkout = git clone 'git@github.com:fideloper/Vaprobash.git' 'Vaprobash'
 [.zsh/antigen-hs]
 checkout = git clone 'git@github.com:srijanshetty/antigen-hs.git' 'antigen-hs'
 
-[/media/srijan/sync/Copy/Movies]
-checkout = git clone '/home/srijan/Movies' 'Movies'
-update = git annex sync
-
-[Documents/GitHub/vcsh]
-checkout = git clone 'https://github.com/RichiH/vcsh.git' 'vcsh'
-update = sudo make install
-
 [Documents/GitHub/firewall-auth]
 checkout = git clone 'git@github.com:srijanshetty/firewall-auth.git' 'firewall-auth'
 link = ln -s ${PWD}/firewall-auth.py $LOCAL_BIN/firewall-auth1
