@@ -75,3 +75,9 @@ checkout = git clone 'git@github.com:srijanshetty/antigen-hs.git' 'antigen-hs'
 [Documents/GitHub/firewall-auth]
 checkout = git clone 'git@github.com:srijanshetty/firewall-auth.git' 'firewall-auth'
 link = ln -s ${PWD}/firewall-auth.py $LOCAL_BIN/firewall-auth1
+
+[Documents/GitHub/autostart]
+checkout = git clone 'git@github.com:srijanshetty/autostart.git' 'autostart'
+link = 
+    ln -s ${PWD}/autostart $LOCAL_BIN
+    ln -s ${PWD}/run.sh $LOCAL_BIN
