@@ -6,26 +6,18 @@ TODO
     -better logging
     -Read config.cfg in custom
     -autostartrc
-    -links
-        -btsync
 
 # Test
-    -copy/dropbox/btsync/MEGA
+    -copy/dropbox/MEGA/btsync
+    -docker/vagrant/virtualbox
     -xchat
-    -tree
     -indicator sysmon
     -photoqt
     -youtube-dl
     -everpad
     -keybase
     -browsersync
-
-# Tools
-    -geeknote
-    -cowsay
     -Source Code Pro font/Patched powerline fonts
-    -docker+vagrant+virtualbox
-    -firefox/chromium
     -keyboard shortcuts elementary
     -ccze
 
