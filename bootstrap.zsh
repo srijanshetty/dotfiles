@@ -91,6 +91,7 @@ function config_zsh() {
     fi
 
     configure "ZSH" "${CONFDIR}/shells/zsh/zprezto" ~/.zprezto
+    configure "ANTIGEN" "${CONFDIR}/config/zsh/bundles" ~/.zsh/bundles
 
     setopt EXTENDED_GLOB
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do

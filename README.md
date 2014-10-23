@@ -5,34 +5,29 @@ TODO
     -track projects
     -better logging
     -Read config.cfg in custom
-    -antigen-hs installer
     -autostartrc
-    -Media management using Copy
     -links
         -btsync
 
 # Test
-    -MEGA and ondedrip-d
+    -copy/dropbox/btsync/MEGA
+    -xchat
+    -tree
     -indicator sysmon
     -photoqt
     -youtube-dl
     -everpad
     -keybase
+    -browsersync
 
 # Tools
-    -browsersync & shout
     -geeknote
     -cowsay
     -Source Code Pro font/Patched powerline fonts
     -docker+vagrant+virtualbox
-    -onedrive/copy/dropbox/skype/btsync
-    -sublime/firefox/chromium
+    -firefox/chromium
     -keyboard shortcuts elementary
-    -fstab
     -ccze
-    -crontab
-    -nmap
-    -tcpdump
 
 Features
 ---------
@@ -44,12 +39,6 @@ Features
         - **Sandbox**: ~/Documents/sandbox
 
 # Custom
-## Autostart
-    - `autostart start/stop` will start the list of programs listed in ~/.autostartrc
-
-## Autojump
-    - Jump to directories using j
-
 ## Prezto modules
     - **history-substring**
     - **syntax-highlight**
@@ -70,8 +59,8 @@ Features
 
 ## How I manage files
     Projects        :               ?                   Dropbox
-    Writing         :               Everpad             Evernote
 
+    Writing         :               Everpad             Evernote
     Flashcards      :               Anki                Anki
     Music           :               Beets               Copy
     Movies          :               git-annex           Copy
@@ -145,4 +134,3 @@ TOOLS
     -Copy
     -Btsync
     -MEGA
-    -ondedrive-d
