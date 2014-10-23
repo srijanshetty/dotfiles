@@ -25,6 +25,7 @@ Available options:
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
     -d | --devel                       yo, haskell-platform, gulp, ipython
+    --fun                              cowsay, fortune
     --build                            pip, easy_install
     --sync                             onedrive,copy,dropbox,skype
     -t | --test                        Random tests
@@ -114,6 +115,7 @@ function install_system() {
     installer dstat || ERR=1
     installer htop || ERR=1
     installer iotop || ERR=1
+    installer tree || ERR=1
     npm_install trash || ERR=1
 }
 
@@ -157,6 +159,9 @@ function install_devel_tools() {
 
     # RVM
     install_rvm || ERR=1
+
+    # Cow commit
+    installer cowsay || ERR=1
 }
 
 function install_music () {
@@ -221,6 +226,14 @@ function install_indicators() {
     installer shutter || ERR=1
 }
 
+function install_fun() {
+    # for fortune
+    installer fortune-mod || ERR=1
+
+    # Cow commit
+    installer cowsay || ERR=1
+}
+
 # In case the argument list is empty
 if [ -z "$1" ]; then
     help_text
@@ -260,6 +273,9 @@ while [ -n "$1" ]; do
 
         -d | --devel)
             install_devel_tools;;
+
+        --fun)
+            install_fun;;
 
         --build)
             install_build_tools;;
