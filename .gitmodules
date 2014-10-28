@@ -3,4 +3,4 @@
 	url = https://github.com/srijanshetty/prezto.git
 [submodule "config/vim-plug"]
 	path = config/vim-plug
-	url = git@github.com:srijanshetty/vim-plug.git
+	url = http://github.com/srijanshetty/vim-plug.git
