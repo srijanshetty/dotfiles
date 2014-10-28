@@ -43,7 +43,7 @@ checkout = git clone 'https://github.com/Xfennec/cv.git' 'cv' && cd cv && make &
 update = git pull && make && sudo make install
 
 [Documents/GitHub/neovim]
-checkout = git clone 'git@github.com:neovim/neovim.git' 'neovim'
+checkout = git clone 'http://github.com/neovim/neovim.git' 'neovim'
 
 [Documents/GitHub/geeknote]
 checkout = git clone 'git://github.com/VitaliyRodnenko/geeknote.git' 'geeknote' && cd geeknote && sudo python setup.py install
@@ -53,32 +53,32 @@ update = git pull --force && sudo python setup.py install
 checkout = git clone 'https://github.com/xybu92/onedrive-d.git' 'onedrive-d'
 
 [Documents/www/zeppelin]
-checkout = git clone 'git@github.com:gdg-x/zeppelin.git' 'zeppelin'
+checkout = git clone 'https://github.com/gdg-x/zeppelin.git' 'zeppelin'
 
 [.nvm]
 checkout = git clone 'https://github.com/creationix/nvm.git' '.nvm'
 update = git checkout master && git pull && git checkout `git describe --abbrev=0 --tags`
 
 [Documents/GitHub/git-extras]
-checkout = git clone 'git@github.com:visionmedia/git-extras.git' 'git-extras'
+checkout = git clone 'https://github.com/visionmedia/git-extras.git' 'git-extras'
 update = git pull && sudo make install
 
 [Documents/GitHub/pushbullet-bash]
-checkout = git clone 'git@github.com:Red5d/pushbullet-bash.git' 'pushbullet-bash'
+checkout = git clone 'https://github.com/Red5d/pushbullet-bash.git' 'pushbullet-bash'
 link = ln -s ${PWD}/pushbullet $LOCAL_BIN
 
 [Documents/GitHub/Vaprobash]
-checkout = git clone 'git@github.com:fideloper/Vaprobash.git' 'Vaprobash'
+checkout = git clone 'https://github.com/fideloper/Vaprobash.git' 'Vaprobash'
 
 [.zsh/antigen-hs]
 checkout = git clone 'https://github.com/srijanshetty/antigen-hs.git' 'antigen-hs'
 
 [Documents/GitHub/firewall-auth]
-checkout = git clone 'git@github.com:srijanshetty/firewall-auth.git' 'firewall-auth'
+checkout = git clone 'https://github.com/srijanshetty/firewall-auth.git' 'firewall-auth'
 link = ln -s ${PWD}/firewall-auth.py $LOCAL_BIN/firewall-auth1
 
 [Documents/GitHub/autostart]
-checkout = git clone 'git@github.com:srijanshetty/autostart.git' 'autostart'
+checkout = git clone 'https://github.com/srijanshetty/autostart.git' 'autostart'
 link = 
 	   ln -s ${PWD}/autostart $LOCAL_BIN
 	   ln -s ${PWD}/run.sh $LOCAL_BIN
