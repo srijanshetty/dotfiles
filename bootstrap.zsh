@@ -2,7 +2,7 @@
 
 
 # Store the configuration directory for use by the functions
-CONFDIR="$(dirname "$0")"
+CONFDIR=${PWD}
 [ -z $DOT_HELPER ] && source "${CONFDIR}/helpers/helper.sh"
 [ -z $DOT_CONFIGURE ] && source "${CONFDIR}/helpers/configure.zsh"
 
