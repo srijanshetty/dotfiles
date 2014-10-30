@@ -6,20 +6,21 @@ TODO
     -better logging
     -Read config.cfg in custom
     -autostartrc
-
-# Test
+    -everpad
+    -keybase
     -copy/dropbox/MEGA/btsync
     -docker/vagrant/virtualbox
+    -latest zsh/git/vim
+
+# Test
+    -torrent-mount
     -xchat
     -indicator sysmon
     -photoqt
     -youtube-dl
-    -everpad
-    -keybase
     -browsersync
     -Source Code Pro font/Patched powerline fonts
     -keyboard shortcuts elementary
-    -ccze
 
 Features
 ---------
