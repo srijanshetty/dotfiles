@@ -90,3 +90,6 @@ update = git pull && sudo make install
 [Documents/GitHub/git-hooks]
 checkout = git clone 'https://github.com/icefox/git-hooks.git' 'git-hooks'
 link = ln -s ${PWD}/git-hooks $LOCAL_BIN/git-hooks
+
+[Documents/GitHub/zsh]
+checkout = git clone 'https://github.com/zsh-users/zsh.git' 'zsh'
