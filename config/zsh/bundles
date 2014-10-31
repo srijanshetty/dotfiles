@@ -1,6 +1,6 @@
 bundle "supercrabtree/k"
 bundle "voronkovich/gitignore.plugin.zsh"
-bundle "adrien-f/docker-zsh"
+bundle "srijanshetty/docker-zsh"
 bundle "oknowton/zsh-dwim"
 bundle "Tarrasch/zsh-autoenv"
 bundle "s7anley/zsh-geeknote"
