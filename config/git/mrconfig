@@ -93,3 +93,6 @@ link = ln -s ${PWD}/git-hooks $LOCAL_BIN/git-hooks
 
 [Documents/GitHub/zsh]
 checkout = git clone 'https://github.com/zsh-users/zsh.git' 'zsh'
+
+[Documents/GitHub/node-unblocker]
+checkout = git clone 'https://github.com/nfriedly/node-unblocker.git' 'node-unblocker'
