@@ -1,7 +1,3 @@
-[xSwipe]
-    name = xSwipe.pl
-    path = xSwipe.pl
-
 [firewall-auth]
     name = firewall-auth
     path = firewall-auth
@@ -9,3 +5,11 @@
 [btsync]
     name = btsync
     path = btsync
+
+[everpad]
+    name = everpad
+    path = everpad
+
+[xSwipe.pl]
+    name = xSwipe.pl
+    path = xSwipe.pl
