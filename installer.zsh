@@ -17,7 +17,7 @@ USAGE: installer <arguments>
 Available options:
 
     -f | --full                        Full Installations
-    -e | --essentials                  zsh, git, vim, tmux, ag
+    -e | --essentials                  zsh, git, vim, tmux, ag, mr
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
     -s | --system                      dstat, htop, iotop, trash
@@ -90,12 +90,13 @@ function install_build_tools() {
 
 # zsh, ag, vim ,git and screen
 function install_essentials() {
-    highlight "\nInstalling essentials: zsh, vim, git, tmux, ag"
+    highlight "\nInstalling essentials: zsh, vim, git, tmux, ag, mr"
 
     installer git || ERR=1
     installer vim || ERR=1
     installer tmux || ERR=1
     installer zsh || ERR=1
+    installer myrepos || ERR=1
     installer -n ag -p silversearcher-ag || ERR=1
 }
 

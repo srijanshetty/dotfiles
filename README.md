@@ -2,7 +2,6 @@ TODO
 -----
 
 # General
-    -track projects
     -better logging
     -Read config.cfg in custom
     -autostartrc
@@ -18,7 +17,6 @@ TODO
     -indicator sysmon
     -photoqt
     -youtube-dl
-    -browsersync
     -Source Code Pro font/Patched powerline fonts
     -keyboard shortcuts elementary
 
