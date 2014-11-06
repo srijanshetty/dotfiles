@@ -96,3 +96,10 @@ checkout = git clone 'https://github.com/zsh-users/zsh.git' 'zsh'
 
 [Documents/GitHub/node-unblocker]
 checkout = git clone 'https://github.com/nfriedly/node-unblocker.git' 'node-unblocker'
+
+[Documents/GitHub/powerline-fonts]
+checkout = git clone 'https://github.com/Lokaltog/powerline-fonts.git' 'powerline-fonts'
+update =
+        git pull
+        find ./* -iname '*.otf' -exec cp {} ${HOME}/.fonts/ \; && fc-cache -f
+
