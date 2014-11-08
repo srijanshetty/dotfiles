@@ -3,22 +3,14 @@ TODO
 
 # General
     -better logging
-    -Read config.cfg in custom
-    -autostartrc
-    -everpad
-    -keybase
     -copy/dropbox/MEGA/btsync
     -docker/vagrant/virtualbox
     -latest zsh/git/vim
 
 # Test
-    -torrent-mount
     -xchat
     -indicator sysmon
     -photoqt
-    -youtube-dl
-    -Source Code Pro font/Patched powerline fonts
-    -keyboard shortcuts elementary
 
 Features
 ---------
@@ -50,10 +42,9 @@ Features
 
 ## How I manage files
     Projects        :               ?                   Dropbox
-
-    Writing         :               Everpad             Evernote
+    Writing         :               Geeknote            Evernote
     Flashcards      :               Anki                Anki
-    Music           :               Beets               Copy
+    Music           :               Beets               Copy/Btsync
     Movies          :               git-annex           Copy
     Books           :               git-annex           Copy
     Photos          :               -                   Dropbox
@@ -64,10 +55,10 @@ TOOLS
 # Manager
     -npm                :           Node utilities
     -mr                 :           Git Repos
-    -vim-plug           :           vim-plugins
+    -vim-plug           :           VIM-plugins
     -antigen-hs         :           ZSH-plugins
     -git-annex          :           Books, Movies
-    -vcsh               :           Projects
+    -bt-sync            :           Music
 
 # General
     -tmux

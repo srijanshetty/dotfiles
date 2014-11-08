@@ -76,7 +76,7 @@ function installer() {
 }
 
 # a function to install something using npm
-function npm_install() {
+function npm-install() {
     if hash npm &> /dev/null; then
         if hash $1 &> /dev/null; then
             warn "$1 is already installed"

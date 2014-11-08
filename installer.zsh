@@ -21,7 +21,7 @@ Available options:
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
     -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
     -s | --system                      dstat, htop, iotop, trash
-    -u | --utilities                   texlive, pandoc, ledger, git-annex, mr
+    -u | --utilities                   texlive, pandoc, ledger, git-annex
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
     -d | --devel                       yo, haskell-platform, gulp, ipython
@@ -117,7 +117,7 @@ function install_system() {
     installer htop || ERR=1
     installer iotop || ERR=1
     installer tree || ERR=1
-    npm_install trash || ERR=1
+    npm-install trash || ERR=1
 }
 
 # Utilities tools
@@ -137,7 +137,10 @@ function install_utilities() {
     installer git-annex
 
     # Install mr
-    install_mr || ERR=1
+    installer_myrepos || ERR=1
+
+    # Install keybase
+    npm-install keybase-installer || ERR=1
 }
 
 # devel tools
@@ -147,8 +150,8 @@ function install_devel_tools() {
     installer curl || ERR=1
 
     # Development on NodeJS
-    npm_install yo || ERR=1
-    npm_install gulp || ERR=1
+    npm-install yo || ERR=1
+    npm-install gulp || ERR=1
 
     # Haskell and cabal
     installer haskell-platform || ERR=1
@@ -188,6 +191,7 @@ function install_battery() {
     installer acpi || ERR=1
 
     highlight "\nUncomment bumblebee and tlp"
+
     # Adding repos for bumblebee
     # add ppa bumblebee/stable && sudo apt-get update
     # sudo apt-get install bumblebee bumblebee-nvidia virtualgl linux-headers-generic
