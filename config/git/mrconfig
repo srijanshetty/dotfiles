@@ -103,3 +103,6 @@ update =
         git pull
         find ./* -iname '*.otf' -exec cp {} ${HOME}/.fonts/ \; && fc-cache -f
 
+
+[Documents/GitHub/npm-package-store]
+checkout = git clone 'https://github.com/travishorn/npm-package-store.git' 'npm-package-store'
