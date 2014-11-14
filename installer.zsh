@@ -42,13 +42,15 @@ function install_latest() {
     # Add git repo
     # Add tmux repo
     # Add vim repo
+    # g++
+    add_ppa ubuntu-toolchain-r/test && sudo apt-get update
 }
 
 function install_elementary() {
     highlight "\nInstalling Elementary Utilities"
 
     # For most features
-    add_ppa ppa:versable/elementary-update
+    add_ppa versable/elementary-update
     add_ppa heathbar/super-wingpanel
 
     installer elementary-tweaks || ERR=1
@@ -58,7 +60,7 @@ function install_elementary() {
     installer dconf-editor || ERR=1
 
     # install conky-manager
-    add_ppa ppa:teejee2008/ppa && sudo apt-get update
+    add_ppa teejee2008/ppa && sudo apt-get update
     installer conky-manager
     # For theme http://www.teejeetech.in/2014/06/conky-manager-v2-themes.html
 
