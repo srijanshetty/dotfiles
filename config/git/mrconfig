@@ -2,12 +2,6 @@
 [Documents/GitHub/myrepos]
 checkout = git clone 'https://github.com/joeyh/myrepos.git' 'myrepos'
 
-[Documents/GitHub/sysadmin]
-checkout = git clone 'https://github.com/skx/sysadmin-util.git' 'sysadmin'
-link = 
-	   cd ..
-	   ln -s ${PWD}/sysadmin $LOCAL_BIN
-
 [Documents/GitHub/wifikill]
 checkout = git clone 'https://github.com/roglew/wifikill.git' 'wifikill'
 
@@ -99,10 +93,18 @@ checkout = git clone 'https://github.com/nfriedly/node-unblocker.git' 'node-unbl
 
 [Documents/GitHub/powerline-fonts]
 checkout = git clone 'https://github.com/Lokaltog/powerline-fonts.git' 'powerline-fonts'
-update =
-        git pull
-        find ./* -iname '*.otf' -exec cp {} ${HOME}/.fonts/ \; && fc-cache -f
+update = 
+	       git pull
+	       find ./* -iname '*.otf' -exec cp {} ${HOME}/.fonts/ \; && fc-cache -f
 
 
 [Documents/GitHub/npm-package-store]
 checkout = git clone 'https://github.com/travishorn/npm-package-store.git' 'npm-package-store'
+
+[Documents/GitHub/GitHubRating]
+checkout = git clone 'https://github.com/danielmiessler/GitHubRating.git' 'GitHubRating'
+link = ln -s ${PWD}/GitHubRating.sh $LOCAL_BIN/GitHubRating.sh
+
+[Documents/GitHub/Antidoto]
+checkout = git clone 'https://github.com/FastVPSEestiOu/Antidoto.git' 'Antidoto'
+link = ln -s ${PWD}/Antidoto.pl $LOCAL_BIN/Antidoto.pl
