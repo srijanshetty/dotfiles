@@ -109,9 +109,6 @@ link = ln -s ${PWD}/GitHubRating.sh $LOCAL_BIN/GitHubRating.sh
 checkout = git clone 'https://github.com/FastVPSEestiOu/Antidoto.git' 'Antidoto'
 link = ln -s ${PWD}/Antidoto.py $LOCAL_BIN/Antidoto.pl
 
-[Documents/GitHub/ulogme]
-checkout = git clone 'https://github.com/karpathy/ulogme.git' 'ulogme'
-
 [Documents/GitHub/dirs3arch]
 checkout = git clone 'https://github.com/maurosoria/dirs3arch.git' 'dirs3arch'
 link = ln -s ${PWD}/dirs3arch.py $LOCAL_BIN/dirs3arch.py
