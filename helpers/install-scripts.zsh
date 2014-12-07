@@ -7,22 +7,15 @@ HELPER_DIR="$(dirname "$0")"
 
 # Install PIP
 function install_pip() {
-    highlight "\nInstalling easy_setup"
+    highlight "\nInstalling pip"
 
-    wget http://peak.telecommunity.com/dist/ez_setup.py &>> $LOGFILE && python ez_setup.py &>> $LOGFILE && rm ez_setup.py &>> $LOGFILE
+    wget https://bootstrap.pypa.io/get-pip.py &>> $LOGFILE && python get-pip.py &>> $LOGFILE && rm get-pip.py
 
     if [ $? -eq 0 ]; then
-        success "easy_setup installed"
-    else
-        fail "easy_setup installation failed"
-        return 1
-    fi
-
-    highlight "\nInstalling pip"
-    if easy_install pip &>> $LOGFILE; then
         success "pip installed"
     else
-        fail "pip installation failed"
+        fail "pii installation failed"
+        return 1
     fi
 }
 
