@@ -42,15 +42,15 @@ function install_latest() {
     # Add tmux repo
     # Add vim repo
     # g++
-    add_ppa ubuntu-toolchain-r/test && sudo apt-get update
+    add-ppa ubuntu-toolchain-r/test && sudo apt-get update
 }
 
 function install_elementary() {
     highlight "\nInstalling Elementary Utilities"
 
     # For most features
-    add_ppa versable/elementary-update
-    add_ppa heathbar/super-wingpanel
+    add-ppa versable/elementary-update
+    add-ppa heathbar/super-wingpanel
 
     installer elementary-tweaks || ERR=1
     installer super-wingpanel || ERR=1
@@ -59,12 +59,12 @@ function install_elementary() {
     installer dconf-editor || ERR=1
 
     # install conky-manager
-    add_ppa teejee2008/ppa && sudo apt-get update
+    add-ppa teejee2008/ppa && sudo apt-get update
     installer conky-manager
     # For theme http://www.teejeetech.in/2014/06/conky-manager-v2-themes.html
 
     # Y PPA Manager
-    add_ppa webupd8team/y-ppa-manager && sudo apt-get update
+    add-ppa webupd8team/y-ppa-manager && sudo apt-get update
     installer y-ppa-manager || ERR=1
 }
 
@@ -130,11 +130,11 @@ function install_utilities() {
     installer pandoc || ERR=1
 
     # PPA for ledger
-    add_ppa mbudde/ledger && sudo apt-get update
+    add-ppa mbudde/ledger && sudo apt-get update
     installer ledger || ERR=1
 
     # Git annex
-    add_ppa fmarier/git-annex && sudo apt-get update
+    add-ppa fmarier/git-annex && sudo apt-get update
     installer git-annex
 
     # Install mr
@@ -169,7 +169,7 @@ function install_devel_tools() {
     installer python3 || ERR=1
 
     # For Python3.3 onwards
-    add_ppa fkrull/deadsnakes && sudo apt-get update
+    add-ppa fkrull/deadsnakes && sudo apt-get update
     installer python3.4 || ERR=1
 }
 
@@ -203,7 +203,7 @@ function install_battery() {
     # sudo apt-get install bumblebee bumblebee-nvidia virtualgl linux-headers-generic
 
     # tlp
-    # add_ppa linrunner/tlp && sudo apt-get update
+    # add-ppa linrunner/tlp && sudo apt-get update
     # sudo apt-get install tlp tlp-rdw
     # sudo tlp start
 }
@@ -218,22 +218,22 @@ function install_indicators() {
     installer fluxgui || ERR=1
 
     # the indicator for sensors
-    add_ppa nilarimogard/webupd8 && sudo apt-get update
+    add-ppa nilarimogard/webupd8 && sudo apt-get update
 
     # Indicator for calendar
-    add_ppa atareao/atareao && sudo apt-get update
+    add-ppa atareao/atareao && sudo apt-get update
     installer calendar-indicator
 
-    add_ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
+    add-ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
     installer indicator-sysmonitor || ERR=1
 
-	add_ppa noobslab/indicators && sudo apt-get update
+	add-ppa noobslab/indicators && sudo apt-get update
     installer my-weather-indicator || ERR=1
 
-    add_ppa alexmurray/indicator-sensors && sudo apt-get update
+    add-ppa alexmurray/indicator-sensors && sudo apt-get update
     installer indicator-sensors || ERR=1
 
-    add_ppa ppa:shutter/ppa && sudo apt-get update
+    add-ppa ppa:shutter/ppa && sudo apt-get update
     installer shutter || ERR=1
 }
 

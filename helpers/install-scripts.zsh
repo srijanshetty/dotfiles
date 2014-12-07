@@ -97,7 +97,7 @@ function npm-install() {
 }
 
 # Function to add a ppa
-function add_ppa() {
+function add-ppa() {
   grep -h "^deb.*$1" /etc/apt/sources.list.d/* &>> $LOGFILE
   if [ $? -ne 0 ]; then
     success "Adding ppa:$1"
