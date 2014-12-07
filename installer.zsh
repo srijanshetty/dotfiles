@@ -34,7 +34,7 @@ _EOH_
 
 function test_function() {
     highlight "\nRunning test function"
-    install_mr
+    install-mr
 }
 
 function install_latest() {
@@ -138,7 +138,7 @@ function install_utilities() {
     installer git-annex
 
     # Install mr
-    installer_myrepos || ERR=1
+    installer-mr || ERR=1
 
     # Install keybase
     npm-install keybase-installer || ERR=1
@@ -162,15 +162,15 @@ function install_devel_tools() {
     installer cscope || ERR=1
 
     # RVM
-    install_rvm || ERR=1
+    install-rvm || ERR=1
 
     # For Python3
     installer ipython || ERR=1
     installer python3 || ERR=1
 
     # For Python3.3 onwards
-    add-ppa fkrull/deadsnakes && sudo apt-get update
-    installer python3.4 || ERR=1
+    # add-ppa fkrull/deadsnakes && sudo apt-get update
+    # installer python3.4 || ERR=1
     pip-install virtualenv || ERR=1
     pip-install virtualenvwrapper || ERR=1
 }
@@ -242,9 +242,6 @@ function install_indicators() {
 function install_fun() {
     # for fortune
     installer fortune-mod || ERR=1
-
-    # Cow commit
-    installer cowsay || ERR=1
 
     # Cow commit
     installer cowsay || ERR=1

@@ -111,10 +111,7 @@ function npm-install() {
 
 # Install PIP
 function install-pip() {
-    highlight "\nInstalling pip"
-
     wget https://bootstrap.pypa.io/get-pip.py &>> $LOGFILE && python get-pip.py &>> $LOGFILE && rm get-pip.py
-
     if [ $? -eq 0 ]; then
         success "pip installed"
     else
@@ -125,8 +122,6 @@ function install-pip() {
 
 # Install RVM
 function install-rvm() {
-    highlight "\nInstalling RVM"
-
     if hash rvm &>> $LOGFILE; then
         warn "RVM already installed"
         return 0
