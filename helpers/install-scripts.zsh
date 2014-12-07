@@ -5,18 +5,17 @@ HELPER_DIR="$(dirname "$0")"
 [ -z $DOT_HELPER ] && source "${HELPER_DIR}/helper.sh"
 [ -z $DOT_CONFIGURE ] && source "${HELPER_DIR}/configure.zsh"
 
-# Install PIP
-function install_pip() {
-    highlight "\nInstalling pip"
+# Function to add a ppa
+function add-ppa() {
+  grep -h "^deb.*$1" /etc/apt/sources.list.d/* &>> $LOGFILE
+  if [ $? -ne 0 ]; then
+    success "Adding ppa:$1"
+    sudo add-apt-repository -y ppa:$1 | tee -a $LOGFILE
+    return 0
+  fi
 
-    wget https://bootstrap.pypa.io/get-pip.py &>> $LOGFILE && python get-pip.py &>> $LOGFILE && rm get-pip.py
-
-    if [ $? -eq 0 ]; then
-        success "pip installed"
-    else
-        fail "pii installation failed"
-        return 1
-    fi
+  warn "ppa:$1 already exists"
+  return 1
 }
 
 # function to install something using apt-get
@@ -68,6 +67,27 @@ function installer() {
     done
 }
 
+# a function to install something using pip
+function pip-install() {
+    if hash pip &> /dev/null; then
+        if hash $1 &> /dev/null; then
+            warn "$1 is already installed"
+            return 0
+        else
+            if sudo pip install $1 &>> $LOGFILE; then
+                success "$1 installed"
+                return 0
+            else
+                fail "$1 installation"
+                return 1
+            fi
+        fi
+    else
+        fail "Pip not installed. Install pip and then try"
+        return 1
+    fi
+}
+
 # a function to install something using npm
 function npm-install() {
     if hash npm &> /dev/null; then
@@ -89,21 +109,22 @@ function npm-install() {
     fi
 }
 
-# Function to add a ppa
-function add-ppa() {
-  grep -h "^deb.*$1" /etc/apt/sources.list.d/* &>> $LOGFILE
-  if [ $? -ne 0 ]; then
-    success "Adding ppa:$1"
-    sudo add-apt-repository -y ppa:$1 | tee -a $LOGFILE
-    return 0
-  fi
+# Install PIP
+function install-pip() {
+    highlight "\nInstalling pip"
 
-  warn "ppa:$1 already exists"
-  return 1
+    wget https://bootstrap.pypa.io/get-pip.py &>> $LOGFILE && python get-pip.py &>> $LOGFILE && rm get-pip.py
+
+    if [ $? -eq 0 ]; then
+        success "pip installed"
+    else
+        fail "pii installation failed"
+        return 1
+    fi
 }
 
 # Install RVM
-function install_rvm() {
+function install-rvm() {
     highlight "\nInstalling RVM"
 
     if hash rvm &>> $LOGFILE; then
@@ -121,7 +142,7 @@ function install_rvm() {
 }
 
 # install mr
-function install_mr() {
+function install-mr() {
     RETURN_VALUE=0
 
     if [ ! -d $GITHUB_DIR ]; then
