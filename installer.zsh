@@ -171,6 +171,8 @@ function install_devel_tools() {
     # For Python3.3 onwards
     add-ppa fkrull/deadsnakes && sudo apt-get update
     installer python3.4 || ERR=1
+    pip-install virtualenv || ERR=1
+    pip-install virtualenvwrapper || ERR=1
 }
 
 # For the love of music

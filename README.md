@@ -42,22 +42,22 @@ Features
 [mrconfig]( ./config/git/mrconfig)
 
 ### Vim Plugins
-[vimrc](https://github.com/srijanshetty/vim-plug/vimrc)
+[vimrc](https://github.com/srijanshetty/vim-plug/blob/master/vimrc)
 
 TOOLS
 -----
 
 ### Manager
-    npm                 :           Node utilities
-    mr                  :           Git Repos
-    vim-plug            :           VIM-plugins
-    antigen-hs          :           ZSH-plugins
     git-annex           :           Books, Movies          :       Copy
     bt-sync/beets       :           Music                  :       Copy
     geeknote            :           Notes                  :       Evernote
-    Anki                :           Flashcards
     git                 :           Projects               :       GitHub/Dropbox
     Photos              :           -                      :       Dropbox
+    Anki                :           Flashcards
+    mr                  :           Git Repos
+    vim-plug            :           VIM-plugins
+    antigen-hs          :           ZSH-plugins
+    npm,rvm,pip         :           Package Managers
 
 ### General
 - tmux
@@ -98,6 +98,7 @@ TOOLS
 ### Development
 - curl
 - pip, ipython
+- python3, python3.4, virtualenv, virtualenv wrapper
 - ag
 - rvm
 - nvm
