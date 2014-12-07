@@ -24,7 +24,7 @@ Available options:
     -u | --utilities                   texlive, pandoc, ledger, git-annex
     -b | --battery                     acpi, bumbleebee, tlp
     -x | --xmonad                      xmonad
-    -d | --devel                       yo, haskell-platform, gulp, ipython
+    -d | --devel                       yo, haskell-platform, gulp, ipython, python3, python3.4
     --fun                              cowsay, fortune
     --build                            pip, easy_install
     --sync                             onedrive,copy,dropbox,skype
@@ -35,7 +35,6 @@ _EOH_
 function test_function() {
     highlight "\nRunning test function"
     install_mr
-
 }
 
 function install_latest() {
@@ -122,7 +121,7 @@ function install_system() {
     npm-install trash || ERR=1
 }
 
-# Utilities tools
+# Utilities
 function install_utilities() {
     highlight "\nInstalling Utilities"
 
@@ -157,7 +156,6 @@ function install_devel_tools() {
 
     # Haskell and cabal
     installer haskell-platform || ERR=1
-    installer ipython || ERR=1
 
     # For C
     installer exuberant-ctags || ERR=1
@@ -166,10 +164,16 @@ function install_devel_tools() {
     # RVM
     install_rvm || ERR=1
 
-    # Cow commit
-    installer cowsay || ERR=1
+    # For Python3
+    installer ipython || ERR=1
+    installer python3 || ERR=1
+
+    # For Python3.3 onwards
+    add_ppa fkrull/deadsnakes && sudo apt-get update
+    installer python3.4 || ERR=1
 }
 
+# For the love of music
 function install_music () {
     # Dependencies of beets for various plugins
     highlight "\nInstalling music tools"
@@ -236,6 +240,9 @@ function install_indicators() {
 function install_fun() {
     # for fortune
     installer fortune-mod || ERR=1
+
+    # Cow commit
+    installer cowsay || ERR=1
 
     # Cow commit
     installer cowsay || ERR=1
