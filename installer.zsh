@@ -153,6 +153,10 @@ function install_devel_tools() {
     # Development on NodeJS
     npm-install yo || ERR=1
     npm-install gulp || ERR=1
+    npm-install jshintc || ERR=1
+    npm-install express || ERR=1
+    npm-install express-generator || ERR=1
+
 
     # Haskell and cabal
     installer haskell-platform || ERR=1

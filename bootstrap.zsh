@@ -34,6 +34,9 @@ function config_vim() {
     highlight "\nConfiguring Vim"
     configure "VIM" "${CONFDIR}/config/vim-plug/vim/"  ~/.vim || ERR=1
     configure "VIM" "${CONFDIR}/config/vim-plug/vimrc" ~/.vimrc || ERR=1
+
+    # Vim development configuration
+    config_devel
 }
 
 # Git configuration
@@ -45,6 +48,12 @@ function config_git() {
 
     # setup the directory structure
     setup_dir
+}
+
+function config_devel() {
+    highlight "\nConfiguring development"
+    configure "JSHINT" "${CONFDIR}/config/code/js/jshintrc" ~/.jshintrc || ERR=1
+    configure "TERN" "${CONFDIR}/config/code/js/tern-project" ~/.tern-project || ERR=1
 }
 
 #Configuration file for tmux
