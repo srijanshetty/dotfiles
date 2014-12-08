@@ -34,7 +34,7 @@ _EOH_
 
 function test_function() {
     highlight "\nRunning test function"
-    install-mr
+    pip-install beets
 }
 
 function install_latest() {
@@ -183,10 +183,10 @@ function install_devel_tools() {
 function install_music () {
     # Dependencies of beets for various plugins
     highlight "\nInstalling music tools"
-    sudo pip install pylast || ERR=1
-    sudo pip install flask || ERR=1
-    sudo pip install discogs_client || ERR=1
-    sudo pip install beets || ERR=1
+    pip-install pylast || ERR=1
+    pip-install pylast || ERR=1
+    pip-install flask || ERR=1
+    pip-install beets || ERR=1
 
     # For music
     installer pavucontrol || ERR=1
