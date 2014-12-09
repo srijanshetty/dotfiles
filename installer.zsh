@@ -1,4 +1,4 @@
-#!/bin/zsh
+# !/bin/zsh
 
 # Use relative directories in sourcing
 CONFDIR="$(dirname $0)"
@@ -151,12 +151,14 @@ function install_devel_tools() {
     installer curl || ERR=1
 
     # Development on NodeJS
+    npm-install jshintc || ERR=1
+
     npm-install yo || ERR=1
     npm-install gulp || ERR=1
-    npm-install jshintc || ERR=1
-    npm-install express || ERR=1
-    npm-install express-generator || ERR=1
-
+    npm-install jshint || ERR=1
+    npm-install csslint || ERR=1
+    npm-install jsonlint || ERR=1
+    npm-install nodemon || ERR=1
 
     # Haskell and cabal
     installer haskell-platform || ERR=1
