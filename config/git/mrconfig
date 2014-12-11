@@ -112,3 +112,25 @@ link = ln -s ${PWD}/Antidoto.py $LOCAL_BIN/Antidoto.pl
 [Documents/GitHub/dirs3arch]
 checkout = git clone 'https://github.com/maurosoria/dirs3arch.git' 'dirs3arch'
 link = ln -s ${PWD}/dirs3arch.py $LOCAL_BIN/dirs3arch.py
+
+[Documents/GitHub/hot100]
+checkout = git clone 'https://github.com/sampsyo/hot100.git' 'hot100'
+
+[Documents/GitHub/coursera]
+checkout = git clone 'https://github.com/coursera-dl/coursera.git' 'coursera'
+
+[Documents/GitHub/peru]
+checkout = git clone 'https://github.com/buildinspace/peru.git' 'peru'
+
+[Documents/GitHub/icdiff]
+checkout = git clone 'https://github.com/jeffkaufman/icdiff.git' 'icdiff'
+link = 
+	       ln -s ${PWD}/icdiff $LOCAL_BIN/icdiff
+	       ln -s ${PWD}/git-icdiff $LOCAL_BIN/git-icdiff
+
+[Documents/GitHub/ulogme]
+checkout = git clone 'https://github.com/karpathy/ulogme.git' 'ulogme'
+
+[Documents/GitHub/atdtool]
+checkout = git clone 'git@github.com:lpenz/atdtool.git' 'atdtool'
+update = git pull && sudo make install
