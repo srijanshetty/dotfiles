@@ -80,7 +80,7 @@ function install_sync() {
 function install_build_tools() {
     highlight "\nInstalling build tools: pip, easy_install"
 
-    install_pip || ERR=1
+    install-pip || ERR=1
     installer python-dev || ERR=1
     installer cmake || ERR=1
     installer build-essential || ERR=1
