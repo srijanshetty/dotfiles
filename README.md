@@ -1,20 +1,28 @@
-TODO
+<!-- TODO -->
 -----
 
 ### General
 - better logging
-- copy/dropbox/MEGA/btsync
+- copy/dropbox/MEGA
 - docker/vagrant/virtualbox
 - latest zsh/git/vim
 
 ### Test
-- Zathura
-- htalk
-- xchat
+- zeal documentation : http://askubuntu.com/questions/279421/how-can-i-install-qt-5-x-on-12-04-lts
+- cron.daily
+- antigen-hs requires shelly
+- write about syntastic
+    - shell-check: checking shell
+    - adtool : english checking
+- peru : pip
+- coursera-dl : pip
+- zathura
 - atarci
-- pygments
-- indicator sysmon
 - photoqt
+
+### Not sure
+- express + mongodb + express-generator
+- xchat
 
 Features
 ---------
@@ -44,6 +52,9 @@ Features
 ### Vim Plugins
 [vimrc](https://github.com/srijanshetty/vim-plug/blob/master/vimrc)
 
+### Antigen Plugins
+[antigen](./config/zsh/bundles)
+
 TOOLS
 -----
 
@@ -63,7 +74,9 @@ TOOLS
 - tmux
 - vim
 - git
+  - mr
 - zsh
+  - antigen
 
 ### System
 - cv
@@ -71,8 +84,8 @@ TOOLS
 - htop
 - dstat
 - ranger
-- xSwipe
 - trash
+- autojump
 
 ### UI
 - conky-manager
@@ -89,6 +102,8 @@ TOOLS
 - tex/detex
 - geeknote
 - ledger
+- memo
+- ulogme
 
 ### Music
 - id3tool
@@ -97,14 +112,20 @@ TOOLS
 
 ### Development
 - curl
-- pip, ipython
-- python3, python3.4, virtualenv, virtualenv wrapper
+- python
+  - pip
+  - ipython
+  - python3 & 3.4
+  - virtualenv
+  - virtualenvwrapper
+  - pygments
 - ag
 - rvm
 - nvm
-  - yo
+  - yo, grunt, bower
   - gulp
-  - bower
+  - nodemon
+  - jshint, csslint, jsonlint
 - cabal (Haskell Platform)
 - Y-PPA-Manager
 - ctags & cscope
@@ -113,5 +134,5 @@ TOOLS
 ### Sync
 - Dropbox
 - Copy
-- Btsync
+- btsync
 - MEGA
