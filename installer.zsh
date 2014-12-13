@@ -180,6 +180,7 @@ function install_devel_tools() {
     # installer python3.4 || ERR=1
     pip-install virtualenv || ERR=1
     pip-install virtualenvwrapper || ERR=1
+    pip-install pygments || ERR=1
 }
 
 # For the love of music
