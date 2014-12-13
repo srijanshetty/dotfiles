@@ -230,8 +230,8 @@ function install_indicators() {
     add-ppa nilarimogard/webupd8 && sudo apt-get update
 
     # Indicator for calendar
-    add-ppa atareao/atareao && sudo apt-get update
-    installer calendar-indicator
+    # add-ppa atareao/atareao && sudo apt-get update
+    # installer calendar-indicator
 
     add-ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
     installer indicator-sysmonitor || ERR=1
