@@ -161,7 +161,8 @@ function install_devel_tools() {
     npm-install nodemon || ERR=1
 
     # Haskell and cabal
-    installer haskell-platform || ERR=1
+    installer ghc || ERR=1
+    installer cabal-install || ERR=1
 
     # For C
     installer exuberant-ctags || ERR=1
