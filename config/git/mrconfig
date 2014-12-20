@@ -134,3 +134,12 @@ checkout = git clone 'https://github.com/karpathy/ulogme.git' 'ulogme'
 [Documents/GitHub/atdtool]
 checkout = git clone 'git@github.com:lpenz/atdtool.git' 'atdtool'
 update = git pull && sudo make install
+
+[Documents/GitHub/killmesoftly]
+checkout = git clone 'https://github.com/alanfranz/killmesoftly.git' 'killmesoftly'
+link = 
+	       ln -s ${PWD}/kmsn $LOCAL_BIN/kmsn
+	       ln -s ${PWD}/kmsp $LOCAL_BIN/kmsp
+
+[Documents/GitHub/edx-downloader]
+checkout = git clone 'https://github.com/shk3/edx-downloader.git' 'edx-downloader'
