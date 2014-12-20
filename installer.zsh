@@ -1,10 +1,10 @@
-# !/bin/zsh
+#!/bin/zsh
 
 # Use relative directories in sourcing
 CONFDIR="$(dirname $0)"
-[ -z $DOT_HELPER ] && source "${CONFDIR}/helpers/helper.sh"
-[ -z $DOT_INSTALL ] && source "${CONFDIR}/helpers/install-scripts.zsh"
-[ -z $DOT_CONFIGURE ] && source "${CONFDIR}/helpers/configure.zsh"
+[ -z "$DOT_HELPER" ] && source "${CONFDIR}/helpers/helper.sh"
+[ -z "$DOT_INSTALL" ] && source "${CONFDIR}/helpers/install-scripts.zsh"
+[ -z "$DOT_CONFIGURE" ] && source "${CONFDIR}/helpers/configure.zsh"
 
 #For errors
 ERR=0
@@ -16,27 +16,28 @@ USAGE: installer <arguments>
 
 Available options:
 
-    -f | --full                        Full Installations
-    -e | --essentials                  zsh, git, vim, tmux, ag, mr
-    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse
-    -m | --music                       beets, vlc, pavucontrol, plugins, id3tool
-    -s | --system                      dstat, htop, iotop, trash
-    -u | --utilities                   texlive, pandoc, ledger, git-annex
-    -b | --battery                     acpi, bumbleebee, tlp
-    -x | --xmonad                      xmonad
-    -d | --devel                       yo, haskell-platform, gulp, ipython, python3, python3.4
-    --fun                              cowsay, fortune
-    --build                            pip, easy_install
-    --sync                             onedrive,copy,dropbox,skype
     -t | --test                        Random tests
+    -f | --full                        Full Installations (without elementary and xmonad)
+    -e | --essentials                  zsh, git, vim, tmux, ag, mr
+    -o | --elementary-os               Elementary OS
+    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse, calendar, sysmon, shutter
+    -m | --music                       beets, vlc, pavucontrol, id3tool
+    -s | --system                      dstat, htop, iotop, trash, tree
+    -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
+    -b | --battery                     acpi, bumbleebee, tlp
+    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools
+    -x | --xmonad                      xmonad
+    --fun                              cowsay, fortune
+    --sync                             onedrive, copy, dropbox, btsync
 _EOH_
 }
 
+# Test functions
 function test_function() {
     highlight "\nRunning test function"
-    pip-install beets
 }
 
+# Latest essentials
 function install_latest() {
     # Add git repo
     # Add tmux repo
@@ -45,6 +46,7 @@ function install_latest() {
     add-ppa ubuntu-toolchain-r/test && sudo apt-get update
 }
 
+# Utilities for Elementary OS
 function install_elementary() {
     highlight "\nInstalling Elementary Utilities"
 
@@ -68,28 +70,17 @@ function install_elementary() {
     installer y-ppa-manager || ERR=1
 }
 
+# Online sync utilities
 function install_sync() {
     # Dropbox, copy, onedrive
+    highlight "\nInstalling sync tools: btsync"
 
     # btsync
     sh -c "$(curl -fsSL http://debian.yeasoft.net/add-btsync-repository.sh)"
     installer btsync-gui || ERR=1
 }
 
-# Build tools
-function install_build_tools() {
-    highlight "\nInstalling build tools: pip, easy_install"
-
-    install-pip || ERR=1
-    installer python-dev || ERR=1
-    installer cmake || ERR=1
-    installer build-essential || ERR=1
-    installer autoconf || ERR=1
-    installer automake || ERR=1
-    installer apt-file || ERR=1
-}
-
-# zsh, ag, vim ,git and screen
+# zsh, ag, vim, git and tmux
 function install_essentials() {
     highlight "\nInstalling essentials: zsh, vim, git, tmux, ag, mr"
 
@@ -106,13 +97,13 @@ function install_xmonad() {
     highlight "\nInstalling xmonad"
 
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
-    installer gnome-panel || ERR=1
-    installer xmonad || ERR=1
+    # installer gnome-panel || ERR=1
+    # installer xmonad || ERR=1
 }
 
 # System monitoring utilies
 function install_system() {
-    highlight "\nInstalling System Utilities"
+    highlight "\nInstalling System Utilities: dstat, htop, iotop, tree, trash"
 
     installer dstat || ERR=1
     installer htop || ERR=1
@@ -123,11 +114,12 @@ function install_system() {
 
 # Utilities
 function install_utilities() {
-    highlight "\nInstalling Utilities"
+    highlight "\nInstalling Utilities: TeX, pandoc, zathura, ledger, git-annex, mr, keybase"
 
     installer -n latex -p texlive || ERR=1
     installer -n xelatex -p texlive-xetex || ERR=1
     installer pandoc || ERR=1
+    installer zathura || ERR=1
 
     # PPA for ledger
     add-ppa mbudde/ledger && sudo apt-get update
@@ -146,13 +138,12 @@ function install_utilities() {
 
 # devel tools
 function install_devel_tools() {
-    highlight "\nInstalling devel tools"
+    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools"
 
     installer curl || ERR=1
 
     # Development on NodeJS
     npm-install jshintc || ERR=1
-
     npm-install yo || ERR=1
     npm-install gulp || ERR=1
     npm-install jshint || ERR=1
@@ -165,11 +156,20 @@ function install_devel_tools() {
     installer cabal-install || ERR=1
 
     # For C
+    installer cmake || ERR=1
+    installer build-essential || ERR=1
+    installer autoconf || ERR=1
+    installer automake || ERR=1
+    installer apt-file || ERR=1
     installer exuberant-ctags || ERR=1
     installer cscope || ERR=1
 
     # RVM
     install-rvm || ERR=1
+
+    # Python
+    install-pip || ERR=1
+    installer python-dev || ERR=1
 
     # For Python3
     installer ipython || ERR=1
@@ -186,7 +186,7 @@ function install_devel_tools() {
 # For the love of music
 function install_music () {
     # Dependencies of beets for various plugins
-    highlight "\nInstalling music tools"
+    highlight "\nInstalling music tools: beets, vlc, pavucontrol, id3tool"
     pip-install pylast || ERR=1
     pip-install pylast || ERR=1
     pip-install flask || ERR=1
@@ -201,7 +201,7 @@ function install_music () {
 
 # Tools for making sure ubuntu doesn't kill my battery
 function install_battery() {
-    highlight "\nInstalling battery monitoring utilies"
+    highlight "\nInstalling battery monitoring utilies: acpi"
 
     # Monitoring tools
     installer acpi || ERR=1
@@ -220,7 +220,7 @@ function install_battery() {
 
 # have to keep a check on the temparature of the laptop
 function install_indicators() {
-    highlight "\nInstalling indicators"
+    highlight "\nInstalling indicators: lm-sensors, hddtemp, flux, calendar, sysmon, sensors, shutter"
 
     # the sensors which are required
     installer lm-sensors || ERR=1
@@ -231,8 +231,8 @@ function install_indicators() {
     add-ppa nilarimogard/webupd8 && sudo apt-get update
 
     # Indicator for calendar
-    # add-ppa atareao/atareao && sudo apt-get update
-    # installer calendar-indicator
+    add-ppa atareao/atareao && sudo apt-get update
+    installer calendar-indicator
 
     add-ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
     installer indicator-sysmonitor || ERR=1
@@ -248,6 +248,7 @@ function install_indicators() {
 }
 
 function install_fun() {
+    highlight "\nInstalling fun tools: fotune-mod, cowsay"
     # for fortune
     installer fortune-mod || ERR=1
 
@@ -264,6 +265,10 @@ fi
 while [ -n "$1" ]; do
     case "$1" in
         -f | --full )
+            install_music
+            install_latest
+            install_sync
+            install_fun
             install_xmonad
             install_essentials
             install_indicators
@@ -276,6 +281,9 @@ while [ -n "$1" ]; do
 
         -e | --essentials)
             install_essentials;;
+
+        -o | --elementary-os)
+            install_elementary;;
 
         -m | --music)
             install_music;;
@@ -297,9 +305,6 @@ while [ -n "$1" ]; do
 
         --fun)
             install_fun;;
-
-        --build)
-            install_build_tools;;
 
         -t | --test)
             test_function;;
