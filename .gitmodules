@@ -1,6 +1,3 @@
 [submodule "shells/zsh/zprezto"]
 	path = shells/zsh/zprezto
 	url = https://github.com/srijanshetty/prezto.git
-[submodule "config/vim-plug"]
-	path = config/vim-plug
-	url = http://github.com/srijanshetty/vim-plug.git
