@@ -17,15 +17,15 @@ USAGE: installer <arguments>
 Available options:
 
     -t | --test                        Random tests
-    -f | --full                        Full Installations (without elementary and xmonad)
+    -f | --full                        Full Installations (without elementary)
     -e | --essentials                  zsh, git, vim, tmux, ag, mr
     -o | --elementary-os               Elementary OS
-    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse, calendar, sysmon, shutter
+    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse, calendar, shutter
     -m | --music                       beets, vlc, pavucontrol, id3tool
     -s | --system                      dstat, htop, iotop, trash, tree
     -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
     -b | --battery                     acpi, bumbleebee, tlp
-    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools
+    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, vim-tools
     -x | --xmonad                      xmonad
     --fun                              cowsay, fortune
     --sync                             onedrive, copy, dropbox, btsync
@@ -63,7 +63,7 @@ function install_elementary() {
     # install conky-manager
     add-ppa teejee2008/ppa && sudo apt-get update
     installer conky-manager
-    # For theme http://www.teejeetech.in/2014/06/conky-manager-v2-themes.html
+    highlight "\nInstall themes from http://www.teejeetech.in/2014/06/conky-manager-v2-themes.html"
 
     # Y PPA Manager
     add-ppa webupd8team/y-ppa-manager && sudo apt-get update
@@ -94,7 +94,7 @@ function install_essentials() {
 
 # Xmonad, the tiling manager
 function install_xmonad() {
-    highlight "\nInstalling xmonad"
+    highlight "\nUncomment xmonad"
 
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
     # installer gnome-panel || ERR=1
@@ -138,17 +138,14 @@ function install_utilities() {
 
 # devel tools
 function install_devel_tools() {
-    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools"
+    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, vim-tools"
 
+    # General Utilities
     installer curl || ERR=1
 
     # Development on NodeJS
-    npm-install jshintc || ERR=1
     npm-install yo || ERR=1
     npm-install gulp || ERR=1
-    npm-install jshint || ERR=1
-    npm-install csslint || ERR=1
-    npm-install jsonlint || ERR=1
     npm-install nodemon || ERR=1
 
     # Haskell and cabal
@@ -181,13 +178,19 @@ function install_devel_tools() {
     pip-install virtualenv || ERR=1
     pip-install virtualenvwrapper || ERR=1
     pip-install pygments || ERR=1
+    pip-install sphinx || ERR=1
+
+    # Tools required by vim
+    npm-install jshint || ERR=1
+    npm-install csslint || ERR=1
+    npm-install jsonlint || ERR=1
+    installer shellcheck || ERR=1
 }
 
 # For the love of music
 function install_music () {
     # Dependencies of beets for various plugins
     highlight "\nInstalling music tools: beets, vlc, pavucontrol, id3tool"
-    pip-install pylast || ERR=1
     pip-install pylast || ERR=1
     pip-install flask || ERR=1
     pip-install beets || ERR=1
