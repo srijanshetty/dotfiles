@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 # Store the configuration directory for use by the functions
 CONFDIR=${PWD}
 [ -z $DOT_HELPER ] && source "${CONFDIR}/helpers/helper.sh"
@@ -14,51 +13,15 @@ USAGE: bootstrap.sh <arguments>
 
 Available commands:
 
-    -f | --full                 Install all options
-    -v | --vim                  configure vim
-    -g | --git                  configure git
+    -t | --test                 Test
     -z | --zsh                  configure zsh using Prezto
     -n | --node                 configure node
-    -t | --tmux                 configure tmux
     -r | --remap                configure remap of keys
     -u | --utilities            configure writing tools
     -m | --music                configure beets
     -d | --dir                  setup the directory structure
     -s | --ssh-config           configure ssh
 _EOH_
-}
-
-# Vim configuration
-function config_vim() {
-    highlight "\nConfiguring Vim"
-    configure "VIM" "${CONFDIR}/config/vim-plug/vim/"  ~/.vim || ERR=1
-    configure "VIM" "${CONFDIR}/config/vim-plug/vimrc" ~/.vimrc || ERR=1
-
-    # Vim development configuration
-    config_devel
-}
-
-# Git configuration
-function config_git() {
-    highlight "\nConfiguring git"
-    configure "GIT" "${CONFDIR}/config/git/gitconfig" ~/.gitconfig || ERR=1
-    configure "GIT" "${CONFDIR}/config/git/gitignore_global" ~/.gitignore_global || ERR=1
-    configure "GIT" "${CONFDIR}/config/git/mrconfig" ~/.mrconfig || ERR=1
-
-    # setup the directory structure
-    setup_dir
-}
-
-function config_devel() {
-    highlight "\nConfiguring development"
-    configure "JSHINT" "${CONFDIR}/config/code/js/jshintrc" ~/.jshintrc || ERR=1
-    configure "TERN" "${CONFDIR}/config/code/js/tern-project" ~/.tern-project || ERR=1
-}
-
-#Configuration file for tmux
-function config_tmux() {
-    highlight "\nConfiguring tmux"
-    configure "TMUX" "${CONFDIR}/config/system/tmux.conf" ~/.tmux.conf
 }
 
 # Configure music
@@ -153,10 +116,6 @@ function setup_dir() {
     fi
 }
 
-# Install everything
-function config_full() {
-}
-
 # In case the argument list is empty
 if [ -z "$1" ]; then
     help_text
@@ -165,23 +124,14 @@ fi
 # Here we process all the command line arguments passed to the bootstrapper
 while [ -n "$1" ]; do
     case "$1" in
-        -x | --xmonad)
-            config_xmonad;;
-
-        -v | --vim)
-            config_vim;;
+        -t | --test)
+            tester;;
 
         -n | --node)
             config_node;;
 
-        -g | --git)
-            config_git;;
-
         -z | --zsh)
             config_zsh;;
-
-        -t | --tmux)
-            config_tmux;;
 
         -m | --music)
             config_music;;
@@ -189,17 +139,11 @@ while [ -n "$1" ]; do
         -u | --utilities)
             config_utilities;;
 
-        -f | --full)
-            config_full;;
-
         -r | --remap)
             config_remap;;
 
         -s | --ssh)
             config_ssh;;
-
-        --test)
-            tester;;
 
         -d | --dir)
             setup_dir;;
