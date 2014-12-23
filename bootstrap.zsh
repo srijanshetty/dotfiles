@@ -21,7 +21,6 @@ Available commands:
     -n | --node                 configure node
     -t | --tmux                 configure tmux
     -r | --remap                configure remap of keys
-    -x | --xmonad               configure xmonad
     -u | --utilities            configure writing tools
     -m | --music                configure beets
     -d | --dir                  setup the directory structure
@@ -73,13 +72,6 @@ function config_utilities() {
     highlight "Configuring LaTeX, Ledger"
     configure "LaTeX" "${CONFDIR}/config/utilites/texmf" ~/texmf
     configure "LEDGER" "${CONFDIR}/utitilies/ledgerrc" ~/.ledgerrc
-}
-
-#Configure xmonad
-function config_xmonad() {
-    highlight "\nConfiguring xmonad"
-    configure "XMONAD" "${CONFDIR}/config/xmonad" ~/.xmonad && xmonad --recompile
-    configure "XINITRC" "${CONFDIR}/config/system/xinitrc" ~/.xinitrc
 }
 
 # configure ssh
