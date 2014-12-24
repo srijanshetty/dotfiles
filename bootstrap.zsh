@@ -81,7 +81,7 @@ function config_node() {
 
 # Remap directly
 function config_remap() {
-    highlight "\nConfiguring xmodmap"
+    highlight "\nConfiguring remap of keys"
 
     # Map caps lock to escape
     if dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"; then
