@@ -1,22 +1,15 @@
-<!-- TODO -->
+TODO
 -----
 
 ### General
-- better logging
 - copy/dropbox/MEGA
 - docker/vagrant/virtualbox
 - latest zsh/git/vim
 
 ### Test
+- glances
 - zeal documentation : http://askubuntu.com/questions/279421/how-can-i-install-qt-5-x-on-12-04-lts
-- cron.daily
-- antigen-hs requires shelly
-- write about syntastic
-    - shell-check: checking shell
-    - adtool : english checking
-- peru : pip
 - coursera-dl : pip
-- zathura
 - atarci
 - photoqt
 
@@ -99,6 +92,7 @@ TOOLS
 
 ### Utilities
 - pandoc
+- zathura
 - tex/detex
 - geeknote
 - ledger
@@ -119,16 +113,25 @@ TOOLS
   - virtualenv
   - virtualenvwrapper
   - pygments
+  - sphinx
 - ag
 - rvm
 - nvm
   - yo, grunt, bower
   - gulp
   - nodemon
+- vim-tools
   - jshint, csslint, jsonlint
-- cabal (Haskell Platform)
-- Y-PPA-Manager
-- ctags & cscope
+  - shellcheck
+- Haskell Tools
+  - ghc
+  - cabal
+- C-tools (For syntastic support)
+  - ctags
+  - cscope
+  - autotools
+  - apt-file
+  - build-essentials
 - dotjs
 
 ### Sync
@@ -136,3 +139,13 @@ TOOLS
 - Copy
 - btsync
 - MEGA
+
+### Elementary
+
+- elementary-tweaks
+- superwingpanel
+- indicator-synapse
+- elementary-wallpaper-collection
+- dconf-editor
+- conky-manager
+- y-ppa-manager
