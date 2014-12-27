@@ -20,53 +20,19 @@ Available commands:
     -u | --utilities            configure writing tools
     -m | --music                configure beets
     -d | --dir                  setup the directory structure
-    -s | --ssh-config           configure ssh
 _EOH_
-}
-
-# Configure music
-function config_music() {
-    highlight "\nConfiguring Beets"
-    configure "BEETS" "${CONFDIR}/config/music/beets" ~/.config/beets
 }
 
 #configure writing tools
 function config_utilities() {
-    highlight "Configuring LaTeX, Ledger"
+    highlight "Configuring LaTeX"
     configure "LaTeX" "${CONFDIR}/config/utilites/texmf" ~/texmf
-    configure "LEDGER" "${CONFDIR}/utitilies/ledgerrc" ~/.ledgerrc
-}
-
-# configure ssh
-function config_ssh() {
-    highlight "\nConfiguring ssh"
-    configure "SSH" "${CONFDIR}/config/system/sshconfig" ~/.ssh/config
-}
-
-#ZSH configuration
-function config_zsh() {
-    highlight "\nConfiguring zsh"
-
-    # change default shell to zsh
-    if [ -n $ZSH_NAME ]; then
-        success "The current shell is zsh"
-    else
-        chsh -s /bin/zsh && success "Changed the shell to zsh"
-    fi
-
-    configure "ZSH" "${CONFDIR}/shells/zsh/zprezto" ~/.zprezto
-    configure "ANTIGEN" "${CONFDIR}/config/zsh/bundles" ~/.zsh/bundles
-
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-        ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
 }
 
 # Configuration Functions
 function config_node() {
     if hash nvm &> /dev/null;then
-        if nvm install v0.10.28 && nvm use v0.10.28; then
+        if nvm install stable && nvm use stable; then
             success "NVM : configured"
             return 0
         else
@@ -104,16 +70,6 @@ function setup_dir() {
     else
         warn "Local bin exists at $LOCAL_BIN"
     fi
-
-    if [ ! -d $SANDBOX_DIR ]; then
-        if mkdir -p $SANDBOX_DIR; then
-            success "Created sandbox at $SANDBOX_DIR"
-        else
-            fail "Creation of sandbox failed at $SANDBOX_DIR"
-        fi
-    else
-        warn "Sandbox exists at $SANDBOX_DIR"
-    fi
 }
 
 # In case the argument list is empty
@@ -130,20 +86,11 @@ while [ -n "$1" ]; do
         -n | --node)
             config_node;;
 
-        -z | --zsh)
-            config_zsh;;
-
-        -m | --music)
-            config_music;;
-
         -u | --utilities)
             config_utilities;;
 
         -r | --remap)
             config_remap;;
-
-        -s | --ssh)
-            config_ssh;;
 
         -d | --dir)
             setup_dir;;
