@@ -3,7 +3,6 @@
 # Source required files
 HELPER_DIR="$(dirname "$0")"
 [ -z $DOT_HELPER ] && source "${HELPER_DIR}/helper.sh"
-[ -z $DOT_CONFIGURE ] && source "${HELPER_DIR}/configure.zsh"
 
 # Function to add a ppa
 function add-ppa() {

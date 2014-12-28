@@ -4,7 +4,6 @@
 CONFDIR="$(dirname $0)"
 [ -z "$DOT_HELPER" ] && source "${CONFDIR}/helpers/helper.sh"
 [ -z "$DOT_INSTALL" ] && source "${CONFDIR}/helpers/install-scripts.zsh"
-[ -z "$DOT_CONFIGURE" ] && source "${CONFDIR}/helpers/configure.zsh"
 
 #For errors
 ERR=0
