@@ -27,6 +27,7 @@ Available options:
     -b | --battery                     acpi, bumbleebee, tlp
     -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, vim-tools
     -x | --xmonad                      xmonad
+    -r | --remap                       Remap keys
     --fun                              cowsay, fortune
     --sync                             onedrive, copy, dropbox, btsync
 _EOH_
@@ -35,6 +36,20 @@ _EOH_
 # Test functions
 function test_function() {
     highlight "\nRunning test function"
+}
+
+# Remap directly
+function config_remap() {
+    highlight "\nConfiguring remap of keys"
+
+    # Map caps lock to escape
+    if dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"; then
+        success "Remap : successful"
+        return 0
+    else
+        fail "Remap : failed"
+        return 1
+    fi
 }
 
 # Latest essentials
@@ -305,6 +320,9 @@ while [ -n "$1" ]; do
 
         -d | --devel)
             install_devel_tools;;
+
+        -r | --remap)
+            config_remap;;
 
         --fun)
             install_fun;;
