@@ -12,7 +12,7 @@ vcsh clone git@github.com:srijanshetty/vcsh-mr.git
 mr up
 ```
 
-Want to get down and dirty? You need to go [here].
+Want to get down and dirty? You need to go [here](#walk-through)
 
 Organization
 ------------
@@ -24,11 +24,7 @@ There are two vital pieces of the puzzle: vcsh and mr.
 
 2. **mr**: mr allows to manage multiple repositories together. You register repositories with mr (Using *mr reg*, D'oh) and then you can execute VCS commands like push, update, checkout on them together. mr supports all popular version controls systems. (I only care about git though).
 
-What's wonderful about these two tools is that they were written by the same author and work together seamlessly.
-
-## Configuration Structure
-
-My vcsh-mr directory has the following structure:
+3. **Directory Structure**: The author of the vcsh work flow prescribes the following directory structure:
 
 ```txt
 ~/.config/mr/
@@ -54,13 +50,14 @@ My vcsh-mr directory has the following structure:
         └── zsh.vcsh -> ../available.d/zsh.vcsh
 ```
 
-### Salient Points
+Some salient points about this directory structure are:
+- **available.d** serves as a store for different available configurations.
+- active configurations are symlinked in **config.d**.
+- mr acts only on the configurations listed in **config.d**.
 
-- The structure mimics Apache web server.
-  - Files in config.d are active.
-  - Files in available.d are available configurations.
-  - mr only acts on files listed in config.d.
-- I use [repos] to enable/disable/list configurations.
+What's wonderful about these three tools is that they were written by the same author and work together seamlessly!!
+
+**Note**: Maintaining symlinks seemed too much of a chore for me; and so I did what any respectable programmer would do - [automate it](https://github.com/srijanshetty/custom/blob/master/functions/myrepos.zsh)
 
 Walk-through
 ------------
@@ -219,9 +216,9 @@ A final note on the four sub steps required in Step 9 of [Adding a new repositor
 Caveats
 -------
 
-1. The lack a git prompt in \$HOME, is unnerving. I still need to soak it in and find a system to track changes.
+1. ~~The lack a git prompt in \$HOME, is unnerving. I still need to soak it in and find a system to track changes.~~ **Update:** vcsh version 1.2 onwards supports the vcsh status command which scratches this itch.
 2. All repositories need to share a common LICENSE and README files (the way git prescribes them to). Again, I need to find a way around this.
-3. ~~I don't like the manual symlinking required in .config.d/. It would be much easier to have helper functions like apache provides for it's web server~~. [This]() script creates wrappers for automating most of this.
+3. ~~I don't like the manual symlinking required in .config.d/. It would be much easier to have helper functions like apache provides for it's web server~~. [This](https://github.com/srijanshetty/custom/blob/master/functions/myrepos.zsh) script creates wrappers for automating most of this.
 
 Tracked Tools
 -------------
@@ -241,5 +238,4 @@ Following is a list of the tools I'm using vcsh to track:
 License
 -------
 
-This projected is licensed under the terms of the [MIT LICENSE](LICENSE)
-
+This project is licensed under the terms of the [MIT LICENSE](LICENSE)
