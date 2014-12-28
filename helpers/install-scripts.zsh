@@ -136,34 +136,5 @@ function install-rvm() {
     fi
 }
 
-# install mr
-function install-mr() {
-    RETURN_VALUE=0
-
-    if [ ! -d $GITHUB_DIR ]; then
-        mkdir -p $GITHUB_DIR
-    fi
-
-    cd $GITHUB_DIR
-
-    # Copy mr
-    if [ ! -d mr ]; then
-        if git clone https://github.com/joeyh/mr.git myrepos &>> $LOGFILE; then
-            success "mr installed"
-        else
-            fail "mr installation failed"
-            RETURN_VALUE=1
-        fi
-    else
-        warn "mr already exists"
-    fi
-
-    # configure mr
-    configure "MR" "${GITHUB_DIR}/myrepos/mr" "${LOCAL_BIN}/mr" || RETURN_VALUE=1
-
-    cd -
-    return RETURN_VALUE
-}
-
 # To indicate that this script has been included
 DOT_INSTALL=1
