@@ -56,5 +56,5 @@ fucntion log() {
 
 # Source required files
 HELPER_DIR="$(dirname "$0")"
-configfile="${HELPER_DIR}/../config.cfg"
+configfile="${HELPER_DIR}/config.cfg"
 checkconf $configfile
