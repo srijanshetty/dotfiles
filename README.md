@@ -234,6 +234,7 @@ Following is a list of the tools I'm using vcsh to track:
 - [vim](https://github.com/srijanshetty/vcsh-vim)
 - [misc](https://github.com/srijanshetty/vcsh-misc)
 - [zsh](https://github.com/srijanshetty/vcsh-zsh)
+- [sandbox](https://github.com/srijanshetty/vcsh-sandbox)
 
 License
 -------
