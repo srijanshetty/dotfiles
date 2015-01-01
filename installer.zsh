@@ -24,7 +24,7 @@ Available options:
     -s | --system                      dstat, htop, iotop, trash, tree
     -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
     -b | --battery                     acpi, bumbleebee, tlp
-    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, vim-tools
+    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools
     -x | --xmonad                      xmonad
     -r | --remap                       Remap keys
     --fun                              cowsay, fortune
@@ -144,16 +144,13 @@ function install_utilities() {
     add-ppa fmarier/git-annex && sudo apt-get update
     installer git-annex
 
-    # Install mr
-    installer-mr || ERR=1
-
     # Install keybase
     npm-install keybase-installer || ERR=1
 }
 
 # devel tools
 function install_devel_tools() {
-    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, vim-tools"
+    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools"
 
     # General Utilities
     installer curl || ERR=1
@@ -181,25 +178,19 @@ function install_devel_tools() {
 
     # Python
     install-pip || ERR=1
+    installer ipython || ERR=1
     installer python-dev || ERR=1
 
     # For Python3
-    installer ipython || ERR=1
-    installer python3 || ERR=1
-
     # For Python3.3 onwards
     # add-ppa fkrull/deadsnakes && sudo apt-get update
     # installer python3.4 || ERR=1
+
+    # Pip tools
     pip-install virtualenv || ERR=1
     pip-install virtualenvwrapper || ERR=1
     pip-install pygments || ERR=1
     pip-install sphinx || ERR=1
-
-    # Tools required by vim
-    npm-install jshint || ERR=1
-    npm-install csslint || ERR=1
-    npm-install jsonlint || ERR=1
-    installer shellcheck || ERR=1
 }
 
 # For the love of music
