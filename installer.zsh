@@ -17,7 +17,7 @@ Available options:
 
     -t | --test                        Random tests
     -f | --full                        Full Installations (without elementary)
-    -e | --essentials                  zsh, git, vim, tmux, ag, mr
+    -e | --essentials                  zsh, git, vim, tmux, ag, mr, vcsh
     -o | --elementary-os               Elementary OS
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse, calendar, shutter
     -m | --music                       beets, vlc, pavucontrol, id3tool
@@ -96,13 +96,14 @@ function install_sync() {
 
 # zsh, ag, vim, git and tmux
 function install_essentials() {
-    highlight "\nInstalling essentials: zsh, vim, git, tmux, ag, mr"
+    highlight "\nInstalling essentials: zsh, vim, git, tmux, ag, mr, vcsh"
 
     installer git || ERR=1
     installer vim || ERR=1
     installer tmux || ERR=1
     installer zsh || ERR=1
-    installer myrepos || ERR=1
+    installer mr || ERR=1
+    installer vcsh || ERR=1
     installer -n ag -p silversearcher-ag || ERR=1
 }
 
