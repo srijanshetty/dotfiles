@@ -24,7 +24,7 @@ Available options:
     -s | --system                      dstat, htop, iotop, trash, tree
     -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
     -b | --battery                     acpi, bumbleebee, tlp
-    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools
+    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, golang
     -x | --xmonad                      xmonad
     -r | --remap                       Remap keys
     --fun                              cowsay, fortune
@@ -150,7 +150,7 @@ function install_utilities() {
 
 # devel tools
 function install_devel_tools() {
-    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools"
+    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, golang"
 
     # General Utilities
     installer curl || ERR=1
@@ -191,6 +191,10 @@ function install_devel_tools() {
     pip-install virtualenvwrapper || ERR=1
     pip-install pygments || ERR=1
     pip-install sphinx || ERR=1
+
+    # Go
+    add-ppa duh/golang && sudo apt-get update
+    installer golang
 }
 
 # For the love of music
