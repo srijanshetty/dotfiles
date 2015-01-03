@@ -159,6 +159,7 @@ function install_devel_tools() {
     npm-install yo || ERR=1
     npm-install gulp || ERR=1
     npm-install nodemon || ERR=1
+    npm-install node-inspector || ERR=1
 
     # Haskell and cabal
     installer ghc || ERR=1
