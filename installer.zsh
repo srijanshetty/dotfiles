@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Use relative directories in sourcing
 CONFDIR="$(dirname $0)"

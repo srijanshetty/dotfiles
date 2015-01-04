@@ -1,4 +1,4 @@
-#!/bin/zsh
+!/bin/bash
 
 # This indicates that helper has been sources
 DOT_HELPER=1
@@ -25,13 +25,13 @@ function success() {
 }
 
 function highlight() {
-       echo "${UNDERLINE_ON}$*${UNDERLINE_OFF}" | tee -a "$LOGFILE"
+       echo "${UNDERLINE_ON}$* ${UNDERLINE_OFF}" | tee -a "$LOGFILE"
 }
 
 function checkconf() {
     configfile_secured=/tmp/config.cfg
     # Check if the configfile exists
-    if [ ! -f $1 ]; then
+    if [ ! -f "$1" ]; then
         echo "[ ${YELLOW}WARN${NORMAL} ] Config file not found"
         exit 1
     fi
@@ -50,11 +50,12 @@ function checkconf() {
     source "$1"
 }
 
-fucntion log() {
-    echo "\n[$(date)]: $*" &>> $LOGFILE
+function log() {
+    echo "[$(date)]: $*" &>> $LOGFILE
 }
 
 # Source required files
-HELPER_DIR="$(dirname "$0")"
-configfile="${HELPER_DIR}/config.cfg"
-checkconf $configfile
+# HELPER_DIR="$(dirname "$0")"
+# configfile="${HELPER_DIR}/helpers/config.cfg"
+# checkconf "$configfile"
+LOGFILE=/dev/null
