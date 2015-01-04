@@ -8,7 +8,7 @@ Bootstrapping
 
 ```shell
 sudo apt-get install -y vcsh myrepos
-vcsh clone git@github.com:srijanshetty/vcsh-mr.git
+vcsh clone git@github.com:srijanshetty/vcsh-mr.git mr
 mr up
 ```
 
