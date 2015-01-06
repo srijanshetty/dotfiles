@@ -268,6 +268,11 @@ function install_fun() {
 
     # Cow commit
     installer cowsay || ERR=1
+
+    # Ascii art
+    installer toilet || ERR=1
+    installer toilet-fonts || ERR=1
+    installer figlet || ERR=1
 }
 
 # In case the argument list is empty
