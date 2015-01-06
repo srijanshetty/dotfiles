@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 # This indicates that helper has been sources
 DOT_HELPER=1
