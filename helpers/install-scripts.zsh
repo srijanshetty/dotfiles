@@ -108,17 +108,6 @@ function npm-install() {
     fi
 }
 
-# Install PIP
-function install-pip() {
-    wget https://bootstrap.pypa.io/get-pip.py &>> "$LOGFILE" && python get-pip.py &>> "$LOGFILE" && rm get-pip.py
-    if [ $? -eq 0 ]; then
-        success "pip installed"
-    else
-        fail "pii installation failed"
-        return 1
-    fi
-}
-
 # Install RVM
 function install-rvm() {
     if hash rvm &>> "$LOGFILE"; then

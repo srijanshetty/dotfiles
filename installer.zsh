@@ -178,18 +178,11 @@ function install_devel_tools() {
     install-rvm || ERR=1
 
     # Python
-    install-pip || ERR=1
     installer ipython || ERR=1
     installer python-dev || ERR=1
-
-    # For Python3
-    # For Python3.3 onwards
-    # add-ppa fkrull/deadsnakes && sudo apt-get update
-    # installer python3.4 || ERR=1
+    highlight "Install python version using pyenv"
 
     # Pip tools
-    pip-install virtualenv || ERR=1
-    pip-install virtualenvwrapper || ERR=1
     pip-install pygments || ERR=1
     pip-install sphinx || ERR=1
 
