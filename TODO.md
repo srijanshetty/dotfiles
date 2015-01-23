@@ -12,10 +12,20 @@ TODO
 - coursera-dl : pip
 - atarci
 - photoqt
+- hub
+- gister
+- tor, fire-dev, ptime
+- csearch (go)
+- gist.rb (gem)
+- jq
+- boom (gem)
+- incrontab
 
 ### Not sure
 - express + mongodb + express-generator
 - xchat
+- digg-to-md
+- nw-builder
 
 Features
 ---------
