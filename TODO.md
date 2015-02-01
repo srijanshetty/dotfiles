@@ -13,13 +13,17 @@ TODO
 - atarci
 - photoqt
 - hub
-- gister
 - tor, fire-dev, ptime
-- csearch (go)
+- vagrant/dropbox/copy/onedrive
+- rstudio
 - gist.rb (gem)
 - jq
 - boom (gem)
 - incrontab
+- ptpython
+- libextractor-dev extract
+- surf (libwebkit-dev, libgtk+2.0)
+
 
 ### Not sure
 - express + mongodb + express-generator
