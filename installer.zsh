@@ -133,6 +133,8 @@ function install_utilities() {
 
     installer -n latex -p texlive || ERR=1
     installer -n xelatex -p texlive-xetex || ERR=1
+    installer -n latex-packages -p texlive-latex-extra || ERR=1
+    installer -n latex-packages -p texlive-generic-extra || ERR=1
     installer pandoc || ERR=1
     installer zathura || ERR=1
 
