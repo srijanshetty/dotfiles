@@ -23,7 +23,8 @@ TODO
 - ptpython
 - libextractor-dev extract
 - surf (libwebkit-dev, libgtk+2.0)
-
+- https://code.google.com/p/codesearch/
+- httpie
 
 ### Not sure
 - express + mongodb + express-generator
