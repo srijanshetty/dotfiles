@@ -25,6 +25,8 @@ TODO
 - surf (libwebkit-dev, libgtk+2.0)
 - https://code.google.com/p/codesearch/
 - httpie
+- heroku-toolbelt
+- pip-tools
 
 ### Not sure
 - express + mongodb + express-generator
