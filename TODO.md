@@ -1,32 +1,23 @@
 TODO
 -----
 
-### General
-- copy/dropbox/MEGA
-- docker/vagrant/virtualbox
-- latest zsh/git/vim
-- anki
-
 ### Test
 - zeal documentation : http://askubuntu.com/questions/279421/how-can-i-install-qt-5-x-on-12-04-lts
 - coursera-dl : pip
 - atarci
 - photoqt
 - hub
+- anki
 - tor, fire-dev, ptime
-- vagrant/dropbox/copy/onedrive
+- dropbox/copy/onedrive/MEGA
+- latest zsh/git/vim
 - rstudio
-- gist.rb (gem)
-- jq
 - boom (gem)
-- incrontab
-- ptpython
 - libextractor-dev extract
 - surf (libwebkit-dev, libgtk+2.0)
 - https://code.google.com/p/codesearch/
 - httpie
-- heroku-toolbelt
-- pip-tools
+- heroku-toolbelt (sudo apt-get install libmysql-ruby libmysqlclient-dev)
 
 ### Not sure
 - express + mongodb + express-generator

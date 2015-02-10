@@ -21,7 +21,7 @@ Available options:
     -o | --elementary-os               Elementary OS
     -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse, calendar, shutter
     -m | --music                       beets, vlc, pavucontrol, id3tool
-    -s | --system                      dstat, htop, iotop, trash, tree
+    -s | --system                      dstat, htop, iotop, trash, tree, incron
     -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
     -b | --battery                     acpi, bumbleebee, tlp
     -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, golang
@@ -118,12 +118,13 @@ function install_xmonad() {
 
 # System monitoring utilies
 function install_system() {
-    highlight "\nInstalling System Utilities: dstat, htop, iotop, tree, trash"
+    highlight "\nInstalling System Utilities: dstat, htop, iotop, tree, trash, incron"
 
     installer dstat || ERR=1
     installer htop || ERR=1
     installer iotop || ERR=1
     installer tree || ERR=1
+    installer incron || ERR=1
     npm-install trash || ERR=1
 }
 
@@ -181,11 +182,13 @@ function install_devel_tools() {
 
     # Python
     installer ipython || ERR=1
+    installer ptpython || ERR=1
     installer python-dev || ERR=1
     highlight "Install python version using pyenv"
 
     # Pip tools
     pip-install pygments || ERR=1
+    pip-install pip-tools || ERR=1
     pip-install sphinx || ERR=1
 
     # Go
