@@ -10,14 +10,13 @@ TODO
 - anki
 - tor, fire-dev, ptime
 - dropbox/copy/onedrive/MEGA
-- latest zsh/git/vim
+- latest git/vim
 - rstudio
 - boom (gem)
 - libextractor-dev extract
-- surf (libwebkit-dev, libgtk+2.0)
-- https://code.google.com/p/codesearch/
 - httpie
 - heroku-toolbelt (sudo apt-get install libmysql-ruby libmysqlclient-dev)
+- sejda-console
 
 ### Not sure
 - express + mongodb + express-generator
