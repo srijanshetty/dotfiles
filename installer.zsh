@@ -202,6 +202,7 @@ function install_music () {
     highlight "\nInstalling music tools: beets, vlc, pavucontrol, id3tool"
     pip-install pylast || ERR=1
     pip-install flask || ERR=1
+    pip-install discogs-client || ERR=1
     pip-install beets || ERR=1
 
     # For music
