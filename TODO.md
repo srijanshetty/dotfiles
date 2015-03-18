@@ -8,21 +8,23 @@ TODO
 - photoqt
 - hub
 - anki
-- tor, fire-dev, ptime
+- tor, ptime
 - dropbox/copy/onedrive/MEGA
 - latest git/vim
 - rstudio
 - boom (gem)
 - libextractor-dev extract
-- httpie
 - heroku-toolbelt (sudo apt-get install libmysql-ruby libmysqlclient-dev)
 - sejda-console
+- clf : pip
+
 
 ### Not sure
 - express + mongodb + express-generator
 - xchat
 - digg-to-md
 - nw-builder
+- libstdc++6.4.4-docs
 
 Features
 ---------
