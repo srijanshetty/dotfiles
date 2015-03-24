@@ -16,15 +16,13 @@ TODO
 - libextractor-dev extract
 - heroku-toolbelt (sudo apt-get install libmysql-ruby libmysqlclient-dev)
 - sejda-console
-- clf : pip
-
+- forever : npm
 
 ### Not sure
 - express + mongodb + express-generator
 - xchat
 - digg-to-md
 - nw-builder
-- libstdc++6.4.4-docs
 
 Features
 ---------
