@@ -168,7 +168,8 @@ function install_devel_tools() {
     installer ghc || ERR=1
     installer cabal-install || ERR=1
 
-    # For C
+    # For C family
+    installer libstdc++6.4.4-docs || ERR=1
     installer cmake || ERR=1
     installer build-essential || ERR=1
     installer autoconf || ERR=1
