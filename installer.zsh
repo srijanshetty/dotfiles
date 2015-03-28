@@ -134,8 +134,8 @@ function install_utilities() {
 
     installer -n latex -p texlive || ERR=1
     installer -n xelatex -p texlive-xetex || ERR=1
-    installer -n latex-packages -p texlive-latex-extra || ERR=1
-    installer -n latex-packages -p texlive-generic-extra || ERR=1
+    installer -n latex-packages -p texlive-latex-extra || ERR=1             # Needed packages for latex
+    installer -n latex-packages -p texlive-generic-extra || ERR=1           # Needed packages for latex
     installer pandoc || ERR=1
     installer zathura || ERR=1
 
@@ -259,6 +259,12 @@ function install_indicators() {
 
     add-ppa ppa:shutter/ppa && sudo apt-get update
     installer shutter || ERR=1
+
+    # Indicator for pastie
+    add-ppa ppa:hel-sheep/pastie && sudo apt-get update
+    installer pastie || ERR=1
+    installer python-gnome2 || ERR=1
+
 }
 
 function install_fun() {
