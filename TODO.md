@@ -14,9 +14,10 @@ TODO
 - rstudio
 - boom (gem)
 - libextractor-dev extract
-- heroku-toolbelt (sudo apt-get install libmysql-ruby libmysqlclient-dev)
 - sejda-console
 - forever : npm
+- airpaste : npm
+- lnav
 
 ### Not sure
 - express + mongodb + express-generator
