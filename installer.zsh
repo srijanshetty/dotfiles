@@ -118,13 +118,14 @@ function install_xmonad() {
 
 # System monitoring utilies
 function install_system() {
-    highlight "\nInstalling System Utilities: dstat, htop, iotop, tree, trash, incron"
+    highlight "\nInstalling System Utilities: dstat, htop, iotop, tree, trash, incron, colordiff"
 
     installer dstat || ERR=1
     installer htop || ERR=1
     installer iotop || ERR=1
     installer tree || ERR=1
     installer incron || ERR=1
+    installer colordiff || ERR=1
     npm-install trash || ERR=1
 }
 
