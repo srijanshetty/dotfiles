@@ -183,12 +183,10 @@ function install_devel_tools() {
     install-rvm || ERR=1
 
     # Python
-    installer ipython || ERR=1
-    installer ptpython || ERR=1
-    installer python-dev || ERR=1
     highlight "Install python version using pyenv"
 
     # Pip tools
+    pip-install ipython || ERR=1
     pip-install pygments || ERR=1
     pip-install pip-tools || ERR=1
     pip-install sphinx || ERR=1
