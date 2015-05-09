@@ -19,7 +19,7 @@ Available options:
     -f | --full                        Full Installations (without elementary)
     -e | --essentials                  zsh, git, vim, tmux, ag, mr, vcsh
     -o | --elementary-os               Elementary OS
-    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse, calendar, shutter
+    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse, shutter
     -m | --music                       beets, vlc, pavucontrol, id3tool
     -s | --system                      dstat, htop, iotop, trash, tree, incron
     -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
@@ -235,7 +235,7 @@ function install_battery() {
 
 # have to keep a check on the temparature of the laptop
 function install_indicators() {
-    highlight "\nInstalling indicators: lm-sensors, hddtemp, flux, calendar, sysmon, sensors, shutter"
+    highlight "\nInstalling indicators: lm-sensors, hddtemp, flux, sysmon, sensors, shutter"
 
     # the sensors which are required
     installer lm-sensors || ERR=1
@@ -244,10 +244,6 @@ function install_indicators() {
 
     # the indicator for sensors
     add-ppa nilarimogard/webupd8 && sudo apt-get update
-
-    # Indicator for calendar
-    add-ppa atareao/atareao && sudo apt-get update
-    installer calendar-indicator
 
     add-ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
     installer indicator-sysmonitor || ERR=1
