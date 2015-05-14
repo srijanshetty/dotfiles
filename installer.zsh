@@ -19,12 +19,12 @@ Available options:
     -f | --full                        Full Installations (without elementary)
     -e | --essentials                  zsh, git, vim, tmux, ag, mr, vcsh
     -o | --elementary-os               Elementary OS
-    -i | --indicators                  flux, hddtemp, sensors, sysmon, weather, synapse, shutter
+    -i | --indicators                  hddtemp, sensors, sysmon, weather, shutter
     -m | --music                       beets, vlc, pavucontrol, id3tool
     -s | --system                      dstat, htop, iotop, trash, tree, incron
     -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
-    -b | --battery                     acpi, bumbleebee, tlp
-    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, golang
+    -b | --battery                     bumbleebee, tlp
+    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools
     -x | --xmonad                      xmonad
     -r | --remap                       Remap keys
     --fun                              cowsay, fortune
@@ -57,7 +57,7 @@ function install_latest() {
     # Add tmux repo
     # Add vim repo
     # g++
-    add-ppa ubuntu-toolchain-r/test && sudo apt-get update
+    hash gcc
 }
 
 # Utilities for Elementary OS
@@ -66,18 +66,13 @@ function install_elementary() {
 
     # For most features
     add-ppa versable/elementary-update
-    add-ppa heathbar/super-wingpanel
 
     installer elementary-tweaks || ERR=1
-    installer super-wingpanel || ERR=1
-    installer indicator-synapse || ERR=1
-    installer elementary-wallpaper-collection || ERR=1
     installer dconf-editor || ERR=1
 
     # install conky-manager
     add-ppa teejee2008/ppa && sudo apt-get update
     installer conky-manager
-    highlight "\nInstall themes from http://www.teejeetech.in/2014/06/conky-manager-v2-themes.html"
 
     # Y PPA Manager
     add-ppa webupd8team/y-ppa-manager && sudo apt-get update
@@ -137,6 +132,7 @@ function install_utilities() {
     installer -n xelatex -p texlive-xetex || ERR=1
     installer -n latex-packages -p texlive-latex-extra || ERR=1             # Needed packages for latex
     installer -n latex-packages -p texlive-generic-extra || ERR=1           # Needed packages for latex
+    installer -n latex-packages -p texlive-fonts-extra || ERR=1             # Needed packages for latex
     installer pandoc || ERR=1
     installer zathura || ERR=1
 
@@ -145,7 +141,7 @@ function install_utilities() {
     installer ledger || ERR=1
 
     # Git annex
-    add-ppa fmarier/git-annex && sudo apt-get update
+    # Add the PPA
     installer git-annex
 
     # Install keybase
@@ -154,20 +150,13 @@ function install_utilities() {
 
 # devel tools
 function install_devel_tools() {
-    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools, golang"
+    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools"
 
     # General Utilities
     installer curl || ERR=1
 
-    # Development on NodeJS
-    npm-install yo || ERR=1
-    npm-install gulp || ERR=1
-    npm-install nodemon || ERR=1
-    npm-install node-inspector || ERR=1
-
     # Haskell and cabal
-    installer ghc || ERR=1
-    installer cabal-install || ERR=1
+    hash cabal &> /dev/null && installer haskell-platform || ERR=1
 
     # For C family
     installer libstdc++6.4.4-docs || ERR=1
@@ -178,22 +167,17 @@ function install_devel_tools() {
     installer apt-file || ERR=1
     installer exuberant-ctags || ERR=1
     installer cscope || ERR=1
+    installer python-software-properties || ERR=1
+    installer python-dev || ERR=1
 
     # RVM
     install-rvm || ERR=1
 
-    # Python
-    highlight "Install python version using pyenv"
-
     # Pip tools
-    pip-install ipython || ERR=1
+    pip-install ipython tornado jsonschema pymzq || ERR=1
     pip-install pygments || ERR=1
     pip-install pip-tools || ERR=1
     pip-install sphinx || ERR=1
-
-    # Go
-    add-ppa duh/golang && sudo apt-get update
-    installer golang
 }
 
 # For the love of music
@@ -214,16 +198,12 @@ function install_music () {
 
 # Tools for making sure ubuntu doesn't kill my battery
 function install_battery() {
-    highlight "\nInstalling battery monitoring utilies: acpi"
-
-    # Monitoring tools
-    installer acpi || ERR=1
+    highlight "\nInstalling battery monitoring utilies: "
 
     highlight "\nUncomment bumblebee and tlp"
 
     # Adding repos for bumblebee
-    # add ppa bumblebee/stable && sudo apt-get update
-    # sudo apt-get install bumblebee bumblebee-nvidia virtualgl linux-headers-generic
+    # sudo apt-get install bumblebee bumblebee-
 
     # tlp
     # add-ppa linrunner/tlp && sudo apt-get update
@@ -233,15 +213,11 @@ function install_battery() {
 
 # have to keep a check on the temparature of the laptop
 function install_indicators() {
-    highlight "\nInstalling indicators: lm-sensors, hddtemp, flux, sysmon, sensors, shutter"
+    highlight "\nInstalling indicators: lm-sensors, hddtemp, sysmon, sensors, shutter"
 
     # the sensors which are required
     installer lm-sensors || ERR=1
     installer hddtemp || ERR=1
-    installer fluxgui || ERR=1
-
-    # the indicator for sensors
-    add-ppa nilarimogard/webupd8 && sudo apt-get update
 
     add-ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
     installer indicator-sysmonitor || ERR=1
@@ -254,12 +230,6 @@ function install_indicators() {
 
     add-ppa ppa:shutter/ppa && sudo apt-get update
     installer shutter || ERR=1
-
-    # Indicator for pastie
-    add-ppa ppa:hel-sheep/pastie && sudo apt-get update
-    installer pastie || ERR=1
-    installer python-gnome2 || ERR=1
-
 }
 
 function install_fun() {
@@ -328,6 +298,9 @@ while [ -n "$1" ]; do
 
         --fun)
             install_fun;;
+
+        --sync)
+            install_sync;;
 
         -t | --test)
             test_function;;
