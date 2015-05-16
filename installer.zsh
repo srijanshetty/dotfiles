@@ -24,7 +24,7 @@ Available options:
     -s | --system                      dstat, htop, iotop, trash, tree, incron
     -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
     -b | --battery                     bumbleebee, tlp
-    -d | --devel                       curl, npm-tools, haskell-tools, c-tools, rvm, python-tools
+    -d | --devel                       curl, node, c, c++, ruby, python, go, haskell
     -x | --xmonad                      xmonad
     -r | --remap                       Remap keys
     --fun                              cowsay, fortune
@@ -150,7 +150,7 @@ function install_utilities() {
 
 # devel tools
 function install_devel_tools() {
-    highlight "\nInstalling devel tools: curl, npm-tools, haskell-tools, c-tools, rvm, python-tools"
+    highlight "\nInstalling devel tools: curl, node, haskell, c, c++, ruby, python"
 
     # General Utilities
     installer curl || ERR=1
@@ -172,6 +172,36 @@ function install_devel_tools() {
 
     # RVM
     install-rvm || ERR=1
+
+    # Node
+    if [[ ! $+commands[node] ]]; then
+        if [[ -e "$HOME/.nvm/nvm.sh" ]]; then
+            source "$HOME/.nvm/nvm.sh"
+            nvm install stable && nvm alias default stable
+        else
+            fail "nvm not found"
+        fi
+    fi
+
+    # go
+    if [[ ! $+commands[go] ]]; then
+        if [[ -e "$HOME/.gvm/scripts/gvm" ]]; then
+            source "$HOME/.gvm/scripts/gvm"
+            gvm install go1.4 && gvm use go1.4 --default
+        else
+            fail "gvm not found"
+        fi
+    fi
+
+    # python
+    if [[ -s "$HOME/.pyenv/bin/pyenv" ]]; then
+        path=("$HOME/.pyenv/bin" $path)
+        eval "$(pyenv init -)"
+
+        pyenv install python2.7.9
+        pyenv global 2.7.9
+    fi
+
 
     # Pip tools
     pip-install ipython tornado jsonschema pymzq || ERR=1
