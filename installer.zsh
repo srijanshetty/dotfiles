@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Use relative directories in sourcing
 CONFDIR="$(dirname $0)"
@@ -141,7 +141,6 @@ function install_utilities() {
     installer ledger || ERR=1
 
     # Git annex
-    # Add the PPA
     installer git-annex
 
     # Install keybase
@@ -252,7 +251,7 @@ function install_indicators() {
     add-ppa fossfreedom/indicator-sysmonitor && sudo apt-get update
     installer indicator-sysmonitor || ERR=1
 
-	add-ppa noobslab/indicators && sudo apt-get update
+    add-ppa noobslab/indicators && sudo apt-get update
     installer my-weather-indicator || ERR=1
 
     add-ppa alexmurray/indicator-sensors && sudo apt-get update
