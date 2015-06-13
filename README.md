@@ -228,13 +228,12 @@ Following is a list of the tools I'm using vcsh to track:
 - [beets]
 - [ledger]
 - [ssh]
+- [code-snippets](https://github.com/srijanshetty/code-snippets)
 - [git](https://github.com/srijanshetty/vcsh-git)
 - [mr](https://github.com/srijanshetty/vcsh-mr)
 - [tmux](https://github.com/srijanshetty/vcsh-tmux)
 - [vim](https://github.com/srijanshetty/vcsh-vim)
-- [misc](https://github.com/srijanshetty/vcsh-misc)
 - [zsh](https://github.com/srijanshetty/vcsh-zsh)
-- [sandbox](https://github.com/srijanshetty/vcsh-sandbox)
 
 License
 -------
