@@ -216,6 +216,7 @@ function install_music () {
     pip-install pylast || ERR=1
     pip-install flask || ERR=1
     pip-install discogs-client || ERR=1
+    pip-install beets-follow || ERR=1
     pip-install beets || ERR=1
 
     # For music
