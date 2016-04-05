@@ -104,6 +104,7 @@ function install_devel_tools() {
 
     # General Utilities
     installer curl || ERR=1
+    brew install fasd || ERR=1
 
     # Haskell and cabal
     hash cabal &> /dev/null && installer haskell-platform || ERR=1
@@ -229,7 +230,6 @@ function install_utilities() {
     installer vlc || ERR=1
 }
 
-
 # have to keep a check on the temparature of the laptop
 function install_indicators() {
     highlight "\nInstalling indicators: lm-sensors, hddtemp, sysmon, sensors, shutter"
@@ -289,7 +289,6 @@ while [ -n "$1" ]; do
 
         * )
             help_text;;
-
     esac
     shift
 done
