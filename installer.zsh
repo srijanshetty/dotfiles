@@ -18,17 +18,9 @@ Available options:
     -t | --test                        Random tests
     -f | --full                        Full Installations (without elementary)
     -e | --essentials                  zsh, git, vim, tmux, ag, mr, vcsh
-    -o | --elementary-os               Elementary OS
-    -i | --indicators                  hddtemp, sensors, sysmon, weather, shutter
-    -m | --music                       beets, vlc, pavucontrol, id3tool
-    -s | --system                      dstat, htop, iotop, trash, tree, incron
-    -u | --utilities                   texlive, pandoc, ledger, git-annex, zathura, mr, keybase
-    -b | --battery                     bumbleebee, tlp
-    -d | --devel                       curl, node, c, c++, ruby, python, go, haskell
-    -x | --xmonad                      xmonad
-    -r | --remap                       Remap keys
-    --fun                              cowsay, fortune
-    --sync                             onedrive, copy, dropbox, btsync
+    -o | --elementary-os               Elementary OS + essentials
+    -u | --ubuntu                      Ubuntu Utilies
+    --utils                            Indicators + Utilities
 _EOH_
 }
 
@@ -38,7 +30,7 @@ function test_function() {
 }
 
 # Remap directly
-function config_remap() {
+function install_ubuntu() {
     highlight "\nConfiguring remap of keys"
 
     # Map caps lock to escape
@@ -51,15 +43,6 @@ function config_remap() {
     fi
 }
 
-# Latest essentials
-function install_latest() {
-    # Add git repo
-    # Add tmux repo
-    # Add vim repo
-    # g++
-    hash gcc
-}
-
 # Utilities for Elementary OS
 function install_elementary() {
     highlight "\nInstalling Elementary Utilities"
@@ -69,14 +52,6 @@ function install_elementary() {
 
     installer elementary-tweaks || ERR=1
     installer dconf-editor || ERR=1
-
-    # install conky-manager
-    add-ppa teejee2008/ppa && sudo apt-get update
-    installer conky-manager
-
-    # Y PPA Manager
-    add-ppa webupd8team/y-ppa-manager && sudo apt-get update
-    installer y-ppa-manager || ERR=1
 }
 
 # Online sync utilities
@@ -107,8 +82,8 @@ function install_xmonad() {
     highlight "\nUncomment xmonad"
 
 	# Install gnome, followed by xmonad and then copy the config files. After this step, we compile xmonad
-    # installer gnome-panel || ERR=1
-    # installer xmonad || ERR=1
+    installer gnome-panel || ERR=1
+    installer xmonad || ERR=1
 }
 
 # System monitoring utilies
@@ -120,31 +95,7 @@ function install_system() {
     installer iotop || ERR=1
     installer tree || ERR=1
     installer incron || ERR=1
-    installer colordiff || ERR=1
     npm-install trash || ERR=1
-}
-
-# Utilities
-function install_utilities() {
-    highlight "\nInstalling Utilities: TeX, pandoc, zathura, ledger, git-annex, mr, keybase"
-
-    installer -n latex -p texlive || ERR=1
-    installer -n xelatex -p texlive-xetex || ERR=1
-    installer -n latex-packages -p texlive-latex-extra || ERR=1             # Needed packages for latex
-    installer -n latex-packages -p texlive-generic-extra || ERR=1           # Needed packages for latex
-    installer -n latex-packages -p texlive-fonts-extra || ERR=1             # Needed packages for latex
-    installer pandoc || ERR=1
-    installer zathura || ERR=1
-
-    # PPA for ledger
-    add-ppa mbudde/ledger && sudo apt-get update
-    installer ledger || ERR=1
-
-    # Git annex
-    installer git-annex
-
-    # Install keybase
-    npm-install keybase-installer || ERR=1
 }
 
 # devel tools
@@ -201,7 +152,6 @@ function install_devel_tools() {
         pyenv global 2.7.9
     fi
 
-
     # Pip tools
     pip-install ipython tornado jsonschema pymzq || ERR=1
     pip-install pygments || ERR=1
@@ -220,10 +170,21 @@ function install_music () {
     pip-install beets || ERR=1
 
     # For music
-    installer pavucontrol || ERR=1
-    installer vlc || ERR=1
-    install ubuntu-restricted-extras || ERR=1
     installer id3tool || ERR=1
+}
+
+function install_fun() {
+    highlight "\nInstalling fun tools: fotune-mod, cowsay"
+    # for fortune
+    installer fortune-mod || ERR=1
+
+    # Cow commit
+    installer cowsay || ERR=1
+
+    # Ascii art
+    installer toilet || ERR=1
+    installer toilet-fonts || ERR=1
+    installer figlet || ERR=1
 }
 
 # Tools for making sure ubuntu doesn't kill my battery
@@ -240,6 +201,34 @@ function install_battery() {
     # sudo apt-get install tlp tlp-rdw
     # sudo tlp start
 }
+
+# Utilities
+function install_utilities() {
+    highlight "\nInstalling Utilities: TeX, pandoc, zathura, ledger, git-annex, mr, keybase"
+
+    installer -n latex -p texlive || ERR=1
+    installer -n xelatex -p texlive-xetex || ERR=1
+    installer -n latex-packages -p texlive-latex-extra || ERR=1             # Needed packages for latex
+    installer -n latex-packages -p texlive-generic-extra || ERR=1           # Needed packages for latex
+    installer -n latex-packages -p texlive-fonts-extra || ERR=1             # Needed packages for latex
+    installer pandoc || ERR=1
+    installer zathura || ERR=1
+
+    # PPA for ledger
+    # add-ppa mbudde/ledger && sudo apt-get update
+    # installer ledger || ERR=1
+
+    # Git annex
+    # installer git-annex
+
+    # Install keybase
+    npm-install keybase-installer || ERR=1
+
+    # Music Utilities
+    installer pavucontrol || ERR=1
+    installer vlc || ERR=1
+}
+
 
 # have to keep a check on the temparature of the laptop
 function install_indicators() {
@@ -262,20 +251,6 @@ function install_indicators() {
     installer shutter || ERR=1
 }
 
-function install_fun() {
-    highlight "\nInstalling fun tools: fotune-mod, cowsay"
-    # for fortune
-    installer fortune-mod || ERR=1
-
-    # Cow commit
-    installer cowsay || ERR=1
-
-    # Ascii art
-    installer toilet || ERR=1
-    installer toilet-fonts || ERR=1
-    installer figlet || ERR=1
-}
-
 # In case the argument list is empty
 if [ -z "$1" ]; then
     help_text
@@ -296,41 +271,18 @@ while [ -n "$1" ]; do
             install_utilities
             install_system;;
 
-        -x | --xmonad)
-            install_xmonad;;
-
         -e | --essentials)
             install_essentials;;
 
         -o | --elementary-os)
             install_elementary;;
 
-        -m | --music)
-            install_music;;
+        -u | --ubuntu)
+            install_ubuntu;;
 
-        -i | --indicators)
-            install_indicators;;
-
-        -s | --system)
-            install_system;;
-
-        -b | --battery)
-            install_battery;;
-
-        -w | --utilities)
-            install_utilities;;
-
-        -d | --devel)
-            install_devel_tools;;
-
-        -r | --remap)
-            config_remap;;
-
-        --fun)
-            install_fun;;
-
-        --sync)
-            install_sync;;
+        --utils)
+            install_indicators
+            install_utilies;;
 
         -t | --test)
             test_function;;
