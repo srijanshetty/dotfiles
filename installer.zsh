@@ -49,7 +49,7 @@ function install_essentials() {
     installer vcsh || ERR=1
     installer htop || ERR=1
     installer -n ag -p silversearcher-ag || ERR=1
-    install-rvm() || ERR=1
+    install-rvm || ERR=1
 }
 
 # In case the argument list is empty

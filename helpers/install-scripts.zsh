@@ -114,7 +114,7 @@ function install-rvm() {
         warn "RVM already installed"
         return 0
     else
-        if curl -sSL https://get.rvm.io &>> "$LOGFILE" | bash -s stable --ruby &>> "$LOGFILE"; then
+        if curl -sSL https://get.rvm.io &>> "$LOGFILE" | bash &>> "$LOGFILE"; then
             success "RVM Installed"
             return 0
         else
